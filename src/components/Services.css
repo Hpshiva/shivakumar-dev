@@ -1,0 +1,92 @@
+.services-section {
+  padding: 8rem 2rem;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+}
+
+.services-left h2 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.services-subtitle {
+  font-size: 1.25rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.services-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-item:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.service-header h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.service-plus {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.service-desc-wrapper {
+  overflow: hidden;
+}
+
+.service-desc-text {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  max-width: 80%;
+  padding-bottom: 1rem;
+}
+
+.service-item.active h3 {
+  color: var(--text-dark);
+}
+
+/* Replaced by Framer Motion */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 992px) {
+  .services-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}

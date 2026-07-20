@@ -1,0 +1,70 @@
+.overview-section {
+  padding: 8rem 2rem;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+}
+
+.overview-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.overview-header {
+  margin-bottom: 4rem;
+}
+
+.overview-header h2 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.overview-card {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.overview-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.overview-icon-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.overview-icon-inner {
+  width: 20px;
+  height: 20px;
+  background-color: var(--primary-yellow);
+  border-radius: 4px;
+  transform: rotate(45deg);
+}
+
+.overview-card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.overview-card p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
