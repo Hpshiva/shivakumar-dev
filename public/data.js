@@ -6,14 +6,14 @@ window.WEBSITE_DATA = {
     titleLine3: "Differently.",
     introTextLeft: "The Webflow Expert.\nThat's Nenad.",
     introTextRight: "Working closely with your team to deliver\nWebflow builds that merge creativity, technical\nexcellence, and long-term value.",
-    portraitUrl: "https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final%201.avif",
-    
+    portraitUrl: './src/assets/myPic.png',
+
     // Stats (counter numbers and label)
     projectsCount: "80", // Will animate counting up to this
     projectsLabel: "Projects",
     experienceYears: "7", // Will animate counting up to this
     experienceLabel: "experience",
-    
+
     // CTAs
     ctaTextPrimary: "Book a Call",
     ctaUrlPrimary: "https://cal.com/nenad-popadic/intro-call",
@@ -25,7 +25,7 @@ window.WEBSITE_DATA = {
   about: {
     heading: "About Me (&)\nMy Journey",
     description: "Seven years ago I opened Webflow for the first time. What happened after that is easier to show than explain.",
-    
+
     milestones: [
       {
         year: "'19",
