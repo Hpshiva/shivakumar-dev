@@ -261,9 +261,10 @@
             position: absolute !important;
             inset: clamp(4.77rem, 23.09vw + .15rem, 11.07rem) 0% 0% !important;
           }
+
           .mobile-hero-image {
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 0) 100%) !important;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 0) 100%) !important;
           }
         }
 
