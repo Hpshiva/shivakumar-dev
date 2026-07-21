@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
-import me from '../assets/myPic.png'
+import myPic from '../assets/myPic.png';
+
 const Hero = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -70,7 +71,7 @@ const Hero = () => {
           {/* Center Portrait with Parallax */}
           <motion.div className="hero-portrait-container" style={{ y: portraitY }}>
             <img
-              src={me}
+              src={myPic}
               alt="Shiva Kumar"
               className="hero-portrait"
             />
