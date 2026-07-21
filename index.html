@@ -1,23 +1,23 @@
 <!doctype html>
 <!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Mon Jul 20 2026 10:10:07 GMT+0000 (Coordinated Universal Time) -->
-<html data-wf-domain="heynesh.com" data-wf-page="691d7ca014d0280ebe2d4114" data-wf-site="691d7c9f14d0280ebe2d4108">
+<html data-wf-domain="heyshiva.com" data-wf-page="691d7ca014d0280ebe2d4114" data-wf-site="691d7c9f14d0280ebe2d4108">
 
 <head>
   <meta charset="utf-8" />
   <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous" />
-  <title>Creative Webflow Developer — Nenad Popadic | SHIVA®</title>
+  <title>Creative Frontend Developer — Shiva Kumar | SHIVA®</title>
   <meta
-    content="Webflow developer with 7 years of experience delivering custom builds, CMS setups, GSAP animations, and technical SEO for biotech, SaaS, and blockchain brands."
+    content="Frontend developer with 2+ years of experience delivering custom builds, CMS setups, GSAP animations, and technical SEO for biotech, SaaS, and blockchain brands."
     name="description" />
-  <meta content="Creative Webflow Developer — Nenad Popadic | SHIVA®" property="og:title" />
+  <meta content="Creative Frontend Developer — Shiva Kumar | SHIVA®" property="og:title" />
   <meta
-    content="Webflow developer with 7 years of experience delivering custom builds, CMS setups, GSAP animations, and technical SEO for biotech, SaaS, and blockchain brands."
+    content="Frontend developer with but  years of experience delivering custom web apps using React, TypeScript, Redux Toolkit, and modern web technologies."
     property="og:description" />
   <meta content="https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6985214bb975f745e43bb088_OpenGraph.jpg"
     property="og:image" />
-  <meta content="Creative Webflow Developer — Nenad Popadic | SHIVA®" name="twitter:title" />
+  <meta content="Creative Frontend Developer — Shiva Kumar | SHIVA®" name="twitter:title" />
   <meta
-    content="Webflow developer with 7 years of experience delivering custom builds, CMS setups, GSAP animations, and technical SEO for biotech, SaaS, and blockchain brands."
+    content="Frontend developer with 2+ years of experience delivering custom web apps using React, TypeScript, Redux Toolkit, and modern web technologies."
     name="twitter:description" />
   <meta property="og:type" content="website" />
   <meta content="summary_large_image" name="twitter:card" />
@@ -50,12 +50,12 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Webflow Development by Nenad Popadic",
-        "url": "https://heynesh.com",
+        "name": "Frontend Development by Shiva Kumar",
+        "url": "https://heyshiva.com",
         "provider": {
           "@type": "Person",
-          "name": "Nenad Popadic",
-          "url": "https://heynesh.com"
+          "name": "Shiva Kumar",
+          "url": "https://heyshiva.com"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -76,7 +76,7 @@
                 "url": "https://www.alosant.com/"
               }
             },
-            "reviewBody": "Nenad has been a fantastic partner to work with and continues to be an essential part of our team. He communicates clearly and promptly, and his work consistently exceeds expectations. He resolves technical challenges quickly and efficiently, always demonstrating skill, reliability, and a strong commitment to quality.",
+            "reviewBody": "Shiva has been a fantastic partner to work with and continues to be an essential part of our team. He communicates clearly and promptly, and his work consistently exceeds expectations. He resolves technical challenges quickly and efficiently, always demonstrating skill, reliability, and a strong commitment to quality.",
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": "5",
@@ -95,7 +95,7 @@
                 "url": "https://see.design/"
               }
             },
-            "reviewBody": "I've been working with Nenad for years and have always been impressed by his work ethic, fast turnaround, and attention to detail. Nenad clearly knows his craft, takes a thoughtful and disciplined approach to his work, and consistently delivers results that meet a high professional standard.",
+            "reviewBody": "I've been working with Shiva for years and have always been impressed by his work ethic, fast turnaround, and attention to detail. Shiva clearly knows his craft, takes a thoughtful and disciplined approach to his work, and consistently delivers results that meet a high professional standard.",
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": "5",
@@ -114,7 +114,7 @@
                 "url": "https://www.autorank.com/"
               }
             },
-            "reviewBody": "We loved working with Nenad on the Autorank website. He showed exceptional leadership throughout the project, taking full ownership of the website infrastructure and guiding key technical decisions. His structured approach and attention to quality ensured a reliable and scalable outcome.",
+            "reviewBody": "We loved working with Shiva on the Agan Health platform. He showed exceptional leadership throughout the project, taking full ownership of the frontend infrastructure and guiding key technical decisions. His structured approach and attention to quality ensured a reliable and scalable outcome.",
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": "5",
@@ -354,11 +354,59 @@
         /* ============================================
              7. INTERACTIVE ELEMENTS
              ============================================ */
+        /* Overrides for mobile responsiveness and card sizing */
+        .work-card {
+          width: 85vw !important;
+        }
+
+        @media (min-width: 768px) {
+          .work-card {
+            width: clamp(40rem, 30vw, 40rem) !important;
+          }
+        }
+
+        /* Ensure screenshots are visible and cover properly, showing top */
+        .work-image {
+          object-fit: cover !important;
+          object-position: top center !important;
+        }
+
+        /* Black gradient overlay from bottom to top so text remains readable against bright screenshots */
+        .work-card::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 60%;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+          pointer-events: none;
+          z-index: 1;
+          border-radius: inherit;
+        }
+
+        .work-card-content {
+          z-index: 2 !important;
+        }
+
+        /* Override mobile hero image so it scales down correctly and doesn't overlap text, mimicking Nesh's original spaced-out image */
+        @media screen and (max-width: 767px) {
+          .mobile-hero-image-wrap {
+            justify-content: flex-end !important;
+            align-items: flex-end !important;
+          }
+          .mobile-hero-image {
+            height: 65% !important;
+            width: auto !important;
+            object-fit: contain !important;
+            object-position: bottom right !important;
+          }
+        }
+
         /* Work card hover effects */
         .work-card:hover {
           opacity: 1;
         }
-
 
         @media (min-width: 992px) {
 
@@ -647,15 +695,16 @@
     <div data-flip-origin="" class="nesh-logo-preload-wrap">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1288 338" fill="none"
         class="nesh-logo-preload-svg">
-        <path d="M194,4 H374 V191 H249 V268 H374 V323 H194 V136 H319 V59 H194 Z" fill="currentColor"
+        <path d="M0,4 H246.64 V191 H75.36 V268 H246.64 V323 H0 V136 H171.28 V59 H0 Z" fill="currentColor"
           class="nesh-logo-letter"></path>
-        <path d="M414,4 H469 V136 H539 V4 H594 V323 H539 V191 H469 V323 H414 Z" fill="currentColor"
+        <path d="M301.45,4 H376.81 V136 H472.72 V4 H548.09 V323 H472.72 V191 H376.81 V323 H301.45 Z" fill="currentColor"
           class="nesh-logo-letter"></path>
-        <path d="M634,4 H694 V323 H634 Z" fill="currentColor" class="nesh-logo-letter"></path>
-        <path d="M734,4 L794,323 H854 L914,4 H854 L824,180 L794,4 Z" fill="currentColor" class="nesh-logo-letter">
+        <path d="M602.89,4 H685.11 V323 H602.89 Z" fill="currentColor" class="nesh-logo-letter"></path>
+        <path d="M739.91,4 L822.13,323 H904.34 L986.55,4 H904.34 L863.23,180 L822.13,4 Z" fill="currentColor"
+          class="nesh-logo-letter">
         </path>
         <path
-          d="M954,323 L1014,4 H1074 L1134,323 H1074 L1056,246 H1032 L1014,323 H954 Z M1034,110 H1054 L1068,191 H1020 Z"
+          d="M1041.36,323 L1123.57,4 H1205.79 L1288,323 H1205.79 L1181.12,246 H1148.24 L1123.57,323 H1041.36 Z M1150.98,110 H1178.38 L1197.57,191 H1131.8 Z"
           fill="currentColor" class="nesh-logo-letter"></path>
       </svg>
     </div>
@@ -666,7 +715,7 @@
         <div data-tl-desktop="" data-tl-type="trigger" data-tl-trigger=".hero" data-tl-start="top 70%"
           class="profile-img-wrap">
           <div class="profile-img-item">
-            <img class="hero-profile-img" src="./src/assets/myPic.png" data-tl-trigger=".hero" alt="Nenad Popadic"
+            <img class="hero-profile-img" src="./src/assets/myPic.png" data-tl-trigger=".hero" alt="Shiva Kumar"
               data-tl-end="70% top" data-tl-desktop="" data-tl-type="scroll"
               data-tl-to="{&#x27;filter&#x27;: &#x27;blur(90px)&#x27;, &#x27;opacity&#x27;: 0.3}"
               data-tl-start="top top" sizes="100vw" loading="lazy"
@@ -688,43 +737,33 @@
                 <div data-flip-trigger=".hero" data-flip-start="top top" data-flip-end="44% top" class="nesh-logo">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1288 338" fill="none"
                     class="nesh-logo-svg">
-                    <path
-                      d="M0 330.469V4.83951H163.391L244.51 292.675H250.272L247.737 4.83951H337.383V330.469H174.683L93.1029 42.6337H87.3416L89.6461 330.469H0Z"
+                    <path d="M0,4 H246.64 V191 H75.36 V268 H246.64 V323 H0 V136 H171.28 V59 H0 Z" fill="currentColor">
+                    </path>
+                    <path d="M301.45,4 H376.81 V136 H472.72 V4 H548.09 V323 H472.72 V191 H376.81 V323 H301.45 Z"
+                      fill="currentColor"></path>
+                    <path d="M602.89,4 H685.11 V323 H602.89 Z" fill="currentColor"></path>
+                    <path d="M739.91,4 L822.13,323 H904.34 L986.55,4 H904.34 L863.23,180 L822.13,4 Z"
                       fill="currentColor"></path>
                     <path
-                      d="M463.809 258.798H645.175V330.469H374.163V4.83951H640.797V76.5103H463.809V130.897H626.739V202.568H463.809V258.798Z"
+                      d="M1041.36,323 L1123.57,4 H1205.79 L1288,323 H1205.79 L1181.12,246 H1148.24 L1123.57,323 H1041.36 Z M1150.98,110 H1178.38 L1197.57,191 H1131.8 Z"
                       fill="currentColor"></path>
-                    <path
-                      d="M651.997 245.432L721.824 205.794C743.333 245.739 774.905 265.712 816.54 265.712C830.982 265.712 842.197 263.331 850.186 258.568C858.329 253.652 862.4 246.661 862.4 237.597C862.4 228.686 858.713 221.619 851.338 216.395C843.964 211.018 830.982 206.562 812.392 203.029L756.161 192.198C727.893 186.82 706.307 176.45 691.404 161.086C676.655 145.569 669.281 125.904 669.281 102.091C669.281 82.7325 675.042 65.2949 686.565 49.7778C698.241 34.107 714.219 21.893 734.499 13.1358C754.779 4.3786 777.286 0 802.021 0C879.454 0 929.001 31.3416 950.663 94.0247L873.692 117.07C866.164 100.17 857.1 88.2634 846.499 81.3498C836.052 74.4362 822.148 70.9794 804.787 70.9794C791.574 70.9794 780.666 73.7449 772.063 79.2757C763.459 84.8066 759.157 92.2579 759.157 101.63C759.157 110.233 762.768 116.532 769.989 120.527C777.209 124.521 790.115 128.285 808.705 131.819L864.244 142.65C923.393 154.019 952.968 184.977 952.968 235.523C952.968 266.557 940.37 291.292 915.174 309.728C889.978 328.011 856.178 337.152 813.775 337.152C774.598 337.152 742.411 329.855 717.215 315.259C692.019 300.51 670.279 277.235 651.997 245.432Z"
-                      fill="currentColor"></path>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1288 338" fill="none"
-                      class="nesh-logo-svg">
-                      <path d="M194,4 H374 V191 H249 V268 H374 V323 H194 V136 H319 V59 H194 Z" fill="currentColor">
-                      </path>
-                      <path d="M414,4 H469 V136 H539 V4 H594 V323 H539 V191 H469 V323 H414 Z" fill="currentColor">
-                      </path>
-                      <path d="M634,4 H694 V323 H634 Z" fill="currentColor"></path>
-                      <path d="M734,4 L794,323 H854 L914,4 H854 L824,180 L794,4 Z" fill="currentColor"></path>
+                  </svg>
+                  <div class="nesh-copyright-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 9" fill="none"
+                      data-tl-type="scroll" data-tl-trigger=".hero" data-tl-start="2% top" data-tl-end="5% top"
+                      data-tl-from="{&#x27;opacity&#x27;: 0}" data-tl-to="{&#x27;opacity&#x27; : 1}" data-tl-desktop=""
+                      class="nesh-copyright-icon">
                       <path
-                        d="M954,323 L1014,4 H1074 L1134,323 H1074 L1056,246 H1032 L1014,323 H954 Z M1034,110 H1054 L1068,191 H1020 Z"
+                        d="M0.343933 5.97697C0.114645 5.44236 0 4.8828 0 4.29829C0 3.71378 0.114645 3.156 0.343933 2.62495C0.573221 2.0939 0.883118 1.6377 1.27362 1.25634C1.66413 0.871419 2.12808 0.56669 2.66547 0.342152C3.20645 0.114051 3.7743 0 4.36901 0C4.96373 0 5.52978 0.114051 6.06718 0.342152C6.60815 0.56669 7.0739 0.871419 7.4644 1.25634C7.85491 1.6377 8.1648 2.0939 8.39409 2.62495C8.62338 3.156 8.73802 3.71378 8.73802 4.29829C8.73802 5.07526 8.54277 5.7952 8.15226 6.45812C7.76176 7.11748 7.23153 7.63962 6.56158 8.02454C5.89163 8.40946 5.16077 8.60192 4.36901 8.60192C3.7743 8.60192 3.20645 8.48787 2.66547 8.25977C2.12808 8.03523 1.66413 7.73228 1.27362 7.35093C0.883118 6.96601 0.573221 6.50802 0.343933 5.97697ZM1.08017 4.29829C1.08017 4.7438 1.16615 5.16971 1.33811 5.57601C1.51008 5.97875 1.74295 6.32625 2.03672 6.61851C2.3305 6.91076 2.6798 7.14421 3.08464 7.31885C3.49306 7.48993 3.92118 7.57546 4.36901 7.57546C4.81684 7.57546 5.24317 7.48993 5.64801 7.31885C6.05643 7.14421 6.40752 6.91076 6.7013 6.61851C6.99507 6.32625 7.22794 5.97875 7.39991 5.57601C7.57546 5.16971 7.66324 4.7438 7.66324 4.29829C7.66324 3.85278 7.57546 3.42865 7.39991 3.02591C7.22794 2.6196 6.99507 2.27032 6.7013 1.97807C6.40752 1.68581 6.05643 1.45415 5.64801 1.28307C5.24317 1.11199 4.81684 1.02646 4.36901 1.02646C3.77071 1.02646 3.21899 1.17258 2.71384 1.46484C2.20869 1.75353 1.80922 2.14914 1.51545 2.65168C1.22526 3.15422 1.08017 3.70309 1.08017 4.29829ZM2.64398 6.58643V1.99945H4.91178C5.33811 1.99945 5.691 2.12954 5.97045 2.38972C6.25347 2.64633 6.39499 2.97958 6.39499 3.38945C6.39499 3.71378 6.29109 3.98821 6.0833 4.21275C5.87909 4.43729 5.62651 4.56916 5.32557 4.60836L5.26109 4.61905L6.34125 6.56505H5.0515L4.11644 4.75805H3.84237V6.58643H2.64398ZM3.84237 3.82783H4.74519C4.88491 3.82783 4.99597 3.79219 5.07837 3.72091C5.16436 3.64962 5.20735 3.55161 5.20735 3.42687C5.20735 3.29143 5.16615 3.18629 5.08375 3.11145C5.00135 3.0366 4.88849 2.99918 4.74519 2.99918H3.84237V3.82783Z"
                         fill="currentColor"></path>
                     </svg>
-                    <div class="nesh-copyright-wrap">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 9" fill="none"
-                        data-tl-type="scroll" data-tl-trigger=".hero" data-tl-start="2% top" data-tl-end="5% top"
-                        data-tl-from="{&#x27;opacity&#x27;: 0}" data-tl-to="{&#x27;opacity&#x27; : 1}"
-                        data-tl-desktop="" class="nesh-copyright-icon">
-                        <path
-                          d="M0.343933 5.97697C0.114645 5.44236 0 4.8828 0 4.29829C0 3.71378 0.114645 3.156 0.343933 2.62495C0.573221 2.0939 0.883118 1.6377 1.27362 1.25634C1.66413 0.871419 2.12808 0.56669 2.66547 0.342152C3.20645 0.114051 3.7743 0 4.36901 0C4.96373 0 5.52978 0.114051 6.06718 0.342152C6.60815 0.56669 7.0739 0.871419 7.4644 1.25634C7.85491 1.6377 8.1648 2.0939 8.39409 2.62495C8.62338 3.156 8.73802 3.71378 8.73802 4.29829C8.73802 5.07526 8.54277 5.7952 8.15226 6.45812C7.76176 7.11748 7.23153 7.63962 6.56158 8.02454C5.89163 8.40946 5.16077 8.60192 4.36901 8.60192C3.7743 8.60192 3.20645 8.48787 2.66547 8.25977C2.12808 8.03523 1.66413 7.73228 1.27362 7.35093C0.883118 6.96601 0.573221 6.50802 0.343933 5.97697ZM1.08017 4.29829C1.08017 4.7438 1.16615 5.16971 1.33811 5.57601C1.51008 5.97875 1.74295 6.32625 2.03672 6.61851C2.3305 6.91076 2.6798 7.14421 3.08464 7.31885C3.49306 7.48993 3.92118 7.57546 4.36901 7.57546C4.81684 7.57546 5.24317 7.48993 5.64801 7.31885C6.05643 7.14421 6.40752 6.91076 6.7013 6.61851C6.99507 6.32625 7.22794 5.97875 7.39991 5.57601C7.57546 5.16971 7.66324 4.7438 7.66324 4.29829C7.66324 3.85278 7.57546 3.42865 7.39991 3.02591C7.22794 2.6196 6.99507 2.27032 6.7013 1.97807C6.40752 1.68581 6.05643 1.45415 5.64801 1.28307C5.24317 1.11199 4.81684 1.02646 4.36901 1.02646C3.77071 1.02646 3.21899 1.17258 2.71384 1.46484C2.20869 1.75353 1.80922 2.14914 1.51545 2.65168C1.22526 3.15422 1.08017 3.70309 1.08017 4.29829ZM2.64398 6.58643V1.99945H4.91178C5.33811 1.99945 5.691 2.12954 5.97045 2.38972C6.25347 2.64633 6.39499 2.97958 6.39499 3.38945C6.39499 3.71378 6.29109 3.98821 6.0833 4.21275C5.87909 4.43729 5.62651 4.56916 5.32557 4.60836L5.26109 4.61905L6.34125 6.56505H5.0515L4.11644 4.75805H3.84237V6.58643H2.64398ZM3.84237 3.82783H4.74519C4.88491 3.82783 4.99597 3.79219 5.07837 3.72091C5.16436 3.64962 5.20735 3.55161 5.20735 3.42687C5.20735 3.29143 5.16615 3.18629 5.08375 3.11145C5.00135 3.0366 4.88849 2.99918 4.74519 2.99918H3.84237V3.82783Z"
-                          fill="currentColor"></path>
-                      </svg>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="social-wrap">
               <a class="social-link w-inline-block" data-tl-trigger=".hero" data-tl-end="46% top"
-                href="https://x.com/NenadPopadicc" data-tl-type="scroll"
+                href="https://github.com/Hpshiva" data-tl-type="scroll"
                 data-tl-to="{&#x27;scale&#x27; : 1, &#x27;opacity&#x27; : 1}" aria-label="x" data-tl-start="44% top"
                 target="_blank" data-tl-from="{&#x27;scale&#x27; : 0.3, &#x27;opacity&#x27; : 0}"><svg
                   xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 15 15" fill="none" class="instagram">
@@ -735,7 +774,7 @@
                     d="M5.86448 3.09766H3.13116L6.30703 7.60993L3.10156 11.3622H3.96245L6.69578 8.16211L8.94822 11.3622H11.6809L8.19427 6.40805L11.0218 3.09766H10.1609L7.80552 5.85587L5.86448 3.09766ZM4.44939 3.78637L9.30737 10.6735H10.3626L5.50466 3.78637H4.44939Z"
                     fill="currentColor" class="social-path-white"></path>
                 </svg></a><a class="social-link w-inline-block" data-tl-trigger=".hero" data-tl-end="48% top"
-                href="https://www.linkedin.com/in/nenad-popadic-3a8649197/" data-tl-type="scroll"
+                href="https://www.linkedin.com/" data-tl-type="scroll"
                 data-tl-to="{&#x27;scale&#x27; : 1, &#x27;opacity&#x27; : 1}" aria-label="linkedin"
                 data-tl-start="46% top" target="_blank"
                 data-tl-from="{&#x27;scale&#x27; : 0.3, &#x27;opacity&#x27; : 0}"><svg
@@ -754,8 +793,7 @@
                 </svg></a>
             </div>
             <div class="mobile-menu-wrap">
-              <a href="https://cal.com/nenad-popadic/intro-call" target="_blank" class="nav-button-mobile w-button">Book
-                a Call</a>
+              <a href="mailto:shivakumar.bfgi@gmail.com" target="_blank" class="nav-button-mobile w-button">Email Me</a>
               <div class="mobile-menu">
                 <div class="mobile-menu-icons">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 7" fill="none"
@@ -813,9 +851,7 @@
             <div id="yrs_big_text" class="nav-experience-numb-wrap">
               <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 41 28" fill="none"
                 data-flip-trigger=".hero" data-flip-start="top top" data-flip-end="40% top" class="nav-experience-numb">
-                <path
-                  d="M0 5.99609V0H21.3672V6.71875C20.5729 7.01823 19.8828 7.31771 19.2969 7.61719C18.724 7.91667 18.1055 8.32031 17.4414 8.82812C16.7904 9.32292 16.2305 9.88281 15.7617 10.5078C15.293 11.1198 14.8307 11.8945 14.375 12.832C13.9323 13.7695 13.5742 14.8307 13.3008 16.0156C13.0273 17.1875 12.806 18.5872 12.6367 20.2148C12.4805 21.8294 12.4023 23.6263 12.4023 25.6055V27.5977H4.6875V25.6055C4.6875 23.0273 4.9349 20.7096 5.42969 18.6523C5.9375 16.5951 6.60156 14.8893 7.42188 13.5352C8.24219 12.168 9.25781 10.9896 10.4688 10C11.6797 8.9974 12.9102 8.22917 14.1602 7.69531C15.4232 7.16146 16.8229 6.73177 18.3594 6.40625V5.91797L0 5.99609Z"
-                  fill="currentColor"></path>
+                <path d="M0,0 H21.37 V17 H6 V22 H21.37 V28 H0 V11 H15.37 V6 H0 Z" fill="currentColor"></path>
                 <path
                   d="M20.7422 19.9609V14.5508H27.793V7.59766H33.5547V14.5508H40.5469V19.9609H33.5547V27.2852H27.793V19.9609H20.7422Z"
                   fill="currentColor"></path>
@@ -1336,7 +1372,7 @@
             data-tl-end="38% top" data-tl-from="{&#x27;opacity&#x27; : 0}" data-tl-to="{&#x27;opacity&#x27; : 1}"
             class="nav-email-wrap">
             <div class="nav-email-item">
-              <p class="email-text">nenad@popadic.co</p>
+              <p class="email-text">shivakumar.bfgi@gmail.com</p>
               <div class="clipboard-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 14" fill="none"
                   class="clipboard-icon">
@@ -1361,9 +1397,9 @@
             </div>
           </div>
           <div data-flip-end="35% top" data-flip-target=".hero" data-flip-start="5% top" class="nav-button-wrap">
-            <a data-button-hover="" href="https://cal.com/nenad-popadic/intro-call" target="_blank"
+            <a data-button-hover="" href="mailto:shivakumar.bfgi@gmail.com" target="_blank"
               class="nav-button w-inline-block">
-              <p class="button-text">Book a Call</p>
+              <p class="button-text">Email Me</p>
             </a><a data-button-hover="" href="#about" class="nav-button-secondary w-inline-block">
               <p class="button-text">About Me</p>
             </a>
@@ -1383,12 +1419,15 @@
                   data-flip-target="" class="nesh-logo-ghost">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1288 338" fill="none"
                     class="nesh-logo-svg">
-                    <path d="M194,4 H374 V191 H249 V268 H374 V323 H194 V136 H319 V59 H194 Z" fill="currentColor"></path>
-                    <path d="M414,4 H469 V136 H539 V4 H594 V323 H539 V191 H469 V323 H414 Z" fill="currentColor"></path>
-                    <path d="M634,4 H694 V323 H634 Z" fill="currentColor"></path>
-                    <path d="M734,4 L794,323 H854 L914,4 H854 L824,180 L794,4 Z" fill="currentColor"></path>
+                    <path d="M0,4 H246.64 V191 H75.36 V268 H246.64 V323 H0 V136 H171.28 V59 H0 Z" fill="currentColor">
+                    </path>
+                    <path d="M301.45,4 H376.81 V136 H472.72 V4 H548.09 V323 H472.72 V191 H376.81 V323 H301.45 Z"
+                      fill="currentColor"></path>
+                    <path d="M602.89,4 H685.11 V323 H602.89 Z" fill="currentColor"></path>
+                    <path d="M739.91,4 L822.13,323 H904.34 L986.55,4 H904.34 L863.23,180 L822.13,4 Z"
+                      fill="currentColor"></path>
                     <path
-                      d="M954,323 L1014,4 H1074 L1134,323 H1074 L1056,246 H1032 L1014,323 H954 Z M1034,110 H1054 L1068,191 H1020 Z"
+                      d="M1041.36,323 L1123.57,4 H1205.79 L1288,323 H1205.79 L1181.12,246 H1148.24 L1123.57,323 H1041.36 Z M1150.98,110 H1178.38 L1197.57,191 H1131.8 Z"
                       fill="currentColor"></path>
                   </svg>
                 </svg><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 9" fill="none"
@@ -1466,7 +1505,7 @@
             <p class="hero-left-text" data-tl-trigger=".hero" data-tl-split="lines" data-tl-end="10% top"
               data-tl-desktop="" data-tl-type="scroll" data-tl-to="{ &#x27;y&#x27;: &#x27;-100%&#x27;}"
               data-tl-start="5% top" data-tl-from="{ &#x27;y&#x27;: &#x27;0%&#x27;}">
-              The Webflow Expert. That’s Nenad.
+              The Frontend Developer. That’s Shiva.
             </p>
             <div class="hero-content-layout">
               <h1 class="hero-heading">
@@ -1513,9 +1552,7 @@
                     <div class="experience-number-wrap">
                       <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 41 28" fill="none"
                         class="experience-number">
-                        <path
-                          d="M0 5.99609V0H21.3672V6.71875C20.5729 7.01823 19.8828 7.31771 19.2969 7.61719C18.724 7.91667 18.1055 8.32031 17.4414 8.82812C16.7904 9.32292 16.2305 9.88281 15.7617 10.5078C15.293 11.1198 14.8307 11.8945 14.375 12.832C13.9323 13.7695 13.5742 14.8307 13.3008 16.0156C13.0273 17.1875 12.806 18.5872 12.6367 20.2148C12.4805 21.8294 12.4023 23.6263 12.4023 25.6055V27.5977H4.6875V25.6055C4.6875 23.0273 4.9349 20.7096 5.42969 18.6523C5.9375 16.5951 6.60156 14.8893 7.42188 13.5352C8.24219 12.168 9.25781 10.9896 10.4688 10C11.6797 8.9974 12.9102 8.22917 14.1602 7.69531C15.4232 7.16146 16.8229 6.73177 18.3594 6.40625V5.91797L0 5.99609Z"
-                          fill="currentColor"></path>
+                        <path d="M0,0 H21.37 V17 H6 V22 H21.37 V28 H0 V11 H15.37 V6 H0 Z" fill="currentColor"></path>
                         <path
                           d="M20.7422 19.9609V14.5508H27.793V7.59766H33.5547V14.5508H40.5469V19.9609H33.5547V27.2852H27.793V19.9609H20.7422Z"
                           fill="currentColor"></path>
@@ -1584,8 +1621,8 @@
           </div>
           <div class="mobile-hero-image-wrap">
             <img
-              src="https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/69708b99545c57d03ebb5cd9_Frame%202147258154.avif"
-              loading="lazy" fetchpriority="high" alt="Nenad Popadic" class="mobile-hero-image" />
+              src="./src/assets/myPic.png"
+              loading="lazy" fetchpriority="high" alt="Shiva Kumar" class="mobile-hero-image" />
           </div>
         </div>
       </section>
@@ -1607,8 +1644,8 @@
             <p data-tl-to="{&#x27;yPercent&#x27;: 0,  &#x27;duration&#x27;: 0.6, &#x27;stagger&#x27;: 0.1, &#x27;delay&#x27;: 0.3, &#x27;ease&#x27;: &#x27;power2.out&#x27;}"
               data-tl-type="trigger" data-tl-trigger=".about-section" data-tl-start="top 90%" data-tl-split="lines"
               data-tl-from="{&#x27;yPercent&#x27;: 100}" class="max-width-389">
-              Seven years ago I opened Webflow for the first time. What
-              happened after that is easier to show than explain.
+              Highly focused on frontend engineering, converting design visions into performant, accessible React
+              applications with solid SEO foundation.
             </p>
           </div>
           <div class="about-wrap">
@@ -2270,7 +2307,7 @@
                         data-tl-start="58% top" data-tl-split="lines" data-tl-from="{&#x27;yPercent&#x27;: 100}"
                         data-tl-to="{&#x27;yPercent&#x27;: 0,  &#x27;duration&#x27;: 0.4, &#x27;stagger&#x27;: 0.1, &#x27;delay&#x27;: 0.6, &#x27;ease&#x27;: &#x27;expo.out&#x27;}"
                         class="about-card-bottom-text">
-                        @nenad<br />2hours ago
+                        @shiva<br />2hours ago
                       </p>
                     </div>
                     <button data-tl-type="trigger" data-tl-trigger=".about-card-container" data-tl-start="58% top"
@@ -2295,7 +2332,7 @@
                             <div class="about-card-img-wrap">
                               <img
                                 src="https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/693fbb7c6a81b0964539f3bc_Frame%201321314730.avif"
-                                loading="lazy" alt="Me | Nenad Popadic" class="about-card-img" />
+                                loading="lazy" alt="Me | Shiva Kumar" class="about-card-img" />
                               <h4 class="popup-heading">
                                 The journey continues
                               </h4>
@@ -3609,7 +3646,7 @@
                   </div>
                   <div class="cta-button-grid">
                     <div class="cta-button-grid-item">
-                      <a data-button-hover="" href="https://cal.com/nenad-popadic/intro-call" target="_blank"
+                      <a data-button-hover="" href="mailto:shivakumar.bfgi@gmail.com" target="_blank"
                         class="cta-button w-inline-block">
                         <p class="button-text">Let&#x27;s Talk</p>
                       </a>
@@ -3974,12 +4011,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1388 338" class="footer-logo-icon">
               <defs>
                 <clipPath id="nesh-clip">
-                  <path d="M194,4 H374 V191 H249 V268 H374 V323 H194 V136 H319 V59 H194 Z"></path>
-                  <path d="M414,4 H469 V136 H539 V4 H594 V323 H539 V191 H469 V323 H414 Z"></path>
-                  <path d="M634,4 H694 V323 H634 Z"></path>
-                  <path d="M734,4 L794,323 H854 L914,4 H854 L824,180 L794,4 Z"></path>
+                  <path d="M0,4 H246.64 V191 H75.36 V268 H246.64 V323 H0 V136 H171.28 V59 H0 Z"></path>
+                  <path d="M301.45,4 H376.81 V136 H472.72 V4 H548.09 V323 H472.72 V191 H376.81 V323 H301.45 Z"></path>
+                  <path d="M602.89,4 H685.11 V323 H602.89 Z"></path>
+                  <path d="M739.91,4 L822.13,323 H904.34 L986.55,4 H904.34 L863.23,180 L822.13,4 Z"></path>
                   <path
-                    d="M954,323 L1014,4 H1074 L1134,323 H1074 L1056,246 H1032 L1014,323 H954 Z M1034,110 H1054 L1068,191 H1020 Z">
+                    d="M1041.36,323 L1123.57,4 H1205.79 L1288,323 H1205.79 L1181.12,246 H1148.24 L1123.57,323 H1041.36 Z M1150.98,110 H1178.38 L1197.57,191 H1131.8 Z">
                   </path>
                   <!-- ® symbol — scale(11.25) = 90px wide, positioned as superscript next to H -->
                   <path transform="translate(1295, 0) scale(11.25)"
@@ -4269,7 +4306,7 @@
                       <p class="faq-answer">
                         No stress. Just reach out at
                         <a
-                          href="mailto:nenad@popadic.co?subject=Not%20Sure%20Which%20Plan%20to%20Choose">nenad@popadic.co</a>
+                          href="mailto:shivakumar.bfgi@gmail.com?subject=Not%20Sure%20Which%20Plan%20to%20Choose">shivakumar.bfgi@gmail.com</a>
                         and tell me what you have in mind. I&#x27;ll help you
                         figure out the right option.
                       </p>

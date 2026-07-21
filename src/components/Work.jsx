@@ -11,27 +11,39 @@ import './Work.css';
 const projects = [
   {
     id: 1,
-    title: 'Biotech Innovation',
-    category: 'Webflow Development',
-    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop'
+    title: 'Agan Health',
+    category: 'Healthcare Platform',
+    image: './images/agan_health.png'
   },
   {
     id: 2,
-    title: 'SaaS Platform',
-    category: 'UI/UX Design',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop'
+    title: 'Trident Hyundai',
+    category: 'Automotive Platform',
+    image: './images/trident_hyundai.png'
   },
   {
     id: 3,
-    title: 'Blockchain Startup',
-    category: 'GSAP Animation',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f4ec651?q=80&w=800&auto=format&fit=crop'
+    title: 'Pristine Renault',
+    category: 'Automotive Platform',
+    image: './images/pristine_renault.png'
   },
   {
     id: 4,
-    title: 'Fintech App',
-    category: 'Webflow CMS',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop'
+    title: 'Kinara Capital',
+    category: 'Fintech Platform',
+    image: './images/kinara_capital.png'
+  },
+  {
+    id: 5,
+    title: 'Design Esthetics',
+    category: 'Creative Agency Portal',
+    image: './images/design_esthetics.png'
+  },
+  {
+    id: 6,
+    title: 'Pristine Isuzu',
+    category: 'Automotive Commerce',
+    image: './images/pristine_isuzu.png'
   }
 ];
 

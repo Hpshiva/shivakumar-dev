@@ -33,14 +33,14 @@ const Hero = () => {
   return (
     <section className="hero-section" id="hero" ref={ref}>
       <div className="hero-container">
-        {/* Background NESH Logo with Parallax */}
+        {/* Background SHIVA Logo with Parallax */}
         <motion.div className="hero-logo-bg" style={{ y: logoY }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1288 338" fill="none" className="nesh-logo-svg">
-            <path d="M194,4 H374 V191 H249 V268 H374 V323 H194 V136 H319 V59 H194 Z" fill="#F4FF15"></path>
-            <path d="M414,4 H469 V136 H539 V4 H594 V323 H539 V191 H469 V323 H414 Z" fill="#F4FF15"></path>
-            <path d="M634,4 H694 V323 H634 Z" fill="#F4FF15"></path>
-            <path d="M734,4 L794,323 H854 L914,4 H854 L824,180 L794,4 Z" fill="#F4FF15"></path>
-            <path d="M954,323 L1014,4 H1074 L1134,323 H1074 L1056,246 H1032 L1014,323 H954 Z M1034,110 H1054 L1068,191 H1020 Z" fill="#F4FF15"></path>
+            <path d="M0,4 H246.64 V191 H75.36 V268 H246.64 V323 H0 V136 H171.28 V59 H0 Z" fill="#F4FF15"></path>
+            <path d="M301.45,4 H376.81 V136 H472.72 V4 H548.09 V323 H472.72 V191 H376.81 V323 H301.45 Z" fill="#F4FF15"></path>
+            <path d="M602.89,4 H685.11 V323 H602.89 Z" fill="#F4FF15"></path>
+            <path d="M739.91,4 L822.13,323 H904.34 L986.55,4 H904.34 L863.23,180 L822.13,4 Z" fill="#F4FF15"></path>
+            <path d="M1041.36,323 L1123.57,4 H1205.79 L1288,323 H1205.79 L1181.12,246 H1148.24 L1123.57,323 H1041.36 Z M1150.98,110 H1178.38 L1197.57,191 H1131.8 Z" fill="#F4FF15"></path>
           </svg>
         </motion.div>
 
@@ -71,7 +71,7 @@ const Hero = () => {
           <motion.div className="hero-portrait-container" style={{ y: portraitY }}>
             <img 
               src="https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final%201.avif" 
-              alt="Nenad Popadic" 
+              alt="Shiva Kumar" 
               className="hero-portrait"
             />
             
@@ -149,11 +149,11 @@ const Hero = () => {
 
           {/* Bottom Text */}
           <div className="hero-bottom-text left-text">
-            <p>The Webflow Expert.<br/>That's Nenad.</p>
+            <p>The Frontend Developer.<br/>That's Shiva.</p>
           </div>
           
           <div className="hero-bottom-text right-text">
-            <p>Working closely with your team to deliver<br/>Webflow builds that merge creativity, technical<br/>excellence, and long-term value.</p>
+            <p>Working closely with your team to deliver<br/>React builds that merge creativity, technical<br/>excellence, and long-term value.</p>
           </div>
 
         </div>

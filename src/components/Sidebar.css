@@ -19,7 +19,7 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.sidebar-badge-nesh {
+.sidebar-badge-shiva {
   background: var(--primary-yellow);
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
@@ -28,7 +28,7 @@
   letter-spacing: -0.02em;
 }
 
-.sidebar-badge-nesh sup {
+.sidebar-badge-shiva sup {
   font-size: 0.5rem;
 }
 

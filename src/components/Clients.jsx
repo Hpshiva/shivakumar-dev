@@ -25,7 +25,7 @@ const Clients = () => {
           >
             <div className="quote-icon">"</div>
             <p className="testimonial-text">
-              Nenad is an absolute powerhouse. He took our complex Figma designs and built a flawless, high-performing Webflow site ahead of schedule. The animations are buttery smooth!
+              Shiva is an absolute powerhouse. He took our complex Figma designs and built a flawless, high-performing React site ahead of schedule. The animations are buttery smooth!
             </p>
             <div className="testimonial-author">
               <div className="author-avatar"></div>
@@ -45,7 +45,7 @@ const Clients = () => {
           >
             <div className="quote-icon">"</div>
             <p className="testimonial-text">
-              Working with Nenad was the best decision for our agency. His deep knowledge of Webflow CMS and technical SEO meant our site not only looks great, but performs exceptionally well.
+              Working with Shiva was the best decision for our agency. His deep knowledge of state management and technical SEO meant our site not only looks great, but performs exceptionally well.
             </p>
             <div className="testimonial-author">
               <div className="author-avatar"></div>

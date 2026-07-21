@@ -5,10 +5,10 @@ import './Sidebar.css';
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      {/* NESH Badge */}
+      {/* SHIVA Badge */}
       <div className="sidebar-badge-container">
-        <div className="sidebar-badge-nesh">
-          NESH<sup>®</sup>
+        <div className="sidebar-badge-shiva">
+          SHIVA<sup>®</sup>
         </div>
         <div className="sidebar-badge-socials">
           <a href="#" className="social-icon">𝕏</a>

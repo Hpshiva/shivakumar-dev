@@ -18,7 +18,7 @@ const Footer = () => {
         </motion.div>
         
         <div className="footer-bottom">
-          <div className="footer-logo">NESH®</div>
+          <div className="footer-logo">SHIVA®</div>
           <div className="footer-links">
             <a href="#">LinkedIn</a>
             <a href="#">Twitter</a>
@@ -26,7 +26,7 @@ const Footer = () => {
             <a href="#">Email</a>
           </div>
           <div className="footer-copy">
-            <p>&copy; {new Date().getFullYear()} Nenad Popadić. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Shiva Kumar. All rights reserved.</p>
           </div>
         </div>
       </div>

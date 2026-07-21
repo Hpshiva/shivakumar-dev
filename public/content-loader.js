@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sidebar Stats Card Text
     updateHTML(".nav-webflow-text", `${data.hero.projectsCount}+<br />${data.hero.projectsLabel}`);
-    updateHTML(".nav-experience-text", `${data.hero.experienceYears}+<br />${data.hero.experienceLabel}`);
+    updateHTML(".nav-experience-text", `${data.hero.experienceLabel}`);
 
     // Update data-number-count for counter animations
     document.querySelectorAll("[data-number-count]").forEach(el => {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       els.forEach(el => {
         const textNode = el.querySelector(".button-text") || el;
         if (text && textNode !== el) textNode.textContent = text;
-        
+
         el.style.cursor = "pointer";
         el.onclick = (e) => {
           e.preventDefault();
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupLink(".hero-cta-button", data.hero.ctaTextPrimary, data.hero.ctaUrlPrimary);
     setupLink(".nav-button-mobile", data.hero.ctaTextPrimary, data.hero.ctaUrlPrimary);
     setupLink(".nav-button", data.hero.ctaTextPrimary, data.hero.ctaUrlPrimary);
-    
+
     setupLink(".hero-button", data.hero.ctaTextSecondary, data.hero.ctaUrlSecondary);
     setupLink(".nav-button-secondary", data.hero.ctaTextSecondary, data.hero.ctaUrlSecondary);
   }
@@ -95,11 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Title
         const titleEl = cardWrap.querySelector(".about-card-heading");
         if (titleEl) titleEl.textContent = ms.title;
-        
+
         // Short text
         const descEl = cardWrap.querySelector(".op80");
         if (descEl) descEl.textContent = ms.text;
-        
+
         // Handle & time bottom layout
         const bottomText = cardWrap.querySelector(".about-card-bottom-text");
         if (bottomText) {
@@ -111,10 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (popupWrap) {
           const popupYear = popupWrap.querySelector(".popup-card-top-item div:first-child");
           if (popupYear && ms.popupYear) popupYear.textContent = ms.popupYear;
-          
+
           const popupHeading = popupWrap.querySelector(".popup-heading");
           if (popupHeading) popupHeading.innerHTML = ms.title.replace(/\s&\s/g, " & <br />");
-          
+
           const popupDesc = popupWrap.querySelector(".popup-card-bottom-item p") || popupWrap.querySelector(".popup-card-bottom-item div p");
           if (popupDesc) popupDesc.innerHTML = ms.popupText || ms.text;
         }
@@ -177,13 +177,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Background video & hover video source (transparent overlays)
       const bgVideo = card.querySelector(".work-bg");
-      if (bgVideo && proj.videoBg) {
-        bgVideo.setAttribute("data-src", proj.videoBg);
+      if (bgVideo) {
+        if (proj.videoBg) {
+          bgVideo.setAttribute("data-src", proj.videoBg);
+        } else {
+          bgVideo.removeAttribute("data-src");
+        }
+        if (proj.image) {
+          bgVideo.setAttribute("poster", proj.image);
+        }
       }
+      
       const fgVideo = card.querySelector(".work-video");
       if (fgVideo) {
-        if (proj.videoFgWebm) fgVideo.setAttribute("data-webm", proj.videoFgWebm);
-        if (proj.videoFgMov) fgVideo.setAttribute("data-mov", proj.videoFgMov);
+        if (proj.videoFgWebm) {
+          fgVideo.setAttribute("data-webm", proj.videoFgWebm);
+        } else {
+          fgVideo.removeAttribute("data-webm");
+        }
+        if (proj.videoFgMov) {
+          fgVideo.setAttribute("data-mov", proj.videoFgMov);
+        } else {
+          fgVideo.removeAttribute("data-mov");
+        }
+        if (proj.image) {
+          fgVideo.setAttribute("poster", proj.image);
+        }
       }
 
       // Main static image src
@@ -191,6 +210,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (staticImg && proj.image) {
         staticImg.src = proj.image;
         staticImg.removeAttribute("srcset");
+        // Ensure object-fit is cover for the static image so it looks like the poster
+        staticImg.style.objectFit = "cover";
       }
     });
   }
@@ -292,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (data.contact) {
     // Email Text
     updateText(".email-text", data.contact.email);
-    
+
     // Update all mailto links
     document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
       link.href = `mailto:${data.contact.email}`;
