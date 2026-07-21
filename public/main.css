@@ -250,6 +250,14 @@
           z-index: 2 !important;
         }
 
+        .about-card-img {
+          width: clamp(48px, 8vw, 68px) !important;
+          height: clamp(48px, 8vw, 68px) !important;
+          border-radius: 50% !important;
+          object-fit: cover !important;
+          aspect-ratio: 1 / 1 !important;
+        }
+
         @media screen and (max-width: 767px) {
           .mobile-hero-image-wrap {
             z-index: 1 !important;
