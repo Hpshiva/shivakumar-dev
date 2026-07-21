@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.loadWebsiteData = () => {
   const data = window.WEBSITE_DATA;
   if (!data) return;
 
@@ -327,4 +327,5 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href = data.contact.bookCallUrl;
     });
   }
-});
+};
+document.addEventListener("DOMContentLoaded", window.loadWebsiteData);
