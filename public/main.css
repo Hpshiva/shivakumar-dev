@@ -250,6 +250,22 @@
           z-index: 2 !important;
         }
 
+        @media screen and (max-width: 767px) {
+          .mobile-hero-image-wrap {
+            z-index: 1 !important;
+            pointer-events: none !important;
+            justify-content: center !important;
+            align-items: flex-end !important;
+            height: clamp(40.7rem, 170vw + 1.23rem, 92.6rem) !important;
+            display: flex !important;
+            position: absolute !important;
+            inset: clamp(4.77rem, 23.09vw + .15rem, 11.07rem) 0% 0% !important;
+          }
+          .mobile-hero-image {
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%) !important;
+          }
+        }
 
         /* Force Desktop Hero Image to be visible (overriding external CSS that hides it) */
         @media screen and (min-width: 768px) {
