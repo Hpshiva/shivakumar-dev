@@ -13,37 +13,37 @@ const projects = [
     id: 1,
     title: 'Agan Health',
     category: 'Healthcare Platform',
-    image: './images/agan_health.png'
+    image: '/images/agan_health.png'
   },
   {
     id: 2,
     title: 'Trident Hyundai',
     category: 'Automotive Platform',
-    image: './images/trident_hyundai.png'
+    image: '/images/trident_hyundai.png'
   },
   {
     id: 3,
     title: 'Pristine Renault',
     category: 'Automotive Platform',
-    image: './images/pristine_renault.png'
+    image: '/images/pristine_renault.png'
   },
   {
     id: 4,
     title: 'Kinara Capital',
     category: 'Fintech Platform',
-    image: './images/kinara_capital.png'
+    image: '/images/kinara_capital.png'
   },
   {
     id: 5,
     title: 'Design Esthetics',
     category: 'Creative Agency Portal',
-    image: './images/design_esthetics.png'
+    image: '/images/design_esthetics.png'
   },
   {
     id: 6,
     title: 'Pristine Isuzu',
     category: 'Automotive Commerce',
-    image: './images/pristine_isuzu.png'
+    image: '/images/pristine_isuzu.png'
   }
 ];
 

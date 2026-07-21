@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Sidebar.css';
 
 const Sidebar = () => {
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px' }
+    );
+
+    const sections = document.querySelectorAll('section[id], div[id="projects"]');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   return (
-    <aside className="sidebar">
+    <motion.aside 
+      className="sidebar"
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+    >
       {/* SHIVA Badge */}
       <div className="sidebar-badge-container">
         <div className="sidebar-badge-shiva">
@@ -49,38 +76,38 @@ const Sidebar = () => {
       <nav className="sidebar-nav">
         <ul>
           <li>
-            <a href="#home" className="nav-link">
-              <span className="nav-icon">⌂</span> HOME
+            <a href="#home" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'home' ? '●' : '⌂'}</span> HOME
             </a>
           </li>
           <li>
-            <a href="#about" className="nav-link active">
-              <span className="nav-icon">●</span> ABOUT ME
+            <a href="#about" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'about' ? '●' : '○'}</span> ABOUT ME
             </a>
           </li>
           <li>
-            <a href="#projects" className="nav-link">
-              <span className="nav-icon">☰</span> PROJECTS
+            <a href="#projects" className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'projects' ? '●' : '☰'}</span> PROJECTS
             </a>
           </li>
           <li>
-            <a href="#what-you-get" className="nav-link">
-              <span className="nav-icon">✧</span> WHAT YOU GET
+            <a href="#overview" className={`nav-link ${activeSection === 'overview' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'overview' ? '●' : '✧'}</span> WHAT YOU GET
             </a>
           </li>
           <li>
-            <a href="#services" className="nav-link">
-              <span className="nav-icon">⚡</span> SERVICES
+            <a href="#services" className={`nav-link ${activeSection === 'services' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'services' ? '●' : '⚡'}</span> SERVICES
             </a>
           </li>
           <li>
-            <a href="#clients" className="nav-link">
-              <span className="nav-icon">👤</span> CLIENTS
+            <a href="#clients" className={`nav-link ${activeSection === 'clients' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'clients' ? '●' : '👤'}</span> CLIENTS
             </a>
           </li>
           <li>
-            <a href="#faq" className="nav-link">
-              <span className="nav-icon">?</span> FAQ
+            <a href="#faq" className={`nav-link ${activeSection === 'faq' ? 'active' : ''}`}>
+              <span className="nav-icon">{activeSection === 'faq' ? '●' : '?'}</span> FAQ
             </a>
           </li>
         </ul>
@@ -103,7 +130,7 @@ const Sidebar = () => {
           Book a Call
         </button>
       </div>
-    </aside>
+    </motion.aside>
   );
 };
 
