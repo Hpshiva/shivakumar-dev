@@ -32,11 +32,13 @@ window.loadWebsiteData = () => {
 
     // Update data-number-count for counter animations
     document.querySelectorAll("[data-number-count]").forEach(el => {
+      if (el.closest(".about-card") || el.closest(".about-card-year")) return;
+      
       const isProjects = el.closest("#stats_projects") || el.closest(".hero-card-2");
       if (isProjects) {
         el.setAttribute("data-number-count", data.hero.projectsCount);
         el.textContent = data.hero.projectsCount;
-      } else {
+      } else if (data.hero.experienceYears) {
         el.setAttribute("data-number-count", data.hero.experienceYears);
         el.textContent = data.hero.experienceYears;
       }
@@ -76,9 +78,10 @@ window.loadWebsiteData = () => {
     updateText("#about p.max-width-389", data.about.description);
 
     if (data.about.milestones) {
-      data.about.milestones.forEach((ms, index) => {
-        const cardWrap = document.querySelector(`.about-card-wrap.ac-${index + 1}`);
-        if (!cardWrap) return;
+      const aboutCards = document.querySelectorAll(".about-card-wrap");
+      aboutCards.forEach((cardWrap, index) => {
+        const ms = data.about.milestones[index];
+        if (!ms) return;
 
         // Year (e.g. '19 or '22)
         const yearEl = cardWrap.querySelector(".about-card-year span") || cardWrap.querySelector(".about-card-year");
@@ -325,6 +328,21 @@ window.loadWebsiteData = () => {
     // Update book a call URLs
     document.querySelectorAll('a[href*="cal.com"]').forEach(link => {
       link.href = data.contact.bookCallUrl;
+    });
+  }
+
+  // 9. CONTACT FORM HANDLER
+  const contactForm = document.getElementById("contact-form");
+  const successMsg = document.getElementById("contact-success-msg");
+  if (contactForm && successMsg) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      console.log("Contact Form Submitted:", Object.fromEntries(formData.entries()));
+      
+      // Hide form and show success message
+      contactForm.style.display = "none";
+      successMsg.style.display = "flex";
     });
   }
 };
