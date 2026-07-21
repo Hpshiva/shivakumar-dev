@@ -250,19 +250,6 @@
           z-index: 2 !important;
         }
 
-        /* Override mobile hero image so it scales down correctly and doesn't overlap text, mimicking Nesh's original spaced-out image */
-        @media screen and (max-width: 767px) {
-          .mobile-hero-image-wrap {
-            justify-content: flex-end !important;
-            align-items: flex-end !important;
-          }
-          .mobile-hero-image {
-            height: 65% !important;
-            width: auto !important;
-            object-fit: contain !important;
-            object-position: bottom right !important;
-          }
-        }
 
         /* Force Desktop Hero Image to be visible (overriding external CSS that hides it) */
         @media screen and (min-width: 768px) {
