@@ -414,6 +414,15 @@
           }
         }
 
+        /* Force Desktop Hero Image to be visible (overriding external CSS that hides it) */
+        @media screen and (min-width: 768px) {
+          .profile-img-wrap {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+          }
+        }
+
         /* Work card hover effects */
         .work-card:hover {
           opacity: 1;
