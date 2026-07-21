@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './Hero.css';
-
+import me from '../assets/myPic.png'
 const Hero = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -46,7 +46,7 @@ const Hero = () => {
 
         {/* Main Content */}
         <div className="hero-content">
-          
+
           {/* Navigation Bar inside Hero */}
           <nav className="hero-nav">
             <div className="nav-left">
@@ -69,15 +69,15 @@ const Hero = () => {
 
           {/* Center Portrait with Parallax */}
           <motion.div className="hero-portrait-container" style={{ y: portraitY }}>
-            <img 
-              src="https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final%201.avif" 
-              alt="Shiva Kumar" 
+            <img
+              src={me}
+              alt="Shiva Kumar"
               className="hero-portrait"
             />
-            
+
             {/* Floating Text over portrait with stagger animation */}
             <motion.div className="hero-title-overlay" style={{ y: textY }}>
-              <motion.h1 
+              <motion.h1
                 className="hero-title"
                 variants={containerVariants}
                 initial="hidden"
@@ -87,7 +87,7 @@ const Hero = () => {
                 <motion.div className="text-line-wrapper"><motion.div variants={itemVariants}>Applied</motion.div></motion.div>
                 <motion.div className="text-line-wrapper"><motion.div variants={itemVariants}>Differently.</motion.div></motion.div>
               </motion.h1>
-              <motion.div 
+              <motion.div
                 className="hero-cta"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Floating Cards - Left */}
-          <motion.div 
+          <motion.div
             className="floating-card stat-projects"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -108,16 +108,16 @@ const Hero = () => {
           >
             <div className="stat-icon webflow-yellow">
               <svg viewBox="0 0 91 57" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-icon">
-                <path fillRule="evenodd" clipRule="evenodd" d="M90.0571 0L61.3209 56.1824H34.3296L46.3557 32.898H45.8162C35.8948 45.7787 21.0919 54.2582 0 56.1824V33.2204C0 33.2204 13.493 32.4233 21.4251 24.0827H0V0.00044379H24.0795V19.8078L24.62 19.8056L34.4597 0.00044379H52.6705V19.6822L53.2109 19.6813L63.4197 0H90.0571Z" fill="#F4FF15"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M90.0571 0L61.3209 56.1824H34.3296L46.3557 32.898H45.8162C35.8948 45.7787 21.0919 54.2582 0 56.1824V33.2204C0 33.2204 13.493 32.4233 21.4251 24.0827H0V0.00044379H24.0795V19.8078L24.62 19.8056L34.4597 0.00044379H52.6705V19.6822L53.2109 19.6813L63.4197 0H90.0571Z" fill="#F4FF15" />
               </svg>
             </div>
             <div className="stat-text">
               <strong>80+</strong>
-              <br/>Projects
+              <br />Projects
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="floating-card stat-years"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -127,12 +127,12 @@ const Hero = () => {
               7+
             </div>
             <div className="stat-text">
-              Years of<br/>experience
+              Years of<br />experience
             </div>
           </motion.div>
 
           {/* Floating Cards - Right */}
-          <motion.div 
+          <motion.div
             className="floating-card features-list"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -149,11 +149,11 @@ const Hero = () => {
 
           {/* Bottom Text */}
           <div className="hero-bottom-text left-text">
-            <p>The Frontend Developer.<br/>That's Shiva.</p>
+            <p>The Frontend Developer.<br />That's Shiva.</p>
           </div>
-          
+
           <div className="hero-bottom-text right-text">
-            <p>Working closely with your team to deliver<br/>React builds that merge creativity, technical<br/>excellence, and long-term value.</p>
+            <p>Working closely with your team to deliver<br />React builds that merge creativity, technical<br />excellence, and long-term value.</p>
           </div>
 
         </div>
