@@ -201,3 +201,68 @@
         initConnectionFlow();
       }
     })();
+
+    /* ============================================
+       CONTACT FORM FIREBASE & EMAIL HANDLER
+       ============================================ */
+    (function () {
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contact-form");
+        const successMsg = document.getElementById("contact-success-msg");
+
+        if (!contactForm) return;
+
+        contactForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = contactForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn ? submitBtn.innerHTML : "Send Message";
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+            submitBtn.innerHTML = "<span>Sending...</span>";
+          }
+
+          const name = document.getElementById("contact-name")?.value || "";
+          const phone = document.getElementById("contact-phone")?.value || "";
+          const email = document.getElementById("contact-email")?.value || "";
+          const message = document.getElementById("contact-message")?.value || "";
+
+          const leadData = {
+            name: name,
+            phone: phone,
+            email: email,
+            subject: "Website Inquiry from " + name,
+            message: message
+          };
+
+          try {
+            // Import and submit to Firestore & local lead storage
+            const { submitLead } = await import("./firebase-config.js");
+            await submitLead(leadData);
+          } catch (err) {
+            console.warn("Lead backup fallback triggered:", err);
+          }
+
+          // Direct mailto backup trigger
+          const mailtoUrl = `mailto:shivakumar.bfgi@gmail.com?subject=${encodeURIComponent("New Lead: " + name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\n\nMessage:\n" + message)}`;
+          
+          // Open hidden mailto iframe/link
+          const mailLink = document.createElement("a");
+          mailLink.href = mailtoUrl;
+          mailLink.style.display = "none";
+          document.body.appendChild(mailLink);
+          mailLink.click();
+          document.body.removeChild(mailLink);
+
+          // Reveal success UI
+          contactForm.style.display = "none";
+          if (successMsg) {
+            successMsg.style.display = "flex";
+            successMsg.style.flexDirection = "column";
+            successMsg.style.alignItems = "center";
+          }
+        });
+      });
+    })();

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Lead Portal | Shiva Kumar</title>
+  <link rel="icon" type="image/png" href="/images/myPic.png" />
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0d0e11;
+      --card-bg: #14151a;
+      --card-border: rgba(255, 255, 255, 0.1);
+      --yellow: #eef840;
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* PASSCODE MODAL */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 14, 17, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .auth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+
+    .auth-logo {
+      background: var(--yellow);
+      color: #000;
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .auth-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .auth-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      letter-spacing: 0.2em;
+    }
+
+    .auth-input:focus {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 3px rgba(238, 248, 64, 0.2);
+    }
+
+    .auth-btn {
+      width: 100%;
+      background: var(--yellow);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .auth-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+      display: none;
+    }
+
+    /* HEADER NAVBAR */
+    header {
+      background: rgba(20, 21, 26, 0.8);
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-badge {
+      background: var(--yellow);
+      color: #000;
+      font-weight: 800;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .portal-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-sync {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-sync:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-logout {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    /* MAIN DASHBOARD */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* METRICS GRID */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .metric-value.highlight {
+      color: var(--yellow);
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-input {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.65rem 1.2rem;
+      color: #fff;
+      font-size: 0.9rem;
+      min-width: 280px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--yellow);
+    }
+
+    .tabs-group {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.3rem;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      border-radius: 7px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--yellow);
+      color: #000;
+    }
+
+    /* LEADS LIST */
+    .leads-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .lead-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.5rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .lead-card:hover {
+      border-color: rgba(238, 248, 64, 0.4);
+    }
+
+    .lead-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .client-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .client-meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-new {
+      background: rgba(238, 248, 64, 0.15);
+      color: var(--yellow);
+      border: 1px solid rgba(238, 248, 64, 0.4);
+    }
+
+    .status-contacted {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .status-archived {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .subject-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--yellow);
+    }
+
+    .message-body {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+      white-space: pre-wrap;
+    }
+
+    .lead-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-email {
+      background: var(--yellow);
+      color: #000;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .btn-status-toggle {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-delete {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      margin-left: auto;
+    }
+
+    .action-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PASSCODE AUTHENTICATION MODAL -->
+  <div id="auth-modal" class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-logo">SHIVA®</div>
+      <h2 class="auth-title">Admin Leads Portal</h2>
+      <p class="auth-subtitle">Enter security passcode to manage client inquiries.</p>
+      <form id="auth-form">
+        <input type="password" id="passcode-input" class="auth-input" placeholder="••••••••" required />
+        <button type="submit" class="auth-btn">Unlock Portal</button>
+        <p id="auth-error" class="error-msg">Incorrect passcode. Try again.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="brand-group">
+        <div class="brand-badge">SHIVA®</div>
+        <span class="portal-title">Leads & Inquiries Dashboard</span>
+      </div>
+      <div class="nav-actions">
+        <button id="btn-sync" class="btn-sync">⚡ Sync Firestore</button>
+        <button id="btn-logout" class="btn-logout">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD BODY -->
+  <main>
+    <!-- METRICS OVERVIEW -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total Inquiries</div>
+        <div id="metric-total" class="metric-value">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">New Leads</div>
+        <div id="metric-new" class="metric-value highlight">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Contacted</div>
+        <div id="metric-contacted" class="metric-value">0</div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <input type="text" id="search-input" class="search-input" placeholder="Search by name, email, or subject..." />
+      <div class="tabs-group">
+        <button class="tab-btn active" data-filter="all">All</button>
+        <button class="tab-btn" data-filter="new">New</button>
+        <button class="tab-btn" data-filter="contacted">Contacted</button>
+        <button class="tab-btn" data-filter="archived">Archived</button>
+      </div>
+    </div>
+
+    <!-- LEADS CONTAINER -->
+    <div id="leads-container" class="leads-grid">
+      <div class="empty-state">Loading client inquiries...</div>
+    </div>
+  </main>
+
+  <!-- JS LOGIC -->
+  <script type="module">
+    import { fetchAllLeads, updateLeadStatus, deleteLead, verifyAdminPasscode } from './firebase-config.js';
+
+    let allLeadsData = [];
+    let currentFilter = 'all';
+
+    // 1. AUTH CHECK
+    const authModal = document.getElementById('auth-modal');
+    const authForm = document.getElementById('auth-form');
+    const passcodeInput = document.getElementById('passcode-input');
+    const authError = document.getElementById('auth-error');
+
+    const checkAuth = () => {
+      const isAuthenticated = sessionStorage.getItem('shiva_admin_auth') === 'true';
+      if (isAuthenticated) {
+        authModal.style.display = 'none';
+        loadDashboard();
+      } else {
+        authModal.style.display = 'flex';
+      }
+    };
+
+    authForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = passcodeInput.value;
+      if (verifyAdminPasscode(code)) {
+        sessionStorage.setItem('shiva_admin_auth', 'true');
+        authModal.style.display = 'none';
+        authError.style.display = 'none';
+        loadDashboard();
+      } else {
+        authError.style.display = 'block';
+      }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('shiva_admin_auth');
+      window.location.reload();
+    });
+
+    document.getElementById('btn-sync').addEventListener('click', () => {
+      loadDashboard();
+    });
+
+    // 2. DASHBOARD LOADER
+    async function loadDashboard() {
+      const container = document.getElementById('leads-container');
+      container.innerHTML = '<div class="empty-state">Syncing with Firestore...</div>';
+
+      allLeadsData = await fetchAllLeads();
+      updateMetrics();
+      renderLeads();
+    }
+
+    function updateMetrics() {
+      document.getElementById('metric-total').textContent = allLeadsData.length;
+      document.getElementById('metric-new').textContent = allLeadsData.filter(l => l.status === 'new').length;
+      document.getElementById('metric-contacted').textContent = allLeadsData.filter(l => l.status === 'contacted').length;
+    }
+
+    function renderLeads() {
+      const container = document.getElementById('leads-container');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+
+      const filtered = allLeadsData.filter(lead => {
+        const matchesFilter = currentFilter === 'all' || lead.status === currentFilter;
+        const matchesSearch = !searchQuery || 
+          (lead.name && lead.name.toLowerCase().includes(searchQuery)) ||
+          (lead.email && lead.email.toLowerCase().includes(searchQuery)) ||
+          (lead.subject && lead.subject.toLowerCase().includes(searchQuery)) ||
+          (lead.message && lead.message.toLowerCase().includes(searchQuery));
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="empty-state">No inquiries found matching your criteria.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(lead => {
+        const dateStr = lead.createdAt ? new Date(lead.createdAt).toLocaleString() : 'Recent';
+        const mailtoUrl = `mailto:${lead.email}?subject=Re: ${encodeURIComponent(lead.subject || 'Your Inquiry')}&body=Hi ${encodeURIComponent(lead.name)},%0A%0AThank you for reaching out through my website. I reviewed your inquiry regarding "${encodeURIComponent(lead.subject)}"...%0A%0ABest regards,%0AShiva Kumar%0ACreative Frontend Engineer`;
+        const phoneClean = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
+        const whatsappUrl = phoneClean ? `https://wa.me/${phoneClean}?text=Hi%20${encodeURIComponent(lead.name)},%20I%20saw%20your%20inquiry%20on%20my%20website!` : '#';
+
+        return `
+          <div class="lead-card" data-id="${lead.id}">
+            <div class="lead-header">
+              <div>
+                <div class="client-name">${escapeHtml(lead.name)}</div>
+                <div class="client-meta">
+                  <span>✉ ${escapeHtml(lead.email)}</span>
+                  ${lead.phone ? `<span>📱 ${escapeHtml(lead.phone)}</span>` : ''}
+                  <span>📅 ${dateStr}</span>
+                </div>
+              </div>
+              <span class="status-badge status-${lead.status}">${lead.status}</span>
+            </div>
+
+            <div class="subject-title">${escapeHtml(lead.subject)}</div>
+            <div class="message-body">${escapeHtml(lead.message)}</div>
+
+            <div class="lead-actions">
+              <a href="${mailtoUrl}" target="_blank" class="action-btn btn-email">📧 Email Reply</a>
+              ${phoneClean ? `<a href="${whatsappUrl}" target="_blank" class="action-btn btn-whatsapp">💬 WhatsApp Reply</a>` : ''}
+              
+              ${lead.status === 'new' 
+                ? `<button class="action-btn btn-status-toggle btn-mark-contacted" data-id="${lead.id}">✓ Mark Contacted</button>`
+                : `<button class="action-btn btn-status-toggle btn-mark-new" data-id="${lead.id}">↺ Mark New</button>`
+              }
+              
+              <button class="action-btn btn-delete" data-id="${lead.id}">🗑 Delete</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Attach event listeners
+      container.querySelectorAll('.btn-mark-contacted').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.target.dataset.id;
+          await updateLeadStatus(id, 'contacted');
+          loadDashboard();
+        });
+      });
+
+      container.querySelectorAll('.btn-mark-new').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.target.dataset.id;
+          await updateLeadStatus(id, 'new');
+          loadDashboard();
+        });
+      });
+
+      container.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.target.dataset.id;
+          if (confirm('Are you sure you want to delete this lead?')) {
+            await deleteLead(id);
+            loadDashboard();
+          }
+        });
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    // SEARCH & FILTER EVENTS
+    document.getElementById('search-input').addEventListener('input', renderLeads);
+
+    document.querySelectorAll('.tab-btn').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        renderLeads();
+      });
+    });
+
+    // INITIAL AUTH CHECK
+    checkAuth();
+  </script>
+</body>
+
+</html>
