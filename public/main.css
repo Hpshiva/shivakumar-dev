@@ -93,6 +93,10 @@
 
         .hero-heading {
           visibility: hidden;
+          font-size: clamp(3rem, 7.5vw, 8.5rem) !important;
+          line-height: 0.95 !important;
+          letter-spacing: -0.03em !important;
+          text-align: center !important;
         }
 
         /* ============================================
@@ -215,6 +219,9 @@
         /* ============================================
              7. INTERACTIVE ELEMENTS
              ============================================ */
+        /* ============================================
+             7. INTERACTIVE ELEMENTS
+             ============================================ */
         /* Overrides for mobile responsiveness and card sizing */
         .work-card {
           width: 85vw !important;
@@ -222,7 +229,7 @@
 
         @media (min-width: 768px) {
           .work-card {
-            width: clamp(40rem, 30vw, 40rem) !important;
+            width: 40rem !important;
           }
         }
 
@@ -232,22 +239,44 @@
           object-position: top center !important;
         }
 
-        /* Black gradient overlay from bottom to top so text remains readable against bright screenshots */
-        .work-card::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 60%;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
-          pointer-events: none;
-          z-index: 1;
-          border-radius: inherit;
+        /* High-contrast dark frosted glass text capsules for guaranteed legibility on bright/white screenshots */
+        .work-card-heading {
+          display: inline-block !important;
+          background-color: rgba(13, 14, 17, 0.9) !important;
+          color: #ffffff !important;
+          padding: 0.4em 0.9em !important;
+          border-radius: 12px !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.18) !important;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+          margin-bottom: 0.4rem !important;
+          font-weight: 700 !important;
         }
 
-        .work-card-content {
-          z-index: 2 !important;
+        .work-card-content-bottom-layout p,
+        .work-card-content-bottom-layout .op80 {
+          display: block !important;
+          background-color: rgba(13, 14, 17, 0.9) !important;
+          color: rgba(255, 255, 255, 0.95) !important;
+          padding: 0.6em 1em !important;
+          border-radius: 12px !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.15) !important;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+          line-height: 1.45 !important;
+        }
+
+        .work-label {
+          background-color: rgba(13, 14, 17, 0.9) !important;
+          color: #ffffff !important;
+          border: 1px solid rgba(255, 255, 255, 0.2) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          padding: 0.35em 0.85em !important;
+          border-radius: 999px !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
         }
 
         .about-card-img {
@@ -347,6 +376,10 @@
           100% {
             transform: translateX(-100%);
           }
+        }
+
+        .clipboard-wrap {
+          right: 0.4rem;
         }
 
         .nav-email-item:hover .email-text,
@@ -646,10 +679,10 @@
           margin-bottom: 0 !important;
         }
 
-        .contact-form-input:focus ~ .contact-form-label,
-        .contact-form-input:not(:placeholder-shown) ~ .contact-form-label,
-        .contact-form-textarea:focus ~ .contact-form-label,
-        .contact-form-textarea:not(:placeholder-shown) ~ .contact-form-label {
+        .contact-form-input:focus~.contact-form-label,
+        .contact-form-input:not(:placeholder-shown)~.contact-form-label,
+        .contact-form-textarea:focus~.contact-form-label,
+        .contact-form-textarea:not(:placeholder-shown)~.contact-form-label {
           top: 0.4vw;
           left: 1.25vw;
           font-size: clamp(0.6rem, 0.8vw, 0.95rem);
@@ -660,8 +693,8 @@
         .contact-form-input:focus,
         .contact-form-textarea:focus {
           background-color: rgba(255, 255, 255, 0.35) !important;
-          border-color: rgba(0, 0, 0, 0.5) !important;
-          box-shadow: 0 0 1.2vw rgba(255, 255, 35, 0.25) !important;
+          border-color: #000 !important;
+          box-shadow: 0 0 0 4px rgba(255, 255, 35, 0.35), 0 4px 15px rgba(0, 0, 0, 0.05) !important;
         }
 
         .contact-form-bar {
@@ -675,8 +708,8 @@
           border-radius: 0 0 0.83vw 0.83vw;
         }
 
-        .contact-form-input:focus ~ .contact-form-bar,
-        .contact-form-textarea:focus ~ .contact-form-bar {
+        .contact-form-input:focus~.contact-form-bar,
+        .contact-form-textarea:focus~.contact-form-bar {
           width: 100%;
         }
 
@@ -739,6 +772,7 @@
             opacity: 0;
             transform: translateY(20px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
@@ -776,32 +810,38 @@
           .contact-form-wrap {
             gap: 5vw;
           }
+
           .contact-form-group {
             margin-bottom: 5vw;
           }
+
           .contact-form-input,
           .contact-form-textarea {
             border-radius: 2vw !important;
             padding: 5.5vw 4vw 2.5vw 4vw !important;
             font-size: clamp(0.85rem, 3.8vw, 1.1rem) !important;
           }
+
           .contact-form-label {
             left: 4vw;
             top: 3.8vw;
             font-size: clamp(0.85rem, 3.8vw, 1.1rem);
           }
-          .contact-form-input:focus ~ .contact-form-label,
-          .contact-form-input:not(:placeholder-shown) ~ .contact-form-label,
-          .contact-form-textarea:focus ~ .contact-form-label,
-          .contact-form-textarea:not(:placeholder-shown) ~ .contact-form-label {
+
+          .contact-form-input:focus~.contact-form-label,
+          .contact-form-input:not(:placeholder-shown)~.contact-form-label,
+          .contact-form-textarea:focus~.contact-form-label,
+          .contact-form-textarea:not(:placeholder-shown)~.contact-form-label {
             top: 1.2vw;
             left: 4vw;
             font-size: clamp(0.65rem, 2.8vw, 0.85rem);
           }
+
           .contact-form-textarea {
             min-height: 35vw !important;
             padding-top: 6vw !important;
           }
+
           .contact-form-submit-btn {
             border-radius: 2vw !important;
             padding: 4vw 6vw !important;
@@ -809,27 +849,145 @@
             width: 100% !important;
             gap: 2vw;
           }
+
           .contact-submit-arrow {
             width: 4vw;
             height: 4vw;
           }
+
           .contact-success-wrap {
             padding: 10vw 6vw !important;
             border-radius: 2vw !important;
             gap: 4vw;
           }
+
           .contact-success-icon-wrap {
             width: 15vw;
             height: 15vw;
           }
+
           .contact-success-icon {
             width: 7vw;
             height: 7vw;
           }
+
           .contact-success-title {
             font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
           }
+
           .contact-success-desc {
             font-size: clamp(0.85rem, 3.8vw, 1.1rem) !important;
+          }
+        }
+
+        /* ============================================
+           CONNECTION CANVAS WIDGET STYLES
+           ============================================ */
+        .connection-canvas-wrap {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.15) !important;
+          border: 1px solid rgba(0, 0, 0, 0.12) !important;
+          border-radius: 0.83vw !important;
+          padding: 2vw !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05) !important;
+          aspect-ratio: 1 / 1;
+        }
+
+        #connection-svg {
+          width: 100%;
+          height: auto;
+          overflow: visible;
+        }
+
+        .node {
+          cursor: pointer;
+        }
+
+        .node-bg {
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .node-text {
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+          user-select: none;
+        }
+
+        /* Tech node hover action */
+        .tech-node:hover .node-bg {
+          fill: #000 !important;
+          stroke: var(--yellow) !important;
+          transform: scale(1.08);
+        }
+
+        .tech-node:hover .node-text {
+          fill: var(--yellow) !important;
+        }
+
+        /* Contact node highlights */
+        .contact-node .node-bg {
+          fill: var(--yellow) !important;
+        }
+
+        .contact-node:hover .node-bg {
+          fill: #000 !important;
+          stroke: var(--yellow) !important;
+          transform: scale(1.06);
+        }
+
+        .contact-node:hover .node-text {
+          fill: var(--yellow) !important;
+        }
+
+        /* Active styling linked via JavaScript */
+        .contact-node.highlight .node-bg {
+          fill: #000 !important;
+          stroke: var(--yellow) !important;
+          transform: scale(1.05);
+        }
+
+        .contact-node.highlight .node-text {
+          fill: var(--yellow) !important;
+        }
+
+        /* Connection Paths active states */
+        .conn-path {
+          transition: stroke 0.3s ease, stroke-width 0.3s ease;
+          opacity: 0.25;
+        }
+
+        .conn-path.active {
+          stroke: #000 !important;
+          stroke-width: 2px !important;
+          stroke-dasharray: none !important;
+          opacity: 0.95;
+        }
+
+        /* Responsive Mobile Layout Scaling */
+        @media (width < 767px) {
+          .connection-canvas-wrap {
+            border-radius: 2vw !important;
+            padding: 4vw !important;
+            margin-top: 5vw;
+          }
+        }
+
+        /* Dynamic Shimmer Heading */
+        .faq-column-main:hover .h2-style {
+          background: linear-gradient(120deg, #000 25%, #7a7a7a 50%, #000 75%);
+          background-size: 200% auto;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: textShimmer 2.2s linear infinite;
+        }
+
+        @keyframes textShimmer {
+          to {
+            background-position: 200% center;
           }
         }

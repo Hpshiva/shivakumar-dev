@@ -1,0 +1,16 @@
+{
+  "name": "Shiva Kumar — Creative Frontend Engineer",
+  "short_name": "Shiva Dev",
+  "description": "High-Performance React & Webflow Experiences by Shiva Kumar in Bengaluru, India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0e11",
+  "theme_color": "#0d0e11",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

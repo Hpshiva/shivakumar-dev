@@ -128,8 +128,6 @@ window.loadWebsiteData = () => {
   // 3. CAPABILITIES / WHAT YOU GET
   if (data.capabilities) {
     updateHTML("#overview .h2-style", data.capabilities.heading.replace(/\n/g, "<br />"));
-    updateText("#overview p.what_you_get-text", data.capabilities.subText);
-    updateText("#overview p.what_you_get-text-mobile", data.capabilities.subText);
 
     if (data.capabilities.items) {
       const cards = document.querySelectorAll("#overview .capa-card");

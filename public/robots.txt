@@ -1,0 +1,10 @@
+# Allow all search engine crawlers
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://shivakumar-dev.vercel.app/sitemap.xml
+
+# Prevent indexing system files
+Disallow: /node_modules/
+Disallow: /*.json$

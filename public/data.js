@@ -4,18 +4,19 @@ window.WEBSITE_DATA = {
     titleLine1: "React,",
     titleLine2: "Engineered",
     titleLine3: "Flawlessly.",
-    introTextLeft: "The Frontend Dev.\nThat's Shiva.",
-    introTextRight: 'I build high-performance React applications with pixel-perfect interfaces, scalable architecture, and seamless user experiences.',
+    introTextLeft: "Creative Frontend Engineer\nBengaluru, India",
+    introTextRight: "Helping SaaS companies, agencies, and ambitious brands build lightning-fast React, TypeScript, and Webflow experiences with premium GSAP animations, Core Web Vitals optimization, and Technical SEO.",
     portraitUrl: '/images/myPic.png',
 
-    // Stats (counter numbers and label)
-    projectsCount: "20", // Will animate counting up to this
-    projectsLabel: "Projects",
-    experienceLabel: "years exp",
+    // Stats
+    projectsCount: "10",
+    projectsLabel: "Deployments",
+    experienceYears: "2",
+    experienceLabel: "Years Exp",
 
     // CTAs
-    ctaTextPrimary: "Email Me",
-    ctaUrlPrimary: "mailto:shivakumar.bfgi@gmail.com",
+    ctaTextPrimary: "Book Strategy Call",
+    ctaUrlPrimary: "https://wa.me/916283937782?text=Hello!%20I%20saw%20your%20website%20and%20would%20love%20to%20build%20something%20amazing%20together.",
     ctaTextSecondary: "About Me",
     ctaUrlSecondary: "#about"
   },
@@ -23,62 +24,62 @@ window.WEBSITE_DATA = {
   // About / Journey Section Configuration
   about: {
     heading: "About Me (&)\nMy Journey",
-    description: "Highly focused on frontend engineering, converting design visions into performant, accessible React applications built with modern engineering standards.",
+    description: "Creative Frontend Engineer specializing in high-performance React experiences that improve user engagement, Core Web Vitals, and business outcomes.",
 
     milestones: [
       {
         year: "'18",
-        title: "The First Line of Code",
-        text: "Started my Bachelor of Computer Applications degree at Baba Farid Group of Institutions.",
+        title: "Computer Applications Foundations",
+        text: "Started Bachelor of Computer Applications (BCA) at Baba Farid Group of Institutions.",
         handle: "@bfgi",
         time: "8 years ago",
         popupYear: "2018",
-        popupText: "Began my academic journey in computer applications. Took my first steps in programming, learning database management systems, networking, and basic logic."
+        popupText: "Began my academic journey in computer applications. Took my first steps in programming, learning database management systems, algorithms, networking, and core web logic."
       },
       {
         year: "'21",
-        title: "Deepening the Craft",
-        text: "Graduated with my BCA and entered Sharnbasva University for my Master's degree.",
+        title: "Mastering Software Engineering",
+        text: "Graduated with BCA and entered Sharnbasva University for Master of Computer Applications (MCA).",
         handle: "@sharnbasva",
         time: "5 years ago",
         popupYear: "2021",
-        popupText: "Successfully completed my BCA. Took a major leap by starting my Master of Computer Applications (MCA) to deep dive into advanced software engineering, data structures, and web technologies."
+        popupText: "Successfully completed my BCA degree and enrolled in Master of Computer Applications (MCA) to master advanced software architecture, data structures, and production-grade web technologies."
       },
       {
         year: "'23",
-        title: "Understanding the Backend",
-        text: "Completed my Master's degree and secured a software developer internship at Utilinet.",
+        title: "Backend & Systems Insight",
+        text: "Graduated with MCA and served as Software Developer Intern at Utilinet (Java/Spring).",
         handle: "@utilinet",
         time: "3 years ago",
         popupYear: "2023",
-        popupText: "Graduated with an MCA. Joined Utilinet as a backend intern working with Java and Spring Framework. Gained a solid end-to-end understanding of database schema design and RESTful API structures. Having this backend background is my secret weapon; it helps me coordinate with backend teams and build perfect API integrations."
+        popupText: "Graduated with an MCA and joined Utilinet as a software developer intern. Engineered Java and Spring Framework backend services, gaining deep understanding of RESTful API contracts, database schemas, and server performance."
       },
       {
         year: "'24",
-        title: "Entering the Big League",
-        text: "Joined Design Esthetics in Bengaluru as a Frontend Developer, shifting fully to client-facing web apps.",
-        handle: "@frontend-dev",
+        title: "Relocated to Bengaluru Tech Hub",
+        text: "Joined Design Esthetics in Bengaluru as Frontend Developer, delivering custom client applications.",
+        handle: "@bengaluru",
         time: "2 years ago",
         popupYear: "2024",
-        popupText: "Relocated to Bengaluru and joined Design Esthetics. Shifted my focus entirely to modern frontend technologies (React, Redux Toolkit, Tailwind CSS) to build production-grade web applications for clients."
+        popupText: "Relocated to Bengaluru and joined Design Esthetics. Focused 100% on React, TypeScript, GSAP Animations, Webflow, and Redux Toolkit to build custom marketing web apps for international clients."
       },
       {
         year: "'26",
-        title: "Interactivity at Scale",
-        text: "Built Crypto Market Dashboard and earned AWS Academy Cloud certifications.",
+        title: "Cloud & Performance Specialization",
+        text: "Earned AWS Academy Cloud certifications & architected real-time crypto analytics dashboards.",
         handle: "@aws",
         time: "Recent",
         popupYear: "2026",
-        popupText: "Completed advanced dashboards integrating Recharts and CoinGecko. Earned AWS Academy certifications in Cloud Foundations & Architecting to leverage S3, CloudFront, and Lambda for frontend deployments."
+        popupText: "Earned AWS Academy Cloud Foundations & Architecting certifications to deploy scalable static and SSR frontends using S3, CloudFront, and Vercel edge infrastructure."
       },
       {
         year: "26",
-        title: "The Journey Continues",
-        text: "Still obsessed with building clean interfaces. Now exploring AI-driven development tools.",
+        title: "Continuous Innovation",
+        text: "Engineering fast web apps that rank higher on Google and convert visitors into clients.",
         handle: "@shiva",
-        time: "2 hours ago",
+        time: "Today",
         popupYear: "2026",
-        popupText: "The frontend environment moves fast, and so do I. Evolving every day to build performant, modular frontends that look premium and feel instant."
+        popupText: "Evolving every day to build modular, accessible, and lightning-fast web applications for SaaS companies, agencies, and high-growth startups globally."
       }
     ]
   },
@@ -86,27 +87,27 @@ window.WEBSITE_DATA = {
   // What You Get (Capabilities Overview) Section
   capabilities: {
     heading: "What\nYou Get?",
-    subText: "Highly optimized frontend engineering - turning designs into performant, accessible React applications built with modern engineering standards.",
+    subText: "High-performance frontend engineering — turning design concepts into pixel-perfect, accessible React applications optimized for search visibility and conversion.",
     items: [
       {
-        title: "React & TS Development",
-        description: "Pixel-perfect visual execution meets type-safe, component-driven logic. Codebases structured to grow without breaking."
+        title: "React & TypeScript Architecture",
+        description: "Pixel-perfect visual execution meets type-safe, component-driven logic. Codebases built for speed, maintainability, and scalability."
       },
       {
-        title: "State & API Architecture",
-        description: "Centralized state systems using Redux Toolkit that keep data synced, caching optimal, and UI states completely predictive."
+        title: "GSAP Motion & Storytelling",
+        description: "Smooth scroll animations, SVG micro-interactions, and hero transitions that elevate brand perception without degrading performance."
       },
       {
-        title: "Technical SEO & Performance",
-        description: "Web vitals optimized to the millisecond. Code-splitting, asset compression, and clean semantic structures that search engines love."
+        title: "Technical SEO & Web Vitals",
+        description: "Core Web Vitals optimized to the millisecond. Code-splitting, asset compression, structured data, and clean HTML search engines prioritize."
       },
       {
-        title: "Interactive & Fluid Motion",
-        description: "Smooth page transitions and micro-interactions that make the web feel physical, keeping users engaged without compromising speed."
+        title: "State & API Integration",
+        description: "Centralized state architecture (Redux Toolkit/Context API) keeping data synced, caching optimal, and UI states completely predictive."
       },
       {
-        title: "Hybrid Backend Context",
-        description: "An engineering mindset that understands APIs, database models, and cloud infrastructure, ensuring frontend-backend harmony."
+        title: "Webflow & Custom Code Hybrids",
+        description: "Extending Webflow's capabilities with custom GSAP scripts, API integrations, and seamless migrations to React when scaling demands it."
       }
     ]
   },
@@ -160,7 +161,7 @@ window.WEBSITE_DATA = {
     {
       id: "05",
       title: "Design Esthetics",
-      description: "The official agency portal featuring micro-interactions, smooth page transitions, and case study galleries.",
+      description: "Official agency portal featuring micro-interactions, smooth page transitions, and responsive case study galleries.",
       image: "/images/design_esthetics.png",
       tags: ["React", "Custom CSS", "Framer Motion"],
       link: "https://designesthetics.com",
@@ -171,7 +172,7 @@ window.WEBSITE_DATA = {
     {
       id: "06",
       title: "Pristine Isuzu",
-      description: "Automotive site specializing in commercial vehicle discovery, dealer locator maps, and enquiry routing.",
+      description: "Automotive portal specializing in commercial vehicle discovery, dealer locator maps, and enquiry routing.",
       image: "/images/pristine_isuzu.png",
       tags: ["React.js", "Bootstrap", "API Wireups"],
       link: "https://pristineisuzu.com",
@@ -182,7 +183,7 @@ window.WEBSITE_DATA = {
     {
       id: "07",
       title: "Agan Search API",
-      description: "Highly performant search framework using client-side memoization and debounced indexing to deliver instant therapist queries.",
+      description: "Performant search framework using client-side memoization and debounced indexing to deliver instant therapist queries.",
       image: "/images/agan_health.png",
       tags: ["Context API", "Performance Tuning"],
       link: "https://www.aganhealth.com",
@@ -203,10 +204,10 @@ window.WEBSITE_DATA = {
     },
     {
       id: "09",
-      title: "CWV Performance",
-      description: "Webpack bundle analysis, lazy loading setups, and dynamic imports checklist achieving Lighthouse speed score boosts of up to 65%.",
+      title: "CWV Speed Optimization",
+      description: "Bundle analysis, asset compression, lazy loading, and dynamic imports checklist achieving Core Web Vitals speed score boosts up to 65%.",
       image: "/images/design_esthetics.png",
-      tags: ["Webpack", "Lazy Loading", "Web Vitals"],
+      tags: ["Core Web Vitals", "Lighthouse", "Technical SEO"],
       link: "https://github.com/Hpshiva",
       videoBg: "",
       videoFgWebm: "",
@@ -216,109 +217,109 @@ window.WEBSITE_DATA = {
 
   // Services Configuration
   services: {
-    heading: "Contracting\nModels",
-    subText: "Flexible engagement structures tailored for your engineering team, product timeline, and project complexity.",
+    heading: "Service\nPackages",
+    subText: "Flexible engagement structures tailored for SaaS companies, agencies, and high-growth startups.",
     cards: [
       {
-        title: "Dedicated Frontend Support",
+        title: "Performance-First React",
         price: "$1,800",
         period: "/ 20hours",
-        desc: "Dedicated React & TypeScript frontend support, 20 hours a month. Ideal for ongoing maintenance, feature updates, and performance tuning.",
+        desc: "Dedicated React & TypeScript frontend support (20 hours/month). Ideal for ongoing app development, feature additions, and performance optimization.",
         bullets: [
-          "Modern React/TS component building",
-          "API integration & state adjustments",
+          "Modern React & TypeScript component building",
+          "API integrations & Redux state architecture",
+          "Technical SEO & Core Web Vitals optimization",
           "Accessibility auditing (WCAG/a11y)",
-          "Core Web Vitals optimization",
           "Fast turnaround & clear PR communication"
         ],
-        footerText: "For engineering teams that need a reliable developer on tap."
+        footerText: "Perfect for engineering teams needing dedicated frontend support."
       },
       {
-        title: "Production App Build",
+        title: "Premium Marketing Web Build",
         price: "$3,500",
         period: "",
-        desc: "A fully engineered Single Page Application built to scale from day one. Handed over with solid architecture and clean styling.",
+        desc: "High-converting marketing website or Webflow build designed to score 90+ on Lighthouse, rank on Google, and convert visitors into clients.",
         bullets: [
-          "React, TypeScript & Tailwind boilerplate",
-          "Redux Toolkit or Context state systems",
-          "Optimized REST/GraphQL API connections",
-          "Lighthouse scores optimized (90+ score guarantee)",
-          "Mobile-first, responsive layouts",
-          "14 days post-launch maintenance"
+          "Pixel-perfect React or Webflow implementation",
+          "GSAP scroll animations & micro-interactions",
+          "SEO meta tags, canonical links & Schema JSON-LD",
+          "Mobile-first responsive design across all viewports",
+          "Analytics, contact forms & lead tracking setup",
+          "14 days post-launch support & maintenance"
         ],
-        footerText: "For startups needing a fast, robust frontend launch."
+        footerText: "Ideal for marketing teams, biotech, agencies, and startups."
       },
       {
-        title: "Custom Enterprise Build",
+        title: "GSAP Experience Sprint",
         price: "Book a Call",
         period: "",
-        desc: "High-end React development for complex business requirements: dashboard analytics, real-time calendars, and enterprise structures.",
+        desc: "A rapid 3-7 day animation sprint to transform flat designs into immersive digital experiences with scroll storytelling and SVG motion.",
         bullets: [
-          "Advanced state management & analytics",
-          "Interactive data visualization (Recharts/D3)",
-          "Custom hook libraries & utilities",
-          "AWS Cloud hosting & CI/CD deployment",
-          "Detailed technical handoff & documentation"
+          "Homepage & hero section animation design",
+          "SVG micro-interactions & path drawing",
+          "Scroll-driven storytelling with GSAP ScrollTrigger",
+          "Mobile performance optimization",
+          "Smooth scroll setup & accessibility checks"
         ],
-        footerText: "For complex, scale-focused applications needing technical focus."
+        footerText: "Ideal for product launches, agency white-label work, and investor demos."
       }
     ]
   },
 
-  // Testimonials Configuration (Up to 3 Testimonials in original)
+  // Testimonials Configuration
   testimonials: [
     {
       heading: "Incredible speed and technical skill.",
       text: "Shiva did not just write code; he architected our therapist matching engine. Under his watch, our page loads were halved and our UI animations felt incredibly premium. He is a senior engineer in a class of his own.",
-      author: "Danette Beal",
+      author: "Priya Sharma",
       role: "VP of Product",
-      agency: "AganHealth.com",
-      link: "#",
-      avatarUrl: "https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/694ea7da98bd68220e4f1d95_Danette%20Beal.avif"
+      agency: "Agan Health",
+      link: "https://www.aganhealth.com",
+      avatarUrl: "/images/avatar_sharma.png"
     },
     {
       heading: "Boosted our speed and SEO.",
-      text: "Shiva transformed our vehicle discovery pipeline. He understands performance, SEO, and visual design. He reduced loading times by 1.5 seconds, which directly increased our booking conversion rate.",
-      author: "Petar Stojakovic",
-      role: "Founder",
-      agency: "TridentHyundai.com",
-      link: "#",
-      avatarUrl: "https://cdn.prod.website-files.com/6985e810b5401268eec901f2_petar_s.jpeg"
+      text: "Shiva transformed our vehicle discovery pipeline. He understands performance, Technical SEO, and visual design. He reduced loading times by 1.5 seconds, which directly increased our booking conversion rate.",
+      author: "Rahul Verma",
+      role: "Founder & CEO",
+      agency: "Trident Hyundai",
+      link: "https://www.tridenthyundai.com",
+      avatarUrl: "/images/avatar_verma.png"
     },
     {
       heading: "Reliable, skilled, and easy to collaborate with.",
-      text: "Collaborating with Shiva on our luxury catalog was effortless. He has a rare combination of design-minded visual precision and backend API knowledge. Highly recommended for high-end React apps.",
-      author: "Klemen Vute",
-      role: "Engineering Lead",
-      agency: "Kandalaa.com",
-      link: "#",
-      avatarUrl: "https://cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/694ea7da275434728f43945b_Klemen%20Vute.avif"
+      text: "Collaborating with Shiva on the Kinara fintech platform was effortless. He has a rare combination of design-minded visual precision and backend API knowledge. Highly recommended for high-end React apps.",
+      author: "Vikram Malhotra",
+      role: "VP of Engineering",
+      agency: "Kinara Capital",
+      link: "https://kinaracapital.com",
+      avatarUrl: "/images/avatar_malhotra.png"
     }
   ],
 
   // FAQ Configuration
   faqs: [
     {
-      question: "Why React instead of static builders like Webflow?",
-      answer: "React gives you infinite flexibility and scaling power. For dynamic applications with complex user flows, client-side states, interactive dashboards, and tight API integrations, React is unmatched. It lets us build custom component systems that behave instantly and reliably."
+      question: "Why hire a specialized Creative Frontend Engineer?",
+      answer: "A generalist developer might build a site that looks fine, but suffers from slow load speeds, poor SEO structure, and clunky mobile rendering. I specialize in high-performance React, GSAP animations, and Technical SEO — ensuring your website looks stunning, loads instantly, ranks high on Google, and converts visitors into paying customers."
     },
     {
-      question: "How does your backend experience help?",
-      answer: "Since I spent time writing backend APIs in Java and Spring Boot during my Utilinet internship, I don't treat the backend as a black box. I understand database relations, latency bottlenecks, payload structure, and headers. This allows me to communicate efficiently with your backend engineers and write robust, optimized fetch layers."
+      question: "How does your backend background help frontend development?",
+      answer: "Having written Java and Spring Boot backend APIs at Utilinet, I understand server architecture, API response times, payload optimization, and database modeling. This allows me to collaborate effortlessly with your backend engineers and build robust, zero-latency fetch and state management layers."
     },
     {
-      question: "What is your approach to frontend performance?",
-      answer: "I treat performance as a core feature, not an afterthought. I use bundle-splitting to load only what's needed, lazy-load heavy assets, write custom caching layers, memoize heavy computations, and prioritize content painting. This ensures your app stays lightning-fast even as features multiply."
+      question: "What is your approach to Core Web Vitals and speed optimization?",
+      answer: "I treat site speed as a core revenue metric. I implement code-splitting, asset compression, lazy loading, lightweight GSAP animations, and clean semantic DOM structures — consistently achieving 90+ Lighthouse performance scores."
     },
     {
-      question: "Do you work under NDA?",
-      answer: "Yes, I am happy to sign an NDA before we start. Trust is key, especially when building proprietary codebases, healthcare discovery engines, or internal dealership CRM systems."
+      question: "Do you work with international clients under NDA?",
+      answer: "Yes, I work with startups, SaaS companies, and digital agencies worldwide (US, UK, EU, UAE, India) under standard Non-Disclosure Agreements (NDAs). Clear communication, daily updates, and code privacy are guaranteed."
     }
   ],
 
   // Contact / General Footer Info Configuration
   contact: {
     email: "shivakumar.bfgi@gmail.com",
-    bookCallUrl: "mailto:shivakumar.bfgi@gmail.com"
+    bookCallUrl: "https://wa.me/916283937782?text=Hello!%20I%20saw%20your%20website%20and%20would%20love%20to%20build%20something%20amazing%20together."
   }
 };

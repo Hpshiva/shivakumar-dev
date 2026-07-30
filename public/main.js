@@ -100,3 +100,104 @@
         });
       }
     })();
+
+    /* ============================================
+       CONNECTION FLOW WIDGET LOGIC
+       ============================================ */
+    (function () {
+      function initConnectionFlow() {
+        const techNodes = document.querySelectorAll(".tech-node");
+        if (!techNodes.length) return;
+
+        techNodes.forEach(function (node) {
+          const pathId = "path-" + node.dataset.path;
+          const dotId = "dot-" + node.dataset.path;
+          const targetId = "node-" + node.dataset.target;
+
+          const pathEl = document.getElementById(pathId);
+          const dotEl = document.getElementById(dotId);
+          const targetEl = document.getElementById(targetId);
+
+          let tween = null;
+
+          // Desktop Hover Animations
+          node.addEventListener("mouseenter", function () {
+            if (pathEl) pathEl.classList.add("active");
+            if (targetEl) targetEl.classList.add("highlight");
+
+            if (dotEl && pathEl) {
+              dotEl.style.display = "block";
+              gsap.set(dotEl, { x: 0, y: 0 });
+              
+              if (tween) tween.kill();
+              tween = gsap.to(dotEl, {
+                duration: 1.6,
+                repeat: -1,
+                ease: "power1.inOut",
+                motionPath: {
+                  path: pathEl,
+                  autoRotate: false
+                }
+              });
+            }
+          });
+
+          node.addEventListener("mouseleave", function () {
+            if (pathEl) pathEl.classList.remove("active");
+            if (targetEl) targetEl.classList.remove("highlight");
+            if (dotEl) dotEl.style.display = "none";
+            if (tween) {
+              tween.kill();
+              tween = null;
+            }
+          });
+
+          // Mobile Tap Interactions
+          node.addEventListener("click", function (e) {
+            const isTouch = window.matchMedia("(pointer: coarse)").matches;
+            if (isTouch) {
+              e.preventDefault();
+              if (pathEl) pathEl.classList.add("active");
+              if (targetEl) targetEl.classList.add("highlight");
+
+              if (dotEl && pathEl) {
+                dotEl.style.display = "block";
+                gsap.set(dotEl, { x: 0, y: 0 });
+                
+                gsap.to(dotEl, {
+                  duration: 0.8,
+                  ease: "power2.out",
+                  motionPath: {
+                    path: pathEl
+                  },
+                  onComplete: function () {
+                    // Trigger link
+                    if (node.dataset.target === "wa") {
+                      window.open("https://wa.me/916283937782?text=Hello!%20I%20saw%20your%20website%20and%20would%20love%20to%20build%20something%20amazing%20together.", "_blank");
+                    } else {
+                      window.location.href = "mailto:shivakumar.bfgi@gmail.com";
+                    }
+
+                    // Reset states after navigation delay
+                    setTimeout(function () {
+                      if (pathEl) pathEl.classList.remove("active");
+                      if (targetEl) targetEl.classList.remove("highlight");
+                      dotEl.style.display = "none";
+                    }, 500);
+                  }
+                });
+              }
+            }
+          });
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        initConnectionFlow();
+      });
+
+      // Fallback if readyState is already loaded
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        initConnectionFlow();
+      }
+    })();
