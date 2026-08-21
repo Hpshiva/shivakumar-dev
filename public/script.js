@@ -3194,9 +3194,12 @@ const ResizeHandler = {
         return; // Ignore - this is just browser chrome
       }
       
+      // If the width hasn't changed at all, don't reload
+      if (newWidth === this.lastWidth) return;
+
       this.lastWidth = newWidth;
 
-      ScrollTrigger.refresh();
+      window.location.reload();
     }, CONFIG.resizeDebounce);
 
     Utils.addEvent(window, 'resize', this.handler);
