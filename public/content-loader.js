@@ -4,13 +4,11 @@ window.loadWebsiteData = () => {
 
   // Helper functions
   const updateHTML = (selector, html) => {
-    const el = document.querySelector(selector);
-    if (el) el.innerHTML = html;
+    document.querySelectorAll(selector).forEach(el => el.innerHTML = html);
   };
 
   const updateText = (selector, text) => {
-    const el = document.querySelector(selector);
-    if (el) el.textContent = text;
+    document.querySelectorAll(selector).forEach(el => el.textContent = text);
   };
 
   // 1. HERO & GENERAL
@@ -27,7 +25,7 @@ window.loadWebsiteData = () => {
     });
 
     // Sidebar Stats Card Text
-    updateHTML(".nav-webflow-text", `${data.hero.projectsCount}+<br />${data.hero.projectsLabel}`);
+    updateHTML(".nav-webflow-text, .hero-webflow-projects-text", `${data.hero.projectsCount}+<br />${data.hero.projectsLabel}`);
     updateHTML(".nav-experience-text", `${data.hero.experienceLabel}`);
 
     // Update data-number-count for counter animations
