@@ -23,63 +23,63 @@ window.WEBSITE_DATA = {
 
   // About / Journey Section Configuration
   about: {
-    heading: "About Me (&)\nMy Journey",
+    heading: "Expertise (&)\nProfessional Journey",
     description: "Creative Frontend Engineer specializing in high-performance React experiences that improve user engagement, Core Web Vitals, and business outcomes.",
 
     milestones: [
       {
         year: "'18",
-        title: "Computer Applications Foundations",
-        text: "Started Bachelor of Computer Applications (BCA) at Baba Farid Group of Institutions.",
-        handle: "@bfgi",
-        time: "8 years ago",
+        title: "Mastering Web Fundamentals",
+        text: "Built a rock-solid foundation in algorithms, databases, and responsive web design.",
+        handle: "@architecture",
+        time: "Foundation",
         popupYear: "2018",
-        popupText: "Began my academic journey in computer applications. Took my first steps in programming, learning database management systems, algorithms, networking, and core web logic."
+        popupText: "Mastered the core building blocks of the web—databases, networking, and responsive design—ensuring that every project starts with a robust, scalable architecture."
       },
       {
         year: "'21",
-        title: "Mastering Software Engineering",
-        text: "Graduated with BCA and entered Sharnbasva University for Master of Computer Applications (MCA).",
-        handle: "@sharnbasva",
-        time: "5 years ago",
+        title: "Engineering Scalable Systems",
+        text: "Advanced expertise in data structures and production-grade web technologies.",
+        handle: "@engineering",
+        time: "Expansion",
         popupYear: "2021",
-        popupText: "Successfully completed my BCA degree and enrolled in Master of Computer Applications (MCA) to master advanced software architecture, data structures, and production-grade web technologies."
+        popupText: "Transitioned to advanced software architecture, focusing on building maintainable, enterprise-level applications capable of handling complex business logic and large user bases."
       },
       {
         year: "'23",
-        title: "Backend & Systems Insight",
-        text: "Graduated with MCA and served as Software Developer Intern at Utilinet (Java/Spring).",
-        handle: "@utilinet",
-        time: "3 years ago",
+        title: "Full-Stack Integrations",
+        text: "Engineered secure backend services, RESTful APIs, and optimized server performance.",
+        handle: "@integration",
+        time: "Backend",
         popupYear: "2023",
-        popupText: "Graduated with an MCA and joined Utilinet as a software developer intern. Engineered Java and Spring Framework backend services, gaining deep understanding of RESTful API contracts, database schemas, and server performance."
+        popupText: "Gained a comprehensive understanding of the full stack by building robust backend services, ensuring seamless, high-performance data communication between frontends and databases."
       },
       {
         year: "'24",
-        title: "Relocated to Bengaluru Tech Hub",
-        text: "Joined Design Esthetics in Bengaluru as Frontend Developer, delivering custom client applications.",
-        handle: "@bengaluru",
-        time: "2 years ago",
+        title: "Premium Frontend Experiences",
+        text: "Delivered highly animated, custom React and Webflow web apps for international clients.",
+        handle: "@frontend",
+        time: "UI/UX",
         popupYear: "2024",
-        popupText: "Relocated to Bengaluru and joined Design Esthetics. Focused 100% on React, TypeScript, GSAP Animations, Webflow, and Redux Toolkit to build custom marketing web apps for international clients."
+        popupText: "Focused intensely on the client side, leveraging React, TypeScript, and GSAP animations to create visually stunning and highly engaging digital experiences that elevate global brands."
       },
       {
         year: "'25",
-        title: "Cloud & Performance Specialization",
-        text: "Earned AWS Academy Cloud certifications & architected real-time crypto analytics dashboards.",
-        handle: "@aws",
-        time: "Recent",
-        popupYear: "2026",
-        popupText: "Earned AWS Academy Cloud Foundations & Architecting certifications to deploy scalable static and SSR frontends using S3, CloudFront, and Vercel edge infrastructure."
+        title: "Cloud & Edge Optimization",
+        text: "Architected real-time dashboards and deployed frontends using edge infrastructure.",
+        handle: "@cloud",
+        time: "Performance",
+        popupYear: "2025",
+        popupText: "Utilized AWS and Vercel edge infrastructure to guarantee lightning-fast load times, exceptional Core Web Vitals, and global scalability for high-traffic applications."
       },
       {
         year: "'26",
-        title: "Continuous Innovation",
+        title: "Driving Business Growth",
         text: "Engineering fast web apps that rank higher on Google and convert visitors into clients.",
-        handle: "@shiva",
+        handle: "@growth",
         time: "Today",
         popupYear: "2026",
-        popupText: "Evolving every day to build modular, accessible, and lightning-fast web applications for SaaS companies, agencies, and high-growth startups globally."
+        popupText: "Currently focused on delivering measurable business value. Building modular, accessible, and high-converting web applications optimized for SEO, speed, and user engagement."
       }
     ]
   },
