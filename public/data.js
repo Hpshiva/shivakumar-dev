@@ -267,20 +267,20 @@ window.WEBSITE_DATA = {
   // FAQ Configuration
   faqs: [
     {
-      question: "What does your typical development process look like?",
-      answer: "I follow a highly systematic approach to product engineering. I start by analyzing your market trends and breaking down complex business problems. Then, I design a scalable architecture before engineering a high-performance web solution tailored to drive your business growth."
+      question: "What technologies do you use to build web applications?",
+      answer: "I specialize in modern JavaScript/TypeScript ecosystems, primarily React.js and Next.js. I pair these with advanced styling tools like Tailwind CSS and GSAP for fluid, premium animations. For backends and APIs, I integrate seamlessly with Node.js, headless CMS platforms, and databases tailored to your product needs."
     },
     {
-      question: "Do you integrate with existing backends or CMS platforms?",
-      answer: "Yes. Whether you have an existing custom backend, a headless CMS (like Sanity or Contentful), or need secure third-party API integrations, I build robust, zero-latency state management layers that seamlessly connect your data to the frontend."
+      question: "How long does it take to deliver a custom web application?",
+      answer: "Timelines depend on the project's complexity. A high-converting marketing website or portfolio typically takes 2-4 weeks, while a full-scale web application with custom dashboards and API integrations can take 6-12 weeks. I prioritize rapid iteration and keep you updated at every milestone."
     },
     {
-      question: "How do you guarantee fast load speeds and good SEO?",
-      answer: "I treat site speed as a core revenue metric. I implement advanced code-splitting, asset compression, edge caching, and lightweight GSAP animations. This ensures we consistently achieve 90+ Lighthouse performance scores, which directly boosts your Google rankings and user retention."
+      question: "Do you handle both design and frontend development?",
+      answer: "While my core expertise is in Frontend Engineering and Technical SEO, I have a strong eye for UI/UX design. I bridge the gap between design and code, ensuring that Figma mockups are translated into pixel-perfect, accessible, and highly performant digital experiences. If you have existing designs, I will bring them to life flawlessly."
     },
     {
-      question: "Can you take over and scale an existing codebase?",
-      answer: "Absolutely. I frequently partner with brands to audit, refactor, and scale their existing applications. I identify performance bottlenecks, clean up the architecture, and systematically upgrade the frontend tech stack without disrupting your live users."
+      question: "What happens after the website is launched?",
+      answer: "I ensure a smooth handover with comprehensive documentation. I also offer a 14-day post-launch support period to fix any immediate issues and ensure optimal performance. For long-term peace of mind, I provide ongoing maintenance retainers for continuous feature development and SEO monitoring."
     }
   ],
 
