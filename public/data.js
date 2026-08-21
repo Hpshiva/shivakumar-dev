@@ -267,20 +267,20 @@ window.WEBSITE_DATA = {
   // FAQ Configuration
   faqs: [
     {
-      question: "Why hire a specialized Creative Frontend Engineer?",
-      answer: "A generalist developer might build a site that looks fine, but suffers from slow load speeds, poor SEO structure, and clunky mobile rendering. I specialize in high-performance React, Next.js, and Technical SEO — ensuring your web application looks stunning, loads instantly, ranks high on Google, and converts visitors into paying customers."
+      question: "What does your typical development process look like?",
+      answer: "I follow a highly systematic approach to product engineering. I start by analyzing your market trends and breaking down complex business problems. Then, I design a scalable architecture before engineering a high-performance web solution tailored to drive your business growth."
     },
     {
-      question: "How does your backend background help frontend development?",
-      answer: "Because I have extensive experience architecting robust server infrastructures and databases, I deeply understand API response times, payload optimization, and data modeling. This allows me to collaborate effortlessly with backend engineering teams to build secure, zero-latency state management layers that scale flawlessly."
+      question: "Do you integrate with existing backends or CMS platforms?",
+      answer: "Yes. Whether you have an existing custom backend, a headless CMS (like Sanity or Contentful), or need secure third-party API integrations, I build robust, zero-latency state management layers that seamlessly connect your data to the frontend."
     },
     {
-      question: "What is your approach to Core Web Vitals and speed optimization?",
-      answer: "I treat site speed as a core business metric. I implement advanced code-splitting, asset compression, edge caching, lightweight animations, and clean semantic DOM structures — consistently achieving 90+ Lighthouse performance scores for high-traffic applications."
+      question: "How do you guarantee fast load speeds and good SEO?",
+      answer: "I treat site speed as a core revenue metric. I implement advanced code-splitting, asset compression, edge caching, and lightweight GSAP animations. This ensures we consistently achieve 90+ Lighthouse performance scores, which directly boosts your Google rankings and user retention."
     },
     {
-      question: "Do you work with international clients under NDA?",
-      answer: "Absolutely. I work with startups, SaaS companies, and digital agencies worldwide under standard Non-Disclosure Agreements (NDAs). Clear communication, timezone-aligned updates, and strict code privacy are guaranteed throughout the entire engagement."
+      question: "Can you take over and scale an existing codebase?",
+      answer: "Absolutely. I frequently partner with brands to audit, refactor, and scale their existing applications. I identify performance bottlenecks, clean up the architecture, and systematically upgrade the frontend tech stack without disrupting your live users."
     }
   ],
 
