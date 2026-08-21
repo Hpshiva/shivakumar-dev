@@ -1,9 +1,9 @@
 window.WEBSITE_DATA = {
   // Hero Section Configuration
   hero: {
-    titleLine1: "React,",
-    titleLine2: "Engineered",
-    titleLine3: "Flawlessly.",
+    titleLine1: "Fast,",
+    titleLine2: "Fluid,",
+    titleLine3: "Flawless.",
     introTextLeft: "Creative Frontend Engineer\nBengaluru, India",
     introTextRight: "Helping SaaS companies, agencies, and ambitious brands build lightning-fast React, TypeScript, and Modern Frontend experiences with premium GSAP animations, Core Web Vitals optimization, and Technical SEO.",
     portraitUrl: '/images/myPic.png',
