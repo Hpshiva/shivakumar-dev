@@ -1000,7 +1000,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .hero-cards-wrap {
+  .hero-container {
     position: relative !important;
     z-index: 20 !important;
   }
