@@ -998,3 +998,10 @@
     -webkit-backdrop-filter: blur(10px);
   }
 }
+
+@media screen and (max-width: 767px) {
+  .hero-card-3 {
+    position: relative !important;
+    z-index: 20 !important;
+  }
+}
