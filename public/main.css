@@ -1005,3 +1005,16 @@
     z-index: 20 !important;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .nav-top-layout {
+    z-index: 300 !important;
+    padding: clamp(1.07rem,5.33vw,2.56rem) 0 0 !important;
+  }
+} 
+@media screen and (max-width: 479px) {
+  .nav-top-layout {
+    margin-bottom: 0 !important;
+    padding: 1.25rem !important;
+  }
+}
