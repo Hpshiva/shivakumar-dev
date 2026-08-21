@@ -64,7 +64,7 @@ window.WEBSITE_DATA = {
         popupText: "Relocated to Bengaluru and joined Design Esthetics. Focused 100% on React, TypeScript, GSAP Animations, Webflow, and Redux Toolkit to build custom marketing web apps for international clients."
       },
       {
-        year: "'26",
+        year: "'25",
         title: "Cloud & Performance Specialization",
         text: "Earned AWS Academy Cloud certifications & architected real-time crypto analytics dashboards.",
         handle: "@aws",
@@ -73,7 +73,7 @@ window.WEBSITE_DATA = {
         popupText: "Earned AWS Academy Cloud Foundations & Architecting certifications to deploy scalable static and SSR frontends using S3, CloudFront, and Vercel edge infrastructure."
       },
       {
-        year: "26",
+        year: "'26",
         title: "Continuous Innovation",
         text: "Engineering fast web apps that rank higher on Google and convert visitors into clients.",
         handle: "@shiva",
