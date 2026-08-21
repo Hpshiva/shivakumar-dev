@@ -224,7 +224,7 @@
              ============================================ */
         /* Overrides for mobile responsiveness and card sizing */
         .work-card {
-          width: 85vw !important;
+          width: 110vw !important;
         }
 
         @media (min-width: 768px) {
