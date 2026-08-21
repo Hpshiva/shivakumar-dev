@@ -147,9 +147,13 @@ window.loadWebsiteData = () => {
   // 4. SELECTED WORK / PROJECTS
   if (data.projects) {
     const workCards = document.querySelectorAll(".work-card");
-    data.projects.forEach((proj, index) => {
-      const card = workCards[index];
-      if (!card) return;
+    workCards.forEach((card, index) => {
+      const proj = data.projects[index];
+      if (!proj) {
+        card.style.display = "none";
+        return;
+      }
+      card.style.display = "";
 
       // Update link href
       card.href = proj.link;

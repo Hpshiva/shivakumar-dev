@@ -179,39 +179,6 @@ window.WEBSITE_DATA = {
       videoBg: "",
       videoFgWebm: "",
       videoFgMov: ""
-    },
-    {
-      id: "07",
-      title: "Agan Search API",
-      description: "Performant search framework using client-side memoization and debounced indexing to deliver instant therapist queries.",
-      image: "/images/agan_health.png",
-      tags: ["Context API", "Performance Tuning"],
-      link: "https://www.aganhealth.com",
-      videoBg: "",
-      videoFgWebm: "",
-      videoFgMov: ""
-    },
-    {
-      id: "08",
-      title: "Crypto Dashboard",
-      description: "Interactive financial terminal displaying real-time coin metrics, global volumes, and clean charts utilizing debounced API streams.",
-      image: "/images/kinara_capital.png",
-      tags: ["React.js", "Recharts", "Custom Hooks"],
-      link: "https://github.com/Hpshiva",
-      videoBg: "",
-      videoFgWebm: "",
-      videoFgMov: ""
-    },
-    {
-      id: "09",
-      title: "CWV Speed Optimization",
-      description: "Bundle analysis, asset compression, lazy loading, and dynamic imports checklist achieving Core Web Vitals speed score boosts up to 65%.",
-      image: "/images/design_esthetics.png",
-      tags: ["Core Web Vitals", "Lighthouse", "Technical SEO"],
-      link: "https://github.com/Hpshiva",
-      videoBg: "",
-      videoFgWebm: "",
-      videoFgMov: ""
     }
   ],
 
