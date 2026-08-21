@@ -268,19 +268,19 @@ window.WEBSITE_DATA = {
   faqs: [
     {
       question: "Why hire a specialized Creative Frontend Engineer?",
-      answer: "A generalist developer might build a site that looks fine, but suffers from slow load speeds, poor SEO structure, and clunky mobile rendering. I specialize in high-performance React, GSAP animations, and Technical SEO — ensuring your website looks stunning, loads instantly, ranks high on Google, and converts visitors into paying customers."
+      answer: "A generalist developer might build a site that looks fine, but suffers from slow load speeds, poor SEO structure, and clunky mobile rendering. I specialize in high-performance React, Next.js, and Technical SEO — ensuring your web application looks stunning, loads instantly, ranks high on Google, and converts visitors into paying customers."
     },
     {
       question: "How does your backend background help frontend development?",
-      answer: "Having written Java and Spring Boot backend APIs at Utilinet, I understand server architecture, API response times, payload optimization, and database modeling. This allows me to collaborate effortlessly with your backend engineers and build robust, zero-latency fetch and state management layers."
+      answer: "Because I have extensive experience architecting robust server infrastructures and databases, I deeply understand API response times, payload optimization, and data modeling. This allows me to collaborate effortlessly with backend engineering teams to build secure, zero-latency state management layers that scale flawlessly."
     },
     {
       question: "What is your approach to Core Web Vitals and speed optimization?",
-      answer: "I treat site speed as a core revenue metric. I implement code-splitting, asset compression, lazy loading, lightweight GSAP animations, and clean semantic DOM structures — consistently achieving 90+ Lighthouse performance scores."
+      answer: "I treat site speed as a core business metric. I implement advanced code-splitting, asset compression, edge caching, lightweight animations, and clean semantic DOM structures — consistently achieving 90+ Lighthouse performance scores for high-traffic applications."
     },
     {
       question: "Do you work with international clients under NDA?",
-      answer: "Yes, I work with startups, SaaS companies, and digital agencies worldwide (US, UK, EU, UAE, India) under standard Non-Disclosure Agreements (NDAs). Clear communication, daily updates, and code privacy are guaranteed."
+      answer: "Absolutely. I work with startups, SaaS companies, and digital agencies worldwide under standard Non-Disclosure Agreements (NDAs). Clear communication, timezone-aligned updates, and strict code privacy are guaranteed throughout the entire engagement."
     }
   ],
 
