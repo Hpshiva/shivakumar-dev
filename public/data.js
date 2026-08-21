@@ -23,63 +23,63 @@ window.WEBSITE_DATA = {
 
   // About / Journey Section Configuration
   about: {
-    heading: "Expertise (&)\nProfessional Journey",
-    description: "Creative Frontend Engineer specializing in high-performance React experiences that improve user engagement, Core Web Vitals, and business outcomes.",
+    heading: "My Process (&)\nHow I Build",
+    description: "A systematic approach to product engineering. I analyze market trends, break down complex problems, and engineer high-performance web solutions that drive business growth.",
 
     milestones: [
       {
-        year: "'18",
-        title: "Mastering Web Fundamentals",
-        text: "Built a rock-solid foundation in algorithms, databases, and responsive web design.",
+        year: "01",
+        title: "Market & Trend Analysis",
+        text: "Understanding your industry, target audience, and current market trends.",
+        handle: "@discovery",
+        time: "Phase 1",
+        popupYear: "Discover",
+        popupText: "Every great product starts with research. I dive deep into market trends, competitor landscapes, and user behaviors to ensure we're building a solution that actually matters."
+      },
+      {
+        year: "02",
+        title: "Problem Breakdown",
+        text: "Deconstructing complex challenges into manageable, user-centric problems.",
+        handle: "@strategy",
+        time: "Phase 2",
+        popupYear: "Analyze",
+        popupText: "I break down the core problems your business faces. By identifying bottlenecks and user pain points, we create a strategic roadmap for a product that provides genuine value."
+      },
+      {
+        year: "03",
+        title: "Solution Architecture",
+        text: "Designing the technical foundation, database schemas, and system architecture.",
         handle: "@architecture",
-        time: "Foundation",
-        popupYear: "2018",
-        popupText: "Mastered the core building blocks of the web—databases, networking, and responsive design—ensuring that every project starts with a robust, scalable architecture."
+        time: "Phase 3",
+        popupYear: "Architect",
+        popupText: "Before writing a single line of code, I architect the system. This means selecting the right tech stack, planning databases, and designing scalable infrastructures that won't break under pressure."
       },
       {
-        year: "'21",
-        title: "Engineering Scalable Systems",
-        text: "Advanced expertise in data structures and production-grade web technologies.",
+        year: "04",
+        title: "Design & Prototyping",
+        text: "Crafting pixel-perfect, highly engaging interfaces that captivate and convert.",
+        handle: "@design",
+        time: "Phase 4",
+        popupYear: "Design",
+        popupText: "Bringing the solution to life visually. I design intuitive, accessible, and premium UI/UX experiences, heavily utilizing interactive prototypes to validate the flow before development."
+      },
+      {
+        year: "05",
+        title: "Development & Execution",
+        text: "Engineering lightning-fast React applications with clean code and robust APIs.",
         handle: "@engineering",
-        time: "Expansion",
-        popupYear: "2021",
-        popupText: "Transitioned to advanced software architecture, focusing on building maintainable, enterprise-level applications capable of handling complex business logic and large user bases."
+        time: "Phase 5",
+        popupYear: "Develop",
+        popupText: "Where the magic happens. I write clean, modular, and performant code. Focusing on React, TypeScript, and modern frameworks to build robust web applications that are as fast as they are beautiful."
       },
       {
-        year: "'23",
-        title: "Full-Stack Integrations",
-        text: "Engineered secure backend services, RESTful APIs, and optimized server performance.",
-        handle: "@integration",
-        time: "Backend",
-        popupYear: "2023",
-        popupText: "Gained a comprehensive understanding of the full stack by building robust backend services, ensuring seamless, high-performance data communication between frontends and databases."
-      },
-      {
-        year: "'24",
-        title: "Premium Frontend Experiences",
-        text: "Delivered highly animated, custom React and Webflow web apps for international clients.",
-        handle: "@frontend",
-        time: "UI/UX",
-        popupYear: "2024",
-        popupText: "Focused intensely on the client side, leveraging React, TypeScript, and GSAP animations to create visually stunning and highly engaging digital experiences that elevate global brands."
-      },
-      {
-        year: "'25",
-        title: "Cloud & Edge Optimization",
-        text: "Architected real-time dashboards and deployed frontends using edge infrastructure.",
-        handle: "@cloud",
-        time: "Performance",
-        popupYear: "2025",
-        popupText: "Utilized AWS and Vercel edge infrastructure to guarantee lightning-fast load times, exceptional Core Web Vitals, and global scalability for high-traffic applications."
-      },
-      {
-        year: "'26",
-        title: "Driving Business Growth",
-        text: "Engineering fast web apps that rank higher on Google and convert visitors into clients.",
-        handle: "@growth",
-        time: "Today",
-        popupYear: "2026",
-        popupText: "Currently focused on delivering measurable business value. Building modular, accessible, and high-converting web applications optimized for SEO, speed, and user engagement."
+        year: "06",
+        title: "Optimization & Delivery",
+        text: "Fine-tuning Core Web Vitals, SEO, and performance before the final launch.",
+        handle: "@launch",
+        time: "Phase 6",
+        popupYear: "Optimize",
+        popupText: "A product isn't done until it's optimized. I rigorously test for accessibility, technical SEO, and Core Web Vitals, ensuring your application ranks higher and delivers an exceptional user experience on every device."
       }
     ]
   },
