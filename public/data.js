@@ -5,7 +5,7 @@ window.WEBSITE_DATA = {
     titleLine2: "Engineered",
     titleLine3: "Flawlessly.",
     introTextLeft: "Creative Frontend Engineer\nBengaluru, India",
-    introTextRight: "Helping SaaS companies, agencies, and ambitious brands build lightning-fast React, TypeScript, and Webflow experiences with premium GSAP animations, Core Web Vitals optimization, and Technical SEO.",
+    introTextRight: "Helping SaaS companies, agencies, and ambitious brands build lightning-fast React, TypeScript, and Modern Frontend experiences with premium GSAP animations, Core Web Vitals optimization, and Technical SEO.",
     portraitUrl: '/images/myPic.png',
 
     // Stats
@@ -106,8 +106,8 @@ window.WEBSITE_DATA = {
         description: "Centralized state architecture (Redux Toolkit/Context API) keeping data synced, caching optimal, and UI states completely predictive."
       },
       {
-        title: "Webflow & Custom Code Hybrids",
-        description: "Extending Webflow's capabilities with custom GSAP scripts, API integrations, and seamless migrations to React when scaling demands it."
+        title: "Modern Tech Stacks & React Hybrids",
+        description: "Building highly interactive web applications using Next.js, React, and GSAP with seamless API integrations for scaling businesses."
       }
     ]
   },
@@ -205,9 +205,9 @@ window.WEBSITE_DATA = {
         title: "Premium Marketing Web Build",
         price: "$3,500",
         period: "",
-        desc: "High-converting marketing website or Webflow build designed to score 90+ on Lighthouse, rank on Google, and convert visitors into clients.",
+        desc: "High-converting marketing website or React web app designed to score 90+ on Lighthouse, rank on Google, and convert visitors into clients.",
         bullets: [
-          "Pixel-perfect React or Webflow implementation",
+          "Pixel-perfect React or Next.js implementation",
           "GSAP scroll animations & micro-interactions",
           "SEO meta tags, canonical links & Schema JSON-LD",
           "Mobile-first responsive design across all viewports",
