@@ -229,16 +229,14 @@
 
         @media (min-width: 768px) {
           .work-card {
-            width: 40rem !important;
+            width: 50vw !important;
           }
         }
 
-        /* Ensure backgrounds cover properly and are blurred */
+        /* Ensure backgrounds cover properly (no blur) */
         .work-image, .work-bg, .work-video {
           object-fit: cover !important;
           object-position: center !important;
-          filter: blur(12px) brightness(0.6) !important;
-          transform: scale(1.1) !important;
           background-color: transparent !important;
         }
 
