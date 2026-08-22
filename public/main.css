@@ -991,11 +991,13 @@
             background-position: 200% center;
           }
         }
+@media screen and (max-width: 991px) {
   .navigation {
     background-color: rgba(13, 14, 17, 0.95) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
   }
+}
 
 @media screen and (max-width: 767px) {
   .hero-container {
