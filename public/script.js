@@ -812,7 +812,7 @@ const HorizontalScroll = {
     
     const wrapRect = wrap.getBoundingClientRect();
     const trackRect = track.getBoundingClientRect();
-    const overflowRight = Math.max(0, trackRect.right - wrapRect.right);
+    const overflowRight = Math.max(0, track.scrollWidth - wrapRect.width);
     const xMovement = -overflowRight;
     
     // Calculate the scroll distance (section height minus viewport)
@@ -831,7 +831,7 @@ const HorizontalScroll = {
         onRefresh: () => {
           const newWrapRect = wrap.getBoundingClientRect();
           const newTrackRect = track.getBoundingClientRect();
-          const newOverflowRight = Math.max(0, newTrackRect.right - newWrapRect.right);
+          const newOverflowRight = Math.max(0, track.scrollWidth - newWrapRect.width);
           
           // Recalculate heights on refresh
           const newSectionHeight = section.offsetHeight;

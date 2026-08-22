@@ -144,7 +144,8 @@ window.loadWebsiteData = () => {
 
   // 4. SELECTED WORK / PROJECTS
   if (data.projects) {
-    const workCards = document.querySelectorAll(".work-card");
+    // Only select the original 6 project cards, ignoring the custom 7th contact card
+    const workCards = document.querySelectorAll(".work-card:not(.final-contact-card)");
     workCards.forEach((card, index) => {
       const proj = data.projects[index];
       if (!proj) {
