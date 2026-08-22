@@ -223,13 +223,17 @@
              7. INTERACTIVE ELEMENTS
              ============================================ */
         /* Overrides for mobile responsiveness and card sizing */
-        .work-card-content {
-          width: 90vw !important;
-          height: fit-content;
-        }
-
         .work-card {
-          width: 110vw !important;
+          width: 90vw !important; /* Mobile sizing */
+          aspect-ratio: 16 / 10 !important;
+          height: auto !important;
+          min-height: 0 !important;
+          position: relative !important;
+          border-radius: 24px !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+          overflow: hidden !important;
+          display: block !important;
         }
 
         @media (min-width: 768px) {
@@ -238,64 +242,133 @@
           }
         }
 
-        /* Ensure card height fits the image naturally */
-        .work-card {
-          height: auto !important;
-          min-height: auto !important;
+        /* Hide extra videos; show only one static image per card */
+        .work-bg, .work-video {
+          display: none !important;
         }
 
-        /* Foreground image drives the height, others cover the area */
+        /* Foreground image completely fills the card */
         .work-image {
-          position: relative !important;
-          height: auto !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          height: 100% !important;
           width: 100% !important;
           display: block !important;
-        }
-
-        .work-image, .work-bg, .work-video {
+          opacity: 1 !important;
+          visibility: visible !important;
+          z-index: 0 !important;
           object-fit: cover !important;
           object-position: center !important;
           background-color: transparent !important;
+          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
         }
 
-        /* High-contrast dark frosted glass text capsules */
-        .work-card-heading {
-          display: inline-block !important;
-          background-color: rgba(13, 14, 17, 0.9) !important;
-          color: #ffffff !important;
-          padding: 0.4em 0.9em !important;
-          border-radius: 12px !important;
+        /* Add hover effect for image */
+        .work-card:hover .work-image {
+          transform: scale(1.05) !important;
+        }
+
+        /* Gradient Overlay for Text Readability */
+        .work-card::after {
+          content: '' !important;
+          position: absolute !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 60% !important;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%) !important;
+          z-index: 1 !important;
+          pointer-events: none !important;
+        }
+
+        /* Content Container */
+        .work-card-content {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          z-index: 10 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+          padding: 1.5rem !important;
+          pointer-events: none !important; /* Allow clicking through to card */
+          box-sizing: border-box !important;
+        }
+        
+        .work-card-content * {
+          pointer-events: auto !important;
+        }
+
+        /* Glassmorphic Bottom Container */
+        .work-card-content-bottom-layout {
+          background: rgba(13, 14, 17, 0.5) !important;
           backdrop-filter: blur(12px) !important;
           -webkit-backdrop-filter: blur(12px) !important;
-          border: 1px solid rgba(255, 255, 255, 0.18) !important;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
-          margin-bottom: 0.4rem !important;
-          font-weight: 700 !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-radius: 16px !important;
+          padding: 1.25rem 1.5rem !important;
+          width: 100% !important;
+          transform: translateY(10px) !important;
+          opacity: 0.9 !important;
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+          box-sizing: border-box !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 0.5rem !important;
         }
 
+        .work-card:hover .work-card-content-bottom-layout {
+          transform: translateY(0) !important;
+          opacity: 1 !important;
+          background: rgba(13, 14, 17, 0.7) !important;
+        }
+
+        /* Clean Typography for Headings (Removing the blocky background) */
+        .work-card-heading {
+          background-color: transparent !important;
+          color: #ffffff !important;
+          padding: 0 !important;
+          border: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          box-shadow: none !important;
+          font-weight: 700 !important;
+          font-size: 1.5rem !important;
+          margin-bottom: 0 !important;
+        }
+
+        /* Description Paragraph */
         .work-card-content-bottom-layout p,
         .work-card-content-bottom-layout .op80 {
           display: block !important;
-          background-color: rgba(13, 14, 17, 0.9) !important;
-          color: rgba(255, 255, 255, 0.95) !important;
-          padding: 0.6em 1em !important;
-          border-radius: 12px !important;
-          backdrop-filter: blur(12px) !important;
-          -webkit-backdrop-filter: blur(12px) !important;
-          border: 1px solid rgba(255, 255, 255, 0.15) !important;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
-          line-height: 1.45 !important;
+          background-color: transparent !important;
+          color: rgba(255, 255, 255, 0.85) !important;
+          padding: 0 !important;
+          border: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          box-shadow: none !important;
+          line-height: 1.5 !important;
+          font-size: 1rem !important;
+          margin: 0 !important;
         }
 
+        /* Minimalist Tags */
         .work-label {
-          background-color: rgba(13, 14, 17, 0.9) !important;
+          background-color: rgba(255, 255, 255, 0.1) !important;
           color: #ffffff !important;
           border: 1px solid rgba(255, 255, 255, 0.2) !important;
-          backdrop-filter: blur(12px) !important;
-          -webkit-backdrop-filter: blur(12px) !important;
-          padding: 0.35em 0.85em !important;
+          backdrop-filter: blur(8px) !important;
+          -webkit-backdrop-filter: blur(8px) !important;
+          padding: 0.3em 0.8em !important;
           border-radius: 999px !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+          box-shadow: none !important;
+          font-size: 0.85rem !important;
+          font-weight: 500 !important;
         }
 
         .about-card-img {
