@@ -4,8 +4,8 @@ window.WEBSITE_DATA = {
     titleLine1: "Fast,",
     titleLine2: "Fluid,",
     titleLine3: "Flawless.",
-    introTextLeft: "Creative Frontend Engineer\nBengaluru, India",
-    introTextRight: "Helping SaaS companies, agencies, and ambitious brands build lightning-fast React, TypeScript, and Modern Frontend experiences with premium GSAP animations, Core Web Vitals optimization, and Technical SEO.",
+    introTextLeft: "Software Engineering Consultant\nBengaluru, India",
+    introTextRight: "Helping ambitious brands, agencies, and enterprises build highly scalable software solutions, premium web applications, and robust modern architectures that drive business growth.",
     portraitUrl: '/images/myPic.png',
 
     // Stats
@@ -87,27 +87,27 @@ window.WEBSITE_DATA = {
   // What You Get (Capabilities Overview) Section
   capabilities: {
     heading: "What\nYou Get?",
-    subText: "High-performance frontend engineering — turning design concepts into pixel-perfect, accessible React applications optimized for search visibility and conversion.",
+    subText: "Comprehensive software engineering — turning complex business requirements into scalable, secure, and high-performance digital products.",
     items: [
       {
-        title: "React & TypeScript Architecture",
-        description: "Pixel-perfect visual execution meets type-safe, component-driven logic. Codebases built for speed, maintainability, and scalability."
+        title: "Modern Tech Stack & Architecture",
+        description: "Building robust, type-safe, and scalable applications using the best modern technologies tailored to your product's specific needs."
       },
       {
-        title: "GSAP Motion & Storytelling",
-        description: "Smooth scroll animations, SVG micro-interactions, and hero transitions that elevate brand perception without degrading performance."
+        title: "Premium Digital Experiences",
+        description: "Smooth animations, micro-interactions, and pixel-perfect UIs that elevate brand perception without sacrificing performance."
       },
       {
         title: "Technical SEO & Web Vitals",
         description: "Core Web Vitals optimized to the millisecond. Code-splitting, asset compression, structured data, and clean HTML search engines prioritize."
       },
       {
-        title: "State & API Integration",
-        description: "Centralized state architecture (Redux Toolkit/Context API) keeping data synced, caching optimal, and UI states completely predictive."
+        title: "Robust Backend & APIs",
+        description: "Secure, scalable backend services, custom API integrations, and database architectures built to handle complex business logic."
       },
       {
-        title: "Modern Tech Stacks & React Hybrids",
-        description: "Building highly interactive web applications using Next.js, React, and GSAP with seamless API integrations for scaling businesses."
+        title: "End-to-End Product Delivery",
+        description: "From system architecture and UI/UX implementation to deployment, scaling, and ongoing infrastructure maintenance."
       }
     ]
   },
@@ -185,50 +185,50 @@ window.WEBSITE_DATA = {
   // Services Configuration
   services: {
     heading: "Service\nPackages",
-    subText: "Flexible engagement structures tailored for SaaS companies, agencies, and high-growth startups.",
+    subText: "Flexible engagement structures tailored for enterprises, agencies, and high-growth startups.",
     cards: [
       {
-        title: "Performance-First React",
-        price: "$1,800",
-        period: "/ 20hours",
-        desc: "Dedicated React & TypeScript frontend support (20 hours/month). Ideal for ongoing app development, feature additions, and performance optimization.",
+        title: "Custom Web Application Build",
+        price: "Custom Quote",
+        period: "",
+        desc: "End-to-end development of scalable, secure, and feature-rich web applications tailored precisely to your business logic and user needs.",
         bullets: [
-          "Modern React & TypeScript component building",
-          "API integrations & Redux state architecture",
-          "Technical SEO & Core Web Vitals optimization",
-          "Accessibility auditing (WCAG/a11y)",
-          "Fast turnaround & clear PR communication"
+          "Full-stack architecture & database design",
+          "Custom API development & integrations",
+          "High-performance frontend implementation",
+          "Enterprise-grade security & scalability",
+          "Comprehensive testing & QA"
         ],
-        footerText: "Perfect for engineering teams needing dedicated frontend support."
+        footerText: "Perfect for businesses needing a robust, custom digital product."
       },
       {
-        title: "Premium Marketing Web Build",
-        price: "$3,500",
+        title: "Premium Digital Experience",
+        price: "$3,500+",
         period: "",
-        desc: "High-converting marketing website or React web app designed to score 90+ on Lighthouse, rank on Google, and convert visitors into clients.",
+        desc: "High-converting marketing website or digital platform designed to rank on Google, load instantly, and convert visitors into clients.",
         bullets: [
-          "Pixel-perfect React or Next.js implementation",
-          "GSAP scroll animations & micro-interactions",
+          "Pixel-perfect UI/UX implementation",
+          "Immersive scroll animations & micro-interactions",
           "SEO meta tags, canonical links & Schema JSON-LD",
           "Mobile-first responsive design across all viewports",
           "Analytics, contact forms & lead tracking setup",
           "14 days post-launch support & maintenance"
         ],
-        footerText: "Ideal for marketing teams, biotech, agencies, and startups."
+        footerText: "Ideal for marketing teams, agencies, and startups."
       },
       {
-        title: "GSAP Experience Sprint",
-        price: "Book a Call",
-        period: "",
-        desc: "A rapid 3-7 day animation sprint to transform flat designs into immersive digital experiences with scroll storytelling and SVG motion.",
+        title: "Dedicated Engineering Support",
+        price: "Retainer",
+        period: "/ month",
+        desc: "Ongoing software engineering support for your existing applications. Ideal for feature additions, architecture scaling, and performance optimization.",
         bullets: [
-          "Homepage & hero section animation design",
-          "SVG micro-interactions & path drawing",
-          "Scroll-driven storytelling with GSAP ScrollTrigger",
-          "Mobile performance optimization",
-          "Smooth scroll setup & accessibility checks"
+          "Modern code refactoring & tech debt reduction",
+          "Backend scaling & API optimization",
+          "Technical SEO & Core Web Vitals audits",
+          "Accessibility compliance (WCAG/a11y)",
+          "Fast turnaround & seamless team integration"
         ],
-        footerText: "Ideal for product launches, agency white-label work, and investor demos."
+        footerText: "Ideal for product teams needing reliable engineering bandwidth."
       }
     ]
   },
@@ -267,20 +267,20 @@ window.WEBSITE_DATA = {
   // FAQ Configuration
   faqs: [
     {
-      question: "What technologies do you use to build web applications?",
-      answer: "I specialize in modern JavaScript/TypeScript ecosystems, primarily React.js and Next.js. I pair these with advanced styling tools like Tailwind CSS and GSAP for fluid, premium animations. For backends and APIs, I integrate seamlessly with Node.js, headless CMS platforms, and databases tailored to your product needs."
+      question: "What technologies do you use to build applications?",
+      answer: "I am tech-agnostic and select the best stack for your specific requirements. I specialize in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js) but can work across various backend technologies, cloud platforms, and databases to deliver a scalable and secure solution."
     },
     {
       question: "How long does it take to deliver a custom web application?",
-      answer: "Timelines depend on the project's complexity. A high-converting marketing website or portfolio typically takes 2-4 weeks, while a full-scale web application with custom dashboards and API integrations can take 6-12 weeks. I prioritize rapid iteration and keep you updated at every milestone."
+      answer: "Timelines depend on the project's complexity. A high-converting marketing platform typically takes 2-4 weeks, while a full-scale web application with custom dashboards and backend architectures can take 6-12 weeks. I prioritize rapid iteration and keep you updated at every milestone."
     },
     {
-      question: "Do you handle both design and frontend development?",
-      answer: "While my core expertise is in Frontend Engineering and Technical SEO, I have a strong eye for UI/UX design. I bridge the gap between design and code, ensuring that Figma mockups are translated into pixel-perfect, accessible, and highly performant digital experiences. If you have existing designs, I will bring them to life flawlessly."
+      question: "Do you handle both design and full-stack development?",
+      answer: "Yes, I offer end-to-end digital product delivery. While my core expertise is in Software Engineering and Architecture, I have a strong eye for UI/UX. I bridge the gap between design and code, ensuring that your vision is translated into a pixel-perfect, secure, and highly performant digital experience."
     },
     {
-      question: "What happens after the website is launched?",
-      answer: "I ensure a smooth handover with comprehensive documentation. I also offer a 14-day post-launch support period to fix any immediate issues and ensure optimal performance. For long-term peace of mind, I provide ongoing maintenance retainers for continuous feature development and SEO monitoring."
+      question: "What happens after the software is launched?",
+      answer: "I ensure a smooth handover with comprehensive documentation and codebase access. I also offer a 14-day post-launch support period to fix any immediate issues and ensure optimal performance. For long-term peace of mind, I provide ongoing maintenance retainers for continuous feature development and scaling."
     }
   ],
 
