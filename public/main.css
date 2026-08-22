@@ -233,7 +233,20 @@
           }
         }
 
-        /* Ensure backgrounds cover properly (no blur) */
+        /* Ensure card height fits the image naturally */
+        .work-card {
+          height: auto !important;
+          min-height: auto !important;
+        }
+
+        /* Foreground image drives the height, others cover the area */
+        .work-image {
+          position: relative !important;
+          height: auto !important;
+          width: 100% !important;
+          display: block !important;
+        }
+
         .work-image, .work-bg, .work-video {
           object-fit: cover !important;
           object-position: center !important;
