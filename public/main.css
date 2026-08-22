@@ -528,6 +528,27 @@
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
           will-change: filter;
+          position: relative;
+          z-index: 2;
+        }
+        
+        .profile-img-item {
+          position: relative;
+        }
+
+        /* Cinematic Warm Glow Behind Face */
+        .profile-img-item::before {
+          content: '';
+          position: absolute;
+          top: 10%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          height: 60%;
+          background: radial-gradient(circle, rgba(255, 160, 60, 0.4) 0%, rgba(255, 160, 60, 0) 70%);
+          z-index: 1;
+          pointer-events: none;
+          filter: blur(20px);
         }
 
         /* ============================================
