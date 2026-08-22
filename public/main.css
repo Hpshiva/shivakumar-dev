@@ -234,17 +234,11 @@
         }
 
         /* Ensure backgrounds cover properly and are blurred */
-        .work-image, .work-bg {
+        .work-image, .work-bg, .work-video {
           object-fit: cover !important;
           object-position: center !important;
           filter: blur(12px) brightness(0.6) !important;
           transform: scale(1.1) !important;
-        }
-
-        /* Foreground image should fit inside without cropping */
-        .work-video {
-          object-fit: contain !important;
-          object-position: center !important;
           background-color: transparent !important;
         }
 
