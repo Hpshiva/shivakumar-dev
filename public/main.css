@@ -233,13 +233,15 @@
           }
         }
 
-        /* Ensure screenshots are visible and cover properly, showing top */
-        .work-image {
+        /* Ensure screenshots cover properly, with atmospheric blur as requested */
+        .work-image, .work-bg {
           object-fit: cover !important;
           object-position: top center !important;
+          filter: blur(8px) brightness(0.6) !important;
+          transform: scale(1.05) !important;
         }
 
-        /* High-contrast dark frosted glass text capsules for guaranteed legibility on bright/white screenshots */
+        /* High-contrast dark frosted glass text capsules */
         .work-card-heading {
           display: inline-block !important;
           background-color: rgba(13, 14, 17, 0.9) !important;
