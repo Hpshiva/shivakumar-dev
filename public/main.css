@@ -223,6 +223,11 @@
              7. INTERACTIVE ELEMENTS
              ============================================ */
         /* Overrides for mobile responsiveness and card sizing */
+        .work-card-content {
+          width: 90vw !important;
+          height: fit-content;
+        }
+
         .work-card {
           width: 110vw !important;
         }
