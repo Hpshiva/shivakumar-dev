@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw site captures (regenerate with npm run capture)
+source-images/cases/
+
+# Local tool config
+.claude/
