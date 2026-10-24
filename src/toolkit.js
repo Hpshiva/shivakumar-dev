@@ -1,5 +1,5 @@
-// Interactive 3D "toolkit" constellation. Outer ring: tools. Inner ring: projects.
-// Every line is real: it comes from the `stack` of each project in src/data/projects.js.
+// Interactive 3D toolkit: tools orbit a glowing core on two tilted rings.
+// Every tool comes from the real `stack` of the projects in src/data/projects.js.
 import {
   WebGLRenderer,
   Scene,
@@ -7,8 +7,12 @@ import {
   Group,
   BufferGeometry,
   Float32BufferAttribute,
-  LineSegments,
+  LineLoop,
+  Line,
   LineBasicMaterial,
+  Mesh,
+  MeshBasicMaterial,
+  IcosahedronGeometry,
   Sprite,
   SpriteMaterial,
   CanvasTexture,
@@ -16,144 +20,150 @@ import {
   Vector3,
   Vector2,
   Raycaster,
-  Points,
-  PointsMaterial,
   AdditiveBlending,
 } from 'three'
 import { buildToolData } from './toolkit-data.js'
 
-function fibonacciPoints(count, radius) {
-  const pts = []
-  const golden = Math.PI * (3 - Math.sqrt(5))
-  for (let i = 0; i < count; i++) {
-    const y = 1 - (i / Math.max(count - 1, 1)) * 2
-    const r = Math.sqrt(1 - y * y)
-    const t = golden * i
-    pts.push(new Vector3(Math.cos(t) * r * radius, y * radius * 0.82, Math.sin(t) * r * radius))
-  }
-  return pts
-}
+const ACCENT = 0xff5a1f
 
-function labelTexture(text, { accent }) {
+function labelTexture(text, active) {
   const dpr = 2
-  const font = `600 ${28 * dpr}px "Archivo Variable", system-ui, sans-serif`
+  const font = `600 ${26 * dpr}px "Archivo Variable", system-ui, sans-serif`
   const c = document.createElement('canvas')
   const ctx = c.getContext('2d')
   ctx.font = font
-  const pad = 22 * dpr
-  const dot = 9 * dpr
-  const w = Math.ceil(ctx.measureText(text).width) + pad * 2 + dot * 2.4
-  const h = 64 * dpr
+  const pad = 20 * dpr
+  const dot = 8 * dpr
+  const w = Math.ceil(ctx.measureText(text).width) + pad * 2 + dot * 2.2
+  const h = 58 * dpr
   c.width = w
   c.height = h
   ctx.font = font
-  // pill
-  ctx.fillStyle = accent ? 'rgba(255,90,31,0.16)' : 'rgba(17,17,19,0.85)'
-  ctx.strokeStyle = accent ? 'rgba(255,90,31,0.9)' : 'rgba(255,255,255,0.22)'
+  ctx.fillStyle = active ? '#ff5a1f' : 'rgba(17,17,19,0.92)'
+  ctx.strokeStyle = active ? '#ff5a1f' : 'rgba(255,255,255,0.18)'
   ctx.lineWidth = 2 * dpr
-  const r = h / 2 - 2 * dpr
   ctx.beginPath()
-  ctx.roundRect(2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, r)
+  ctx.roundRect(2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, h / 2 - 2 * dpr)
   ctx.fill()
   ctx.stroke()
-  // dot
-  ctx.fillStyle = accent ? '#ff5a1f' : '#f4f4f1'
+  ctx.fillStyle = active ? '#ffffff' : '#ff5a1f'
   ctx.beginPath()
   ctx.arc(pad, h / 2, dot / 2, 0, Math.PI * 2)
   ctx.fill()
-  // text
   ctx.fillStyle = '#f4f4f1'
   ctx.textBaseline = 'middle'
-  ctx.fillText(text, pad + dot * 1.4, h / 2 + 1 * dpr)
+  ctx.fillText(text, pad + dot * 1.3, h / 2 + dpr)
   const tex = new CanvasTexture(c)
   tex.colorSpace = SRGBColorSpace
   tex.anisotropy = 4
   return { tex, aspect: w / h }
 }
 
+function glowTexture() {
+  const c = document.createElement('canvas')
+  c.width = c.height = 128
+  const ctx = c.getContext('2d')
+  const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
+  g.addColorStop(0, 'rgba(255,140,80,0.9)')
+  g.addColorStop(0.35, 'rgba(255,90,31,0.35)')
+  g.addColorStop(1, 'rgba(255,90,31,0)')
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, 128, 128)
+  const tex = new CanvasTexture(c)
+  tex.colorSpace = SRGBColorSpace
+  return tex
+}
+
+function circle(radius, segments = 128) {
+  const pts = []
+  for (let i = 0; i < segments; i++) {
+    const a = (i / segments) * Math.PI * 2
+    pts.push(Math.cos(a) * radius, 0, Math.sin(a) * radius)
+  }
+  const geo = new BufferGeometry()
+  geo.setAttribute('position', new Float32BufferAttribute(pts, 3))
+  return geo
+}
+
 export function createToolkit(canvas, { onSelect, reduceMotion, initial }) {
-  const data = buildToolData()
+  const { tools } = buildToolData()
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
   renderer.setClearColor(0x000000, 0)
 
   const scene = new Scene()
-  const camera = new PerspectiveCamera(38, 1, 0.1, 100)
-  camera.position.set(0, 0.4, 9.2)
+  const camera = new PerspectiveCamera(36, 1, 0.1, 100)
+  camera.position.set(0, 2.6, 9.6)
   camera.lookAt(0, 0, 0)
 
   const world = new Group()
   scene.add(world)
 
-  // --- nodes ---
-  const toolPos = fibonacciPoints(data.tools.length, 3.2)
-  const projPos = data.projects.map((_, i) => {
-    const a = (i / data.projects.length) * Math.PI * 2
-    return new Vector3(Math.cos(a) * 1.75, (i % 2 ? 0.55 : -0.55) + Math.sin(a) * 0.2, Math.sin(a) * 1.75)
-  })
+  // --- core ---
+  const core = new Mesh(
+    new IcosahedronGeometry(0.62, 1),
+    new MeshBasicMaterial({ color: ACCENT, wireframe: true, transparent: true, opacity: 0.75 }),
+  )
+  const glow = new Sprite(new SpriteMaterial({ map: glowTexture(), blending: AdditiveBlending, depthWrite: false, transparent: true }))
+  glow.scale.set(3.4, 3.4, 1)
+  world.add(core, glow)
 
+  // --- two tilted orbits; busiest tools on the inner ring ---
+  const rings = [
+    { radius: 1.75, tilt: [0.32, 0, 0.16], speed: 0.0024 },
+    { radius: 2.7, tilt: [0.18, 0, -0.14], speed: -0.0015 },
+  ]
+  const inner = tools.slice(0, Math.ceil(tools.length / 2))
+  const outer = tools.slice(inner.length)
   const sprites = []
-  const makeSprite = (text, pos, kind, ref) => {
-    const { tex, aspect } = labelTexture(text, { accent: kind === 'project' })
-    const mat = new SpriteMaterial({ map: tex, transparent: true, depthWrite: false })
-    const s = new Sprite(mat)
-    const h = kind === 'project' ? 0.3 : 0.28
-    s.scale.set(h * aspect, h, 1)
-    s.position.copy(pos)
-    s.userData = { kind, ref, baseScale: s.scale.clone() }
-    world.add(s)
-    sprites.push(s)
-    return s
-  }
-  data.tools.forEach((t, i) => (t.sprite = makeSprite(t.name, toolPos[i], 'tool', t)))
-  data.projects.forEach((p, i) => (p.sprite = makeSprite(p.name, projPos[i], 'project', p)))
 
-  // --- links ---
-  const pairs = []
-  data.tools.forEach((t, ti) =>
-    t.projects.forEach((p) => pairs.push({ tool: t, project: p, a: toolPos[ti], b: projPos[data.projects.indexOf(p)] })),
-  )
-  const positions = new Float32Array(pairs.length * 6)
-  const colors = new Float32Array(pairs.length * 6)
-  pairs.forEach((l, i) => {
-    positions.set([l.a.x, l.a.y, l.a.z, l.b.x, l.b.y, l.b.z], i * 6)
+  rings.forEach((ring, ri) => {
+    const tiltGroup = new Group()
+    tiltGroup.rotation.set(...ring.tilt)
+    const spin = new Group()
+    tiltGroup.add(spin)
+    world.add(tiltGroup)
+    ring.spin = spin
+
+    spin.add(
+      new LineLoop(circle(ring.radius), new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 })),
+    )
+
+    const list = ri === 0 ? inner : outer
+    list.forEach((tool, i) => {
+      const a = (i / list.length) * Math.PI * 2 + ri * 0.4
+      const anchor = new Group()
+      anchor.position.set(Math.cos(a) * ring.radius, 0, Math.sin(a) * ring.radius)
+      spin.add(anchor)
+
+      const normal = labelTexture(tool.name, false)
+      const active = labelTexture(tool.name, true)
+      const sprite = new Sprite(new SpriteMaterial({ map: normal.tex, transparent: true, depthWrite: false }))
+      const h = 0.3
+      sprite.scale.set(h * normal.aspect, h, 1)
+      sprite.userData = { tool, normal: normal.tex, active: active.tex, base: sprite.scale.clone() }
+      anchor.add(sprite)
+      tool.anchor = anchor
+      tool.sprite = sprite
+      sprites.push(sprite)
+    })
   })
-  const lineGeo = new BufferGeometry()
-  lineGeo.setAttribute('position', new Float32BufferAttribute(positions, 3))
-  lineGeo.setAttribute('color', new Float32BufferAttribute(colors, 3))
-  const lines = new LineSegments(
-    lineGeo,
-    new LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.9, blending: AdditiveBlending, depthWrite: false }),
-  )
-  world.add(lines)
 
-  // faint star dust for depth
-  const dust = new Float32Array(600 * 3)
-  for (let i = 0; i < 600; i++) {
-    const v = new Vector3().randomDirection().multiplyScalar(4 + Math.random() * 3)
-    dust.set([v.x, v.y, v.z], i * 3)
-  }
-  const dustGeo = new BufferGeometry()
-  dustGeo.setAttribute('position', new Float32BufferAttribute(dust, 3))
-  world.add(new Points(dustGeo, new PointsMaterial({ color: 0xffffff, size: 0.018, transparent: true, opacity: 0.35, depthWrite: false })))
+  // --- beam from the core to the selected tool ---
+  const beamGeo = new BufferGeometry()
+  beamGeo.setAttribute('position', new Float32BufferAttribute(new Float32Array(6), 3))
+  const beam = new Line(beamGeo, new LineBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.9 }))
+  const spark = new Sprite(new SpriteMaterial({ map: glow.material.map, blending: AdditiveBlending, depthWrite: false, transparent: true }))
+  spark.scale.set(0.5, 0.5, 1)
+  world.add(beam, spark)
 
-  // --- selection ---
   let selected = null
   function select(tool) {
+    if (selected) {
+      selected.sprite.material.map = selected.sprite.userData.normal
+    }
     selected = tool
-    const linked = new Set(tool.projects)
-    pairs.forEach((l, i) => {
-      const on = l.tool === tool
-      const c = on ? [1, 0.42, 0.16] : [0.2, 0.2, 0.22]
-      colors.set([...c, ...c], i * 6)
-    })
-    lineGeo.attributes.color.needsUpdate = true
-    sprites.forEach((s) => {
-      const { kind, ref } = s.userData
-      const active = (kind === 'tool' && ref === tool) || (kind === 'project' && linked.has(ref))
-      s.material.opacity = active ? 1 : 0.28
-      s.scale.copy(s.userData.baseScale).multiplyScalar(active ? 1.12 : 1)
-    })
+    tool.sprite.material.map = tool.sprite.userData.active
     onSelect?.(tool)
   }
 
@@ -164,15 +174,14 @@ export function createToolkit(canvas, { onSelect, reduceMotion, initial }) {
   let lastX = 0
   let lastY = 0
   let moved = 0
-  let velY = reduceMotion ? 0 : 0.0016
-  let targetX = 0.15
+  let tiltX = 0
+  const speedFactor = reduceMotion ? 0 : 1
 
   function pick(e) {
     const r = canvas.getBoundingClientRect()
     pointer.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1)
     raycaster.setFromCamera(pointer, camera)
-    const hit = raycaster.intersectObjects(sprites, false)[0]
-    return hit?.object
+    return raycaster.intersectObjects(sprites, false)[0]?.object
   }
   canvas.addEventListener('pointerdown', (e) => {
     dragging = true
@@ -183,49 +192,77 @@ export function createToolkit(canvas, { onSelect, reduceMotion, initial }) {
   })
   canvas.addEventListener('pointermove', (e) => {
     if (dragging) {
-      const dx = e.clientX - lastX
-      const dy = e.clientY - lastY
-      moved += Math.abs(dx) + Math.abs(dy)
-      world.rotation.y += dx * 0.006
-      targetX = Math.max(-0.6, Math.min(0.6, targetX + dy * 0.004))
+      moved += Math.abs(e.clientX - lastX) + Math.abs(e.clientY - lastY)
+      world.rotation.y += (e.clientX - lastX) * 0.006
+      tiltX = Math.max(-0.4, Math.min(0.4, tiltX + (e.clientY - lastY) * 0.003))
       lastX = e.clientX
       lastY = e.clientY
       return
     }
     const hit = pick(e)
     canvas.style.cursor = hit ? 'pointer' : 'grab'
-    if (hit?.userData.kind === 'tool' && hit.userData.ref !== selected) select(hit.userData.ref)
+    if (hit && hit.userData.tool !== selected) select(hit.userData.tool)
   })
-  const end = (e) => {
+  canvas.addEventListener('pointerup', (e) => {
     if (!dragging) return
     dragging = false
     if (moved < 6) {
       const hit = pick(e)
-      if (hit?.userData.kind === 'tool') select(hit.userData.ref)
-      if (hit?.userData.kind === 'project' && hit.userData.ref.slug) window.location.href = `/work/${hit.userData.ref.slug}/`
+      if (hit) select(hit.userData.tool)
     }
-  }
-  canvas.addEventListener('pointerup', end)
+  })
   canvas.addEventListener('pointercancel', () => (dragging = false))
 
-  // --- sizing & loop ---
+  // --- sizing ---
   function resize() {
     const w = canvas.clientWidth
     const h = canvas.clientHeight
     if (!w || !h) return
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    camera.position.z = w / h < 0.9 ? 12 : 10
+    camera.position.z = w / h < 0.9 ? 12.5 : 9.6
     camera.updateProjectionMatrix()
   }
   new ResizeObserver(resize).observe(canvas)
   resize()
 
+  // --- loop ---
+  const tmp = new Vector3()
+  const camDir = new Vector3()
+  let t = 0
   function frame() {
-    if (!dragging) world.rotation.y += velY
-    world.rotation.x += (targetX - world.rotation.x) * 0.06
+    t += 0.016
+    rings.forEach((ring) => {
+      if (!dragging) ring.spin.rotation.y += ring.speed * speedFactor
+    })
+    core.rotation.y += 0.004 * speedFactor
+    core.rotation.x += 0.002 * speedFactor
+    world.rotation.x += (tiltX - world.rotation.x) * 0.08
+
+    // Depth cue: labels behind the core fade and shrink
+    camera.getWorldDirection(camDir)
+    sprites.forEach((s) => {
+      s.getWorldPosition(tmp)
+      const depth = Math.min(Math.max(-tmp.dot(camDir) / 3.4, -1), 1) * 0.5 + 0.5
+      const isSel = s.userData.tool === selected
+      s.material.opacity = isSel ? 1 : 0.18 + depth * 0.82
+      s.scale.copy(s.userData.base).multiplyScalar((isSel ? 1.15 : 0.85) + depth * 0.2)
+      s.renderOrder = Math.round(depth * 100) + (isSel ? 200 : 0)
+    })
+
+    if (selected) {
+      selected.anchor.getWorldPosition(tmp)
+      world.worldToLocal(tmp)
+      const pos = beamGeo.attributes.position
+      pos.setXYZ(0, 0, 0, 0)
+      pos.setXYZ(1, tmp.x, tmp.y, tmp.z)
+      pos.needsUpdate = true
+      const k = (t * 0.6) % 1
+      spark.position.set(tmp.x * k, tmp.y * k, tmp.z * k)
+    }
     renderer.render(scene, camera)
   }
+
   let running = false
   const start = () => {
     if (!running) renderer.setAnimationLoop(frame)
@@ -243,12 +280,12 @@ export function createToolkit(canvas, { onSelect, reduceMotion, initial }) {
   }).observe(canvas)
   document.addEventListener('visibilitychange', sync)
 
-  select(data.tools.find((t) => t.name === initial) || data.tools[0])
+  select(tools.find((tl) => tl.name === initial) || tools[0])
   requestAnimationFrame(() => canvas.classList.add('is-ready'))
 
   return {
     select: (name) => {
-      const tool = data.tools.find((t) => t.name === name)
+      const tool = tools.find((tl) => tl.name === name)
       if (tool) select(tool)
     },
   }

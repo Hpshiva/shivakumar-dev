@@ -1307,7 +1307,7 @@ ul, ol {
 .toolkit__hint {
   position: absolute;
   left: 18px;
-  bottom: 14px;
+  top: 16px;
   pointer-events: none;
 }
 @media (max-width: 960px) {
