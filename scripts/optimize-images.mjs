@@ -7,41 +7,49 @@ import path from 'node:path'
 const SRC = 'source-images'
 const OUT = 'public/images'
 
+const PROJECTS = ['agan-health', 'trident-hyundai', 'pristine-renault', 'kinara-capital', 'design-esthetics', 'pristine-isuzu']
+// Retina sizes: the browser picks the smallest one that is still sharp on the visitor's screen
+const SHOT_WIDTHS = [480, 960, 1440, 1920, 2560]
+
 const jobs = [
-  // Project screenshots (1440x900): two widths, AVIF + WebP
-  ...['agan_health', 'trident_hyundai', 'pristine_renault', 'kinara_capital', 'design_esthetics', 'pristine_isuzu'].map(
-    (name) => ({ name, widths: [320, 480, 720, 1280] }),
-  ),
+  // Project screenshots: HD 2x captures (2880x1800) from `npm run capture`, else the original PNGs
+  ...PROJECTS.map((slug) => ({
+    input: [path.join(SRC, 'cases', `${slug}-hd.png`), path.join(SRC, `${slug.replace(/-/g, '_')}.png`)],
+    out: slug,
+    widths: SHOT_WIDTHS,
+  })),
   // Studio headshot
-  { name: 'biopic', out: 'headshot', widths: [480, 800] },
+  { input: [path.join(SRC, 'biopic.png')], out: 'headshot', widths: [480, 800] },
 ]
 
 await fs.mkdir(OUT, { recursive: true })
+const exists = (f) => fs.access(f).then(() => true, () => false)
 
 for (const job of jobs) {
-  const input = path.join(SRC, `${job.name}.png`)
-  const base = job.out || job.name.replace(/_/g, '-')
+  let input = null
+  for (const candidate of job.input) if (await exists(candidate)) { input = candidate; break }
+  if (!input) continue
   for (const w of job.widths) {
-    const img = sharp(input).resize({ width: w, withoutEnlargement: true })
-    await img.clone().avif({ quality: 52, effort: 6 }).toFile(path.join(OUT, `${base}-${w}.avif`))
-    await img.clone().webp({ quality: 74, effort: 6 }).toFile(path.join(OUT, `${base}-${w}.webp`))
+    // Lanczos downscale + light sharpening keeps small UI text crisp
+    const img = sharp(input).resize({ width: w, withoutEnlargement: true, kernel: 'lanczos3' }).sharpen({ sigma: 0.5 })
+    await img.clone().avif({ quality: 62, effort: 6, chromaSubsampling: '4:4:4' }).toFile(path.join(OUT, `${job.out}-${w}.avif`))
+    await img.clone().webp({ quality: 82, effort: 6, smartSubsample: true }).toFile(path.join(OUT, `${job.out}-${w}.webp`))
   }
-  console.log('✓', base)
+  console.log('✓', job.out, path.basename(input))
 }
 
 // Case-study captures (from `npm run capture`): full-page scroll-through, phone screens, OG card
 const CASES = path.join(SRC, 'cases')
 await fs.mkdir(path.join(OUT, 'cases'), { recursive: true })
-const exists = (f) => fs.access(f).then(() => true, () => false)
 for (const file of (await fs.readdir(CASES).catch(() => [])).filter((f) => f.endsWith('.png'))) {
   const [, slug, kind] = file.match(/^(.+)-(desktop|mobile)\.png$/) || []
   if (!slug) continue
   const input = path.join(CASES, file)
   if (kind === 'desktop') {
-    for (const w of [700, 1100]) {
-      const img = sharp(input).resize({ width: w })
-      await img.clone().avif({ quality: 50, effort: 6 }).toFile(path.join(OUT, 'cases', `${slug}-full-${w}.avif`))
-      await img.clone().webp({ quality: 72, effort: 6 }).toFile(path.join(OUT, 'cases', `${slug}-full-${w}.webp`))
+    for (const w of [1200, 2400]) {
+      const img = sharp(input).resize({ width: w, kernel: 'lanczos3' }).sharpen({ sigma: 0.5 })
+      await img.clone().avif({ quality: 58, effort: 6 }).toFile(path.join(OUT, 'cases', `${slug}-full-${w}.avif`))
+      await img.clone().webp({ quality: 78, effort: 6 }).toFile(path.join(OUT, 'cases', `${slug}-full-${w}.webp`))
     }
   } else {
     const { height } = await sharp(input).metadata()
@@ -61,7 +69,8 @@ for (const file of (await fs.readdir(CASES).catch(() => [])).filter((f) => f.end
 
 // Per-project social cards: the project screenshot on paper, framed like a browser
 for (const slug of ['agan-health', 'trident-hyundai', 'kinara-capital', 'pristine-renault', 'design-esthetics', 'pristine-isuzu']) {
-  const shotFile = path.join(SRC, `${slug.replace(/-/g, '_')}.png`)
+  const hd = path.join(SRC, 'cases', `${slug}-hd.png`)
+  const shotFile = (await exists(hd)) ? hd : path.join(SRC, `${slug.replace(/-/g, '_')}.png`)
   if (!(await exists(shotFile))) continue
   const shot = await sharp(shotFile).resize({ width: 1040, height: 536, fit: 'cover', position: 'top' }).png().toBuffer()
   const frame = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
@@ -76,6 +85,24 @@ for (const slug of ['agan-health', 'trident-hyundai', 'kinara-capital', 'pristin
     .toFile(path.join(OUT, 'cases', `${slug}-og.jpg`))
 }
 console.log('✓ case OG cards')
+
+// UnivAssist case study (screenshots from the event work, in source-images/univassist)
+const UA = path.join(SRC, 'univassist')
+if (await exists(UA)) {
+  const enc = async (input, base, widths) => {
+    for (const w of widths) {
+      const img = sharp(input).resize({ width: w, withoutEnlargement: true, kernel: 'lanczos3' }).sharpen({ sigma: 0.5 })
+      await img.clone().avif({ quality: 62, effort: 6, chromaSubsampling: '4:4:4' }).toFile(`${base}-${w}.avif`)
+      await img.clone().webp({ quality: 82, effort: 6, smartSubsample: true }).toFile(`${base}-${w}.webp`)
+    }
+  }
+  await enc(path.join(UA, 'redeinspira.png'), path.join(OUT, 'univassist'), SHOT_WIDTHS)
+  for (const f of await fs.readdir(UA)) {
+    const name = f.replace(/\.(png|jpe?g)$/, '')
+    await enc(path.join(UA, f), path.join(OUT, 'cases', `univassist-${name}`), [480, 960, 1440])
+  }
+  console.log('✓ univassist')
+}
 
 // Open Graph image (1200x630 JPG — AVIF isn't supported by WhatsApp/LinkedIn previews)
 const portrait = await sharp(path.join(SRC, 'myPic.png')).resize({ height: 600 }).png().toBuffer()

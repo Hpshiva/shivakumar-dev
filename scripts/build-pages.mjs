@@ -39,9 +39,9 @@ function card(p, i) {
                 </div>
               </div>
               <a class="shot" href="/work/${p.slug}/" tabindex="-1" aria-hidden="true">
-                <span class="shot__bar"><i></i><i></i><i></i><span>${esc(p.domain)}</span></span>
+                <span class="shot__bar"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></span>
                 <span class="shot__media">
-              ${picture(p.slug, [480, 720, 1280], '(min-width: 860px) 50vw, 90vw', `${p.name} homepage`, { attrs: ' width="1280" height="800" data-shot' })}
+              ${picture(p.image || p.slug, [480, 960, 1440, 1920], '(min-width: 1360px) 700px, (min-width: 860px) 52vw, 90vw', `${p.name} homepage`, { attrs: ' width="1440" height="900" data-shot' })}
                 </span>
               </a>
             </article>`
@@ -123,7 +123,7 @@ function section(num, kicker, title, body) {
 
 const fullHeights = {}
 for (const p of projects) {
-  const file = path.join('public', `images/cases/${p.slug}-full-1100.webp`)
+  const file = path.join('public', `images/cases/${p.slug}-full-1200.webp`)
   if (fs.existsSync(file)) fullHeights[p.slug] = (await sharp(file).metadata()).height
 }
 
@@ -131,13 +131,34 @@ function caseStudy(p, i) {
   const next = projects[(i + 1) % projects.length]
   const url = `${SITE}/work/${p.slug}/`
   const og = has(`images/cases/${p.slug}-og.jpg`) ? `${SITE}/images/cases/${p.slug}-og.jpg` : `${SITE}/images/og-image.jpg`
-  const full = has(`images/cases/${p.slug}-full-1100.avif`)
+  const full = has(`images/cases/${p.slug}-full-1200.avif`)
   const phones = [0, 1, 2].filter((n) => has(`images/cases/${p.slug}-phone${n}-600.avif`))
   let n = 0
 
   const parts = []
   parts.push(section(++n, 'Context', 'The client', `<div class="cs-body">${p.context.map((t) => `<p>${esc(t)}</p>`).join('')}</div>`))
   parts.push(section(++n, 'Challenge', 'The problem to solve', `<div class="cs-body">${p.challenge.map((t) => `<p>${esc(t)}</p>`).join('')}</div>`))
+
+  const gallery = p.gallery
+    ? `    <section class="cs-gallery container" aria-label="${esc(p.gallery.title)}">
+      <div class="cs-scroll__head">
+        <h2>${esc(p.gallery.title)}</h2>
+        <p class="hud">[ ${esc(p.gallery.note)} ]</p>
+      </div>
+      <ul class="cs-gallery__grid">
+${p.gallery.items
+  .map(
+    (g) => `        <li data-reveal>
+          <div class="shot">
+            ${picture(g.img, [480, 960, 1440], '(min-width: 1320px) 400px, (min-width: 700px) 30vw, 92vw', `Screenshot of the ${g.caption.split(' · ')[0]} page I built`, { attrs: ' width="1440" height="900"' })}
+          </div>
+          <p class="hud">${esc(g.caption)}</p>
+        </li>`,
+  )
+  .join('\n')}
+      </ul>
+    </section>`
+    : ''
 
   const scrollThrough = full
     ? `    <section class="cs-scroll container" data-scrollthrough>
@@ -148,7 +169,7 @@ function caseStudy(p, i) {
       <div class="cs-browser">
         <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.domain)}</span></div>
         <div class="cs-browser__view">
-          ${picture(`cases/${p.slug}-full`, [700, 1100], '(min-width: 1320px) 1220px, 92vw', `Full-length screenshot of the ${p.name} homepage`, { attrs: ` width="1100" height="${fullHeights[p.slug]}" data-scroll-img` })}
+          ${picture(`cases/${p.slug}-full`, [1200, 2400], '(min-width: 1320px) 1220px, 92vw', `Full-length screenshot of the ${p.name} homepage`, { attrs: ` width="1200" height="${fullHeights[p.slug]}" data-scroll-img` })}
         </div>
       </div>
     </section>`
@@ -266,9 +287,9 @@ ${nav}
 
     <section class="cs-cover container hero-in" style="--d:.6s" aria-label="Homepage">
       <div class="shot">
-        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.domain)}</span></div>
+        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></div>
         <div class="shot__media">
-          ${picture(p.slug, [720, 1280], '(min-width: 1320px) 1220px, 92vw', `${p.name} homepage`, { lazy: false, attrs: ' width="1280" height="800" data-shot' })}
+          ${picture(p.image || p.slug, [960, 1440, 1920, 2560], '(min-width: 1320px) 1220px, 92vw', `${p.name} homepage`, { lazy: false, attrs: ' width="1440" height="900" data-shot' })}
         </div>
       </div>
     </section>
@@ -276,6 +297,8 @@ ${nav}
     <div class="container">
 ${parts.join('\n')}
     </div>
+
+${gallery}
 
 ${scrollThrough}
 

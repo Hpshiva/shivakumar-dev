@@ -969,10 +969,12 @@ ul, ol {
   .process__viewport { overflow: visible; }
   .process__track {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     width: auto;
     padding: 0 var(--gutter);
   }
-  .module { width: auto; }
+  .module { width: auto; padding: 20px; }
+  .icon { aspect-ratio: 240 / 110; padding: 10px; }
 }
 
 /* =========================================================
@@ -1277,8 +1279,8 @@ ul, ol {
   color: var(--text);
 }
 .toolkit__chips button[aria-pressed="true"] {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: #c93d08;
+  background: #c93d08;
   color: #fff;
 }
 .toolkit__stage {
@@ -2031,9 +2033,34 @@ ul, ol {
   border-radius: 999px;
   font-size: 14px;
 }
-.cs-results {
+.cs-gallery {
+  padding-block: clamp(40px, 6vw, 90px);
+}
+.cs-gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 22px);
+}
+.cs-gallery__grid li {
+  display: grid;
+  gap: 10px;
+}
+.cs-gallery__grid .shot img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+@media (max-width: 860px) {
+  .cs-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .cs-gallery__grid { grid-template-columns: 1fr; }
+}
+.cs-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 36px !important;
   gap: 24px;
 }
 .cs-results li {
@@ -2042,7 +2069,8 @@ ul, ol {
 }
 .cs-results b {
   font-family: var(--dot);
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  white-space: nowrap;
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
   font-weight: 900;
   line-height: 1;
   color: var(--accent);

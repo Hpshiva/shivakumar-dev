@@ -28,3 +28,6 @@ source-images/cases/
 
 # Local tool config
 .claude/
+
+# Raw UnivAssist screenshots (optimised copies live in public/images)
+source-images/univassist/

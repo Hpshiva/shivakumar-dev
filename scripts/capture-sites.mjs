@@ -1,4 +1,4 @@
-// Captures clean desktop + mobile screenshots of each live project into source-images/cases.
+// Captures clean, retina (2x) desktop + mobile screenshots of each live project into source-images/cases.
 // Uses the locally installed Google Chrome. Run with: npm run capture
 import puppeteer from 'puppeteer-core'
 import sharp from 'sharp'
@@ -17,10 +17,10 @@ const only = process.argv.slice(2)
 await fs.mkdir(OUT, { recursive: true })
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--hide-scrollbars'] })
 
-async function capture(url, file, { width, height, mobile }) {
+async function capture(url, file, { width, height, mobile, heroFile }) {
   const page = await browser.newPage()
   await page.setUserAgent(mobile ? MOBILE_UA : DESKTOP_UA)
-  await page.setViewport({ width, height: 900, deviceScaleFactor: mobile ? 2 : 1, isMobile: mobile, hasTouch: mobile })
+  await page.setViewport({ width, height: 900, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile })
   try {
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 45000 })
   } catch {
@@ -53,17 +53,28 @@ async function capture(url, file, { width, height, mobile }) {
   // Full-page capture at a normal viewport (so 100vh sections keep their real size), then crop
   const full = await page.screenshot({ fullPage: true })
   const meta = await sharp(full).metadata()
-  const scale = mobile ? 2 : 1
+  const scale = 2
   await sharp(full)
     .extract({ left: 0, top: 0, width: meta.width, height: Math.min(meta.height, height * scale) })
     .toFile(file)
+  // First screen (1440x900 at 2x = 2880x1800) used for cards, hero and covers
+  if (heroFile) {
+    await sharp(full)
+      .extract({ left: 0, top: 0, width: meta.width, height: Math.min(meta.height, 900 * scale) })
+      .toFile(heroFile)
+  }
   await page.close()
 }
 
 for (const p of projects) {
-  if (only.length && !only.includes(p.slug)) continue
+  if (p.capture === false || (only.length && !only.includes(p.slug))) continue
   try {
-    await capture(p.url, path.join(OUT, `${p.slug}-desktop.png`), { width: 1440, height: 4000, mobile: false })
+    await capture(p.url, path.join(OUT, `${p.slug}-desktop.png`), {
+      width: 1440,
+      height: 4000,
+      mobile: false,
+      heroFile: path.join(OUT, `${p.slug}-hd.png`),
+    })
     await capture(p.url, path.join(OUT, `${p.slug}-mobile.png`), { width: 390, height: 2400, mobile: true })
     console.log('✓', p.slug)
   } catch (err) {

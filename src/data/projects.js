@@ -7,6 +7,66 @@
 
 export const projects = [
   {
+    slug: 'univassist',
+    name: 'UnivAssist',
+    url: 'https://www.univassist.com',
+    domain: 'univassist.com',
+    shotDomain: 'redeinspira.webifairs.com',
+    capture: false, // screenshots come from the event work itself, not univassist.com
+    industry: 'EdTech · Virtual events',
+    location: 'Brazil & UAE',
+    role: 'Frontend engineering & UI system',
+    stack: ['Custom CSS', 'JavaScript', 'MutationObserver', 'jsDelivr CDN'],
+    line: 'Six virtual university fairs, six brands, one locked SaaS platform, re-skinned with nothing but a CSS file and a JavaScript file.',
+    intro:
+      'UnivAssist has spent 15+ years connecting 500+ universities across 70 countries with students and counsellors. Its WebiFair events take that network online with live university booths, admissions chats and video rooms. My brief: make six of those fairs look and feel like premium, brand-owned experiences, on a platform whose code I could never touch.',
+    context: [
+      'Each fair is its own event. Rede Inspira Virtual College Fairs serves students in Brazil. Five GEMS Education Virtual University Fairs (Changemakers, Explorers, Innovators, Lumina and Visionaries) serve students in the UAE. Every fair hosts dozens of universities, from Canada and the UK to Hong Kong and Australia.',
+      'The fairs run on Hubilo, a closed SaaS platform built with React and Material UI. Organisers get exactly two hooks: one custom CSS field and one custom JavaScript field. There are no templates, no components and no access to the source.',
+    ],
+    challenge: [
+      'Out of the box, every fair looked identical: generic, dense and hard to scan. That is expensive when a 17-year-old has 60 universities to compare and about eight seconds of patience.',
+      'The platform pushed back, too. React re-renders silently wiped changes. Auto-generated class names shifted between releases. Native modals swallowed clicks. The CDN serving the custom code kept handing visitors stale versions.',
+      'So the real job was this: build a design system for six different brands on top of someone else’s application, without breaking a single registration, login or live room.',
+    ],
+    gallery: {
+      title: 'One codebase. Six brands.',
+      note: 'Same engine, six identities',
+      items: [
+        { img: 'cases/univassist-redeinspira', caption: 'Rede Inspira · Brazil' },
+        { img: 'cases/univassist-changemakers', caption: 'Changemakers · GEMS Education' },
+        { img: 'cases/univassist-explorers', caption: 'Explorers · GEMS Education' },
+        { img: 'cases/univassist-innovators', caption: 'Innovators · GEMS Education' },
+        { img: 'cases/univassist-lumina', caption: 'Lumina · GEMS Education' },
+        { img: 'cases/univassist-visionaries', caption: 'Visionaries · GEMS Education' },
+        { img: 'cases/univassist-lobby', caption: 'Virtual Lobby: scannable university cards' },
+        { img: 'cases/univassist-search', caption: 'Instant search across universities' },
+        { img: 'cases/univassist-filter', caption: 'Guided lobby with country filters' },
+      ],
+    },
+    features: [
+      { title: 'Event pass & live countdown', text: 'A sticky student pass with a real-time countdown, local date and timezone, and one-tap Register and Add-to-Calendar.', note: 'the page sells the event' },
+      { title: 'A lobby built for scanning', text: 'Rebuilt university cards, a “how the lobby works” guide, country filters and a single search pill, so students reach their shortlist fast.', note: '60 booths, zero overwhelm' },
+      { title: 'University profiles that get read', text: 'Academic programmes and majors as filterable chips, video banners and a clean About section, instead of a wall of text.', note: 'from data dump to dossier' },
+      { title: 'Login & register takeover', text: 'A branded split-screen login with countdown and event perks, layered over Hubilo’s native React forms so validation and one-time codes never break.', note: 'native forms, new skin' },
+      { title: 'A self-healing UI engine', text: 'A debounced MutationObserver re-applies every enhancement after each React render, with idempotency guards so nothing ever doubles up.', note: 'survives every re-render' },
+      { title: 'A smart CDN loader', text: 'A tiny loader asks GitHub for the latest commit and pins the code to that exact version on jsDelivr. Every visitor gets the right build within minutes, with no cache purges and no unstyled flash.', note: 'push = deploy' },
+    ],
+    approach: [
+      'Treat the platform like an API, not an enemy. I mapped Hubilo’s DOM like a contract: which elements stay stable, which re-render, and which carry native handlers that must never be intercepted (room buttons, meeting slots, one-time-code forms).',
+      'Use theme tokens, not hard-coded colours. Each brand lives in one block of CSS custom properties, so a new fair is a copied folder, a palette and a config object, not a redesign.',
+      'Write six self-contained JavaScript modules (login, register, lobby, embeds, booths and people). Each one is guarded, so a fix on one page can never leak into another.',
+      'Verify, don’t hope. Headless Chrome audits across five viewports, from 1440px down to 360px, with a zero-horizontal-overflow check. A preview harness tests unreleased code against the live event without touching it.',
+    ],
+    delivered: ['Design system for 6 brands', 'Login & register takeover', 'Virtual Lobby redesign', 'University profile drawer', 'People directory polish', 'CDN loader & deploy pipeline', 'Responsive QA across 5 viewports'],
+    results: [
+      { value: '6', label: 'Branded virtual fairs from one codebase' },
+      { value: '15k+', label: 'Lines of CSS & JS layered over a closed platform' },
+      { value: '13 days', label: 'From first commit to six launch-ready fairs' },
+      { value: '0', label: 'Horizontal overflow across 5 audited viewports' },
+    ],
+  },
+  {
     slug: 'agan-health',
     name: 'Agan Health',
     url: 'https://www.aganhealth.com',
