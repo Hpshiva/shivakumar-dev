@@ -1,5 +1,5 @@
 const WHATSAPP = '916283937782'
-const EMAIL = 'shivakumar.bfgi@gmail.com'
+const EMAIL = 'shivakumar.frontend@gmail.com'
 
 // Maps a pricing card to the matching "What do you need?" option
 const PLAN_TO_TYPE = {

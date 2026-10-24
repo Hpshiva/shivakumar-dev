@@ -90,7 +90,7 @@ const nav = `  <header class="nav" data-nav>
         <a href="/#pricing"><small>05</small> What you get</a>
         <a href="/#contact"><small>08</small> Contact</a>
       </nav>
-      <p class="hud">shivakumar.bfgi@gmail.com</p>
+      <p class="hud">shivakumar.frontend@gmail.com</p>
     </div>
   </header>`
 

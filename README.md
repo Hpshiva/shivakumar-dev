@@ -78,7 +78,7 @@ In Vercel → Project → Settings → Environment Variables, add:
 | Variable | Example |
 |---|---|
 | `RESEND_API_KEY` | `re_...` |
-| `CONTACT_TO_EMAIL` | `shivakumar.bfgi@gmail.com` |
+| `CONTACT_TO_EMAIL` | `shivakumar.frontend@gmail.com` |
 | `CONTACT_FROM_EMAIL` (optional) | `Portfolio <hello@yourdomain.com>` (needs a verified domain in Resend) |
 
 Until these are set, or in local dev, the form shows one-click **WhatsApp** and **email** links with the
