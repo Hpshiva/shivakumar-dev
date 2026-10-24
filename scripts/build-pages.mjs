@@ -53,12 +53,14 @@ const indexHtml = fs.readFileSync(indexPath, 'utf8')
 const cards = projects.map(card).join('\n')
 let updated = indexHtml.replace(
   /(<!-- work:start -->)[\s\S]*?(\s*<!-- work:end -->)/,
-  `$1\n${cards}\n$2`,
+  (_, start, end) => `${start}\n${cards}\n${end}`,
 )
 // Structured data + AI/search files, generated from the same sources
+// Replacer function, not a string: JSON text like "$25" must never be read as $2
+const ld = JSON.stringify(homeJsonLd(updated), null, 2).replace(/\n/g, '\n  ').replace(/</g, '\\u003c')
 updated = updated.replace(
-  /(<!-- ld:start -->)[\s\S]*?(<!-- ld:end -->)/,
-  `$1\n  <script type="application/ld+json">\n  ${JSON.stringify(homeJsonLd(updated), null, 2).replace(/\n/g, '\n  ')}\n  </script>\n  $2`,
+  /<!-- ld:start -->[\s\S]*?<!-- ld:end -->/,
+  () => `<!-- ld:start -->\n  <script type="application/ld+json">\n  ${ld}\n  </script>\n  <!-- ld:end -->`,
 )
 writeSeoFiles(updated)
 if (updated !== indexHtml) fs.writeFileSync(indexPath, updated)
