@@ -17,6 +17,40 @@ function summary(data) {
   ].join('\n')
 }
 
+// Preferred: our own /api/contact (Resend). If it isn't configured or isn't
+// available (e.g. local dev), deliver through FormSubmit, which needs no API key.
+async function deliver(data) {
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    // Only trust a real JSON success (dev servers answer unknown routes with HTML + 200)
+    const json = await res.json().catch(() => null)
+    if (res.ok && json?.ok === true) return
+  } catch {
+    // fall through to FormSubmit
+  }
+  const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      _subject: `New project inquiry: ${data.type} — ${data.name}`,
+      _replyto: data.email,
+      _template: 'table',
+      _captcha: 'false',
+      name: data.name,
+      email: data.email,
+      project: data.type,
+      budget: data.budget,
+      message: data.message,
+    }),
+  })
+  const json = await res.json().catch(() => ({}))
+  if (!res.ok || json.success === 'false' || json.success === false) throw new Error(json.message || `FormSubmit ${res.status}`)
+}
+
 function el(tag, attrs = {}, text = '') {
   const node = document.createElement(tag)
   Object.assign(node, attrs)
@@ -69,12 +103,8 @@ export function initContact() {
     status.replaceChildren()
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+      // Bots fill the hidden honeypot field: pretend success, send nothing
+      if (!data.website) await deliver(data)
 
       form.classList.add('is-sent')
       const firstName = data.name.trim().split(/\s+/)[0]
