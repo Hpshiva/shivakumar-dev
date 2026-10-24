@@ -53,6 +53,7 @@ src/main.js             Smooth scroll, story chapters, parallax, pinned sections
 src/data/projects.js    Projects + case-study content (single source of truth)
 work/<slug>/index.html  Generated case-study pages (don't edit by hand)
 scripts/build-pages.mjs Generates work cards + case-study pages
+scripts/seo.mjs         JSON-LD schema, llms.txt, llms-full.txt and sitemap.xml (generated on every build)
 scripts/capture-sites.mjs  Screenshots the live client sites with local Chrome
 src/contact.js          Contact form + copy-email
 src/styles.css          Design tokens and all styles

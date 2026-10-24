@@ -1,0 +1,341 @@
+# Shiva Kumar — Frontend Engineer (Bengaluru, India)
+
+> Independent frontend engineer in Bengaluru, India who plans, designs and hand-codes fast, story-driven websites and web apps with React, Next.js, TypeScript and GSAP, with Core Web Vitals and technical SEO built in. 35+ websites shipped for 20+ brands across 10+ industries. Works directly with clients worldwide; no hand-offs, account managers or templates.
+
+Key facts:
+- Name: Shiva Kumar · Role: independent frontend engineer · Based in Bengaluru, India (IST, UTC+5:30)
+- Core stack: React, Next.js, TypeScript, GSAP, Three.js, Tailwind, CSS architecture, REST APIs
+- Strengths: scroll storytelling and motion, Core Web Vitals and performance, technical SEO, accessibility, re-skinning locked SaaS platforms with custom CSS/JS
+- Typical timelines: marketing site 2–4 weeks; web app with dashboards and backend 6–12 weeks
+- Every project includes full code ownership, documentation and handover, and 14 days of post-launch support
+- Contact: shivakumar.frontend@gmail.com · WhatsApp https://wa.me/916283937782 · https://shivakumar-dev.vercel.app/#contact
+
+## Services and pricing
+
+- **Landing page or website** (from $1,000): A fast, animated landing page or marketing website that tells your story, ranks on Google and converts. Most land between $1,000 and $2,000; multi-page sites are quoted after a short call.
+- **Custom web application** (custom quote): End-to-end development of a secure, scalable web application shaped around your business logic.
+- **Ongoing support** ($25–35/hour): New pages, campaign modules, fixes and performance work on your existing site. Billed hourly, no minimum commitment.
+
+## Case studies
+
+- [UnivAssist](https://shivakumar-dev.vercel.app/work/univassist/): Six virtual university fairs, six brands, one locked SaaS platform, re-skinned with nothing but a CSS file and a JavaScript file. (EdTech · Virtual events, Brazil & UAE; Custom CSS, JavaScript, MutationObserver, jsDelivr CDN)
+- [Agan Health](https://shivakumar-dev.vercel.app/work/agan-health/): A calm, trustworthy front door for a mental-health clinic, so people can find the right therapist and book in minutes. (Mental healthcare, Bengaluru & Trichy; React, TypeScript, Redux Toolkit)
+- [Trident Hyundai](https://shivakumar-dev.vercel.app/work/trident-hyundai/): Six showrooms, one fast website: browse the full Hyundai range, customise a car and book a test drive in a few taps. (Automotive dealership, Bangalore; React, Redux, Tailwind CSS)
+- [Kinara Capital](https://shivakumar-dev.vercel.app/work/kinara-capital/): Campaign pages and loan tools that make collateral-free business loans feel simple, for small businesses across India. (Fintech · MSME lending, India; React, GSAP, Tailwind CSS)
+- [Pristine Renault](https://shivakumar-dev.vercel.app/work/pristine-renault/): Model discovery, price calculators and instant trade-in valuation for an authorised Renault dealer in Goa. (Automotive dealership, Goa; React, Figma to code, REST APIs)
+- [Design Esthetics](https://shivakumar-dev.vercel.app/work/design-esthetics/): An agency website with smooth transitions, micro-interactions and case-study galleries that sell the work. (Digital agency, India; React, Framer Motion, Custom CSS)
+- [Pristine Isuzu](https://shivakumar-dev.vercel.app/work/pristine-isuzu/): Pickup and SUV discovery, a dealer locator and smart enquiry routing for an authorised Isuzu dealer in Bangalore. (Commercial vehicles, Bangalore; React, Bootstrap, API integrations)
+
+## Pages
+
+- [Home](https://shivakumar-dev.vercel.app/): story-led portfolio — process, work, toolkit, pricing, about, FAQ and contact
+- [Pricing](https://shivakumar-dev.vercel.app/#pricing): engagements and rates
+- [Contact](https://shivakumar-dev.vercel.app/#contact): project enquiry form, WhatsApp and email
+
+## Optional
+
+- [Full case-study text](https://shivakumar-dev.vercel.app/llms-full.txt): every case study in plain text
+- [Sitemap](https://shivakumar-dev.vercel.app/sitemap.xml)
+
+---
+
+# Case studies (full text)
+
+## UnivAssist — EdTech · Virtual events (Brazil & UAE)
+
+URL: https://shivakumar-dev.vercel.app/work/univassist/
+Client site: https://www.univassist.com
+Role: Frontend engineering & UI system
+Stack: Custom CSS, JavaScript, MutationObserver, jsDelivr CDN
+
+UnivAssist has spent 15+ years connecting 500+ universities across 70 countries with students and counsellors. Its WebiFair events take that network online with live university booths, admissions chats and video rooms. My brief: make six of those fairs look and feel like premium, brand-owned experiences, on a platform whose code I could never touch.
+
+### Context
+
+Each fair is its own event. Rede Inspira Virtual College Fairs serves students in Brazil. Five GEMS Education Virtual University Fairs (Changemakers, Explorers, Innovators, Lumina and Visionaries) serve students in the UAE. Every fair hosts dozens of universities, from Canada and the UK to Hong Kong and Australia.
+
+The fairs run on Hubilo, a closed SaaS platform built with React and Material UI. Organisers get exactly two hooks: one custom CSS field and one custom JavaScript field. There are no templates, no components and no access to the source.
+
+### Challenge
+
+Out of the box, every fair looked identical: generic, dense and hard to scan. That is expensive when a 17-year-old has 60 universities to compare and about eight seconds of patience.
+
+The platform pushed back, too. React re-renders silently wiped changes. Auto-generated class names shifted between releases. Native modals swallowed clicks. The CDN serving the custom code kept handing visitors stale versions.
+
+So the real job was this: build a design system for six different brands on top of someone else’s application, without breaking a single registration, login or live room.
+
+### What was built
+
+- **Event pass & live countdown**: A sticky student pass with a real-time countdown, local date and timezone, and one-tap Register and Add-to-Calendar.
+- **A lobby built for scanning**: Rebuilt university cards, a “how the lobby works” guide, country filters and a single search pill, so students reach their shortlist fast.
+- **University profiles that get read**: Academic programmes and majors as filterable chips, video banners and a clean About section, instead of a wall of text.
+- **Login & register takeover**: A branded split-screen login with countdown and event perks, layered over Hubilo’s native React forms so validation and one-time codes never break.
+- **A self-healing UI engine**: A debounced MutationObserver re-applies every enhancement after each React render, with idempotency guards so nothing ever doubles up.
+- **A smart CDN loader**: A tiny loader asks GitHub for the latest commit and pins the code to that exact version on jsDelivr. Every visitor gets the right build within minutes, with no cache purges and no unstyled flash.
+
+### Approach
+
+Treat the platform like an API, not an enemy. I mapped Hubilo’s DOM like a contract: which elements stay stable, which re-render, and which carry native handlers that must never be intercepted (room buttons, meeting slots, one-time-code forms).
+
+Use theme tokens, not hard-coded colours. Each brand lives in one block of CSS custom properties, so a new fair is a copied folder, a palette and a config object, not a redesign.
+
+Write six self-contained JavaScript modules (login, register, lobby, embeds, booths and people). Each one is guarded, so a fix on one page can never leak into another.
+
+Verify, don’t hope. Headless Chrome audits across five viewports, from 1440px down to 360px, with a zero-horizontal-overflow check. A preview harness tests unreleased code against the live event without touching it.
+
+### Results
+
+- 6: Branded virtual fairs from one codebase
+- 15k+: Lines of CSS & JS layered over a closed platform
+- 13 days: From first commit to six launch-ready fairs
+- 0: Horizontal overflow across 5 audited viewports
+
+### Delivered
+
+Design system for 6 brands · Login & register takeover · Virtual Lobby redesign · University profile drawer · People directory polish · CDN loader & deploy pipeline · Responsive QA across 5 viewports
+
+---
+
+## Agan Health — Mental healthcare (Bengaluru & Trichy)
+
+URL: https://shivakumar-dev.vercel.app/work/agan-health/
+Client site: https://www.aganhealth.com
+Role: Frontend development
+Stack: React, TypeScript, Redux Toolkit
+
+Agan Health offers therapy, counselling and psychiatric care from clinics in Bengaluru and Trichy. For many visitors the website is the very first step they take when they’re struggling, so it had to feel safe, simple and human.
+
+### Context
+
+Agan Health’s psychologists and psychiatrists support people of all ages through anxiety, depression, stress and trauma, using approaches such as CBT, DBT and family counselling, online and in person. They also run mental-health programmes for companies.
+
+### Challenge
+
+Asking for help is hard. Every extra click, slow page or confusing menu is a reason to close the tab.
+
+The site had to explain a wide range of services in plain language, help people find the right kind of support, and make booking a first consultation feel effortless on any phone and any connection.
+
+### What was built
+
+- **Therapist matching**: A guided flow that helps visitors find a specialist who fits their needs instead of scrolling a long list of names.
+- **Video consultations**: Integrations for online sessions, so care isn’t limited to people who can reach a clinic.
+- **Instant booking**: A short, focused booking engine with clear steps and no surprises.
+- **A calm interface**: Soft colours, generous spacing and plain-language copy that reassures instead of overwhelming.
+
+### Approach
+
+I treated trust as the main feature: readable typography, honest copy and nothing that feels pushy.
+
+The booking and matching flows were built as typed React components with predictable state in Redux Toolkit, so they behave the same way every time.
+
+Pages were kept light and mobile-first, because many visitors arrive on a phone, late at night, on a slow connection.
+
+### Delivered
+
+Responsive website · Therapist matching flow · Video consultation integration · Booking engine · Reusable component library
+
+---
+
+## Trident Hyundai — Automotive dealership (Bangalore)
+
+URL: https://shivakumar-dev.vercel.app/work/trident-hyundai/
+Client site: https://tridenthyundai.com
+Role: Frontend development
+Stack: React, Redux, Tailwind CSS
+
+Trident Hyundai has sold and serviced Hyundai cars in Bangalore since 1998, across six showrooms and ten service centres. Their website needed to work as hard as their best salesperson.
+
+### Context
+
+Beyond new cars, Trident offers test drives, exchange, body-shop repairs, insurance, finance and H-Promise certified pre-owned vehicles. Each of these is its own customer journey, and each one needs to end in a lead.
+
+### Challenge
+
+Car buyers research online long before they visit a showroom. If a model page is slow or a test-drive form is clumsy, they simply book with the next dealer.
+
+The goal was a site that makes it easy to explore the whole line-up, from hatchbacks to EVs, and turn that interest into test-drive bookings and enquiries.
+
+### What was built
+
+- **Full model catalogue**: Every Hyundai model with pricing, filters by body type and fuel, and a clear path from browsing to booking.
+- **Vehicle customiser**: Colours, variants and options visitors can explore before they ever walk into a showroom.
+- **Real-time test-drive booking**: A quick booking flow that captures the right details and routes them to the right showroom.
+- **Exchange, finance & insurance**: Dedicated journeys for every service, each ending in a focused enquiry form.
+
+### Approach
+
+I built the catalogue and customiser as reusable React components fed by structured vehicle data, so new models can be added without new code.
+
+Tailwind kept the UI consistent across dozens of pages, and Redux kept the customiser’s state predictable.
+
+Every page was designed around one clear next step: book a test drive, get a valuation or talk to the team.
+
+### Delivered
+
+Responsive website · Model catalogue & filters · Vehicle customiser · Test-drive booking · Service & finance enquiry flows
+
+---
+
+## Kinara Capital — Fintech · MSME lending (India)
+
+URL: https://shivakumar-dev.vercel.app/work/kinara-capital/
+Client site: https://kinaracapital.com
+Role: Frontend development
+Stack: React, GSAP, Tailwind CSS
+
+Kinara Capital provides collateral-free business loans to small and medium businesses in more than 100 cities across six Indian states. Their campaigns need to reach business owners who are busy, cautious and often new to digital lending.
+
+### Context
+
+Kinara offers loans for working capital, supply-chain finance, machinery and a dedicated programme for women entrepreneurs, with cumulative disbursements of over $1 billion.
+
+### Challenge
+
+Lending is built on trust. A campaign page has seconds to explain an offer, prove credibility and get a business owner to start an application.
+
+The pages had to load fast on mid-range phones, explain products clearly and make the numbers easy to understand.
+
+### What was built
+
+- **Campaign landing pages**: Focused, story-led pages for each loan product and campaign, with dynamic media.
+- **Loan & EMI calculators**: Fast, interactive calculators that let owners see what a loan would mean for their business.
+- **Lead-generation forms**: Short, optimised forms that turn interest into applications without friction.
+- **Purposeful motion**: GSAP animations that guide attention to the key message, without slowing the page down.
+
+### Approach
+
+Each campaign followed the same structure: the problem, the offer, proof, then one clear call to action.
+
+Calculators ran entirely in the browser for instant feedback, and animations were kept on the GPU so they stayed smooth on low-end devices.
+
+### Delivered
+
+Campaign landing pages · Loan & EMI calculators · Lead-generation forms · Motion system
+
+---
+
+## Pristine Renault — Automotive dealership (Goa)
+
+URL: https://shivakumar-dev.vercel.app/work/pristine-renault/
+Client site: https://pristinerenault.com
+Role: Frontend development
+Stack: React, Figma to code, REST APIs
+
+Pristine Renault is an authorised Renault dealer in Goa, selling and servicing models like the Kwid, Triber and Kiger. The website is where most of their customers start the journey.
+
+### Context
+
+Alongside sales, Pristine offers test drives at home or in the showroom, exchange with instant valuation, body-shop repairs, service, insurance and flexible finance.
+
+### Challenge
+
+Dealer websites often feel like brochures. Pristine needed a site that helps people compare models, understand real prices and act on it.
+
+The designs came from Figma, and they had to be translated pixel-for-pixel into a fast, responsive site connected to live data.
+
+### What was built
+
+- **Catalogue & filtering**: Quick comparisons across the Renault range by price, variant and fuel.
+- **Price calculator**: Clear on-road pricing and finance estimates, so buyers know where they stand.
+- **Trade-in valuation**: An exchange flow that captures vehicle details and gives buyers a reason to upgrade now.
+- **Test drive at home**: Booking for showroom or doorstep test drives, routed straight to the sales team.
+
+### Approach
+
+I translated the Figma designs into a component system with matching spacing and typography, so every page stays consistent.
+
+Vehicle and pricing data come from REST APIs, keeping the site accurate without manual updates.
+
+### Delivered
+
+Figma-to-code build · Model catalogue · Price & finance calculator · Trade-in workflow · Test-drive booking
+
+---
+
+## Design Esthetics — Digital agency (India)
+
+URL: https://shivakumar-dev.vercel.app/work/design-esthetics/
+Client site: https://www.designesthetics.com
+Role: Frontend development
+Stack: React, Framer Motion, Custom CSS
+
+Design Esthetics has built websites, CRMs, WhatsApp automation and custom software for growing businesses since 2009. Their own website is their most important case study.
+
+### Context
+
+The agency works with businesses in healthcare, aviation, automotive, education and real estate. Its site has to show both craft and credibility to very different kinds of clients.
+
+### Challenge
+
+An agency site is judged twice: on what it says, and on how it feels. Any stutter or awkward transition undermines the pitch.
+
+The site needed rich motion and image-heavy galleries that still load quickly and work on every screen size.
+
+### What was built
+
+- **Page transitions**: Smooth, choreographed transitions between pages using Framer Motion.
+- **Micro-interactions**: Small, considered hover and scroll details that reward curiosity.
+- **Case-study galleries**: Responsive galleries that let the agency’s projects do the talking.
+- **Custom CSS system**: A hand-written styling system with no heavy UI frameworks, built for speed and control.
+
+### Approach
+
+Motion was planned like choreography: every animation has a purpose and a timing curve that matches the brand.
+
+Galleries load images progressively and only animate what’s on screen, so the site stays responsive.
+
+### Delivered
+
+Agency website · Page transition system · Case-study galleries · Custom CSS architecture
+
+---
+
+## Pristine Isuzu — Commercial vehicles (Bangalore)
+
+URL: https://shivakumar-dev.vercel.app/work/pristine-isuzu/
+Client site: https://www.pristineisuzu.com
+Role: Frontend development
+Stack: React, Bootstrap, API integrations
+
+Pristine Isuzu is an authorised Isuzu dealer in Bangalore for the D-Max, V-Cross, Hi-Lander, S-CAB and mu-X. Its buyers range from fleet operators to adventure-SUV owners.
+
+### Context
+
+Besides sales, the dealership offers test drives, exchange, body-shop repairs, finance and insurance, and each of those enquiries needs to reach the right person quickly.
+
+### Challenge
+
+Commercial-vehicle buyers ask very practical questions: payload, variants, price, where to see one. The site needed to answer those fast and route every enquiry correctly.
+
+### What was built
+
+- **Model discovery**: Clear pages for every pickup and SUV with variants, specs and pricing.
+- **Dealer locator**: Maps and directions to showrooms and service centres across the city.
+- **Smart enquiry routing**: Forms that send sales, service and finance enquiries to the right team automatically.
+- **Service & finance journeys**: Simple flows for test drives, exchange, insurance and finance.
+
+### Approach
+
+I built a responsive layout on Bootstrap’s grid for speed of delivery, then customised it to match the brand.
+
+Enquiry forms were wired to the dealership’s systems through APIs, so leads arrive with the context the sales team needs.
+
+### Delivered
+
+Responsive website · Model pages · Dealer locator · Enquiry routing · Service & finance flows
+
+---
+
+# Frequently asked questions
+
+**What technologies do you use?**
+Whatever fits your project best. I specialise in modern JavaScript and TypeScript: React, Next.js and Node.js. I'm comfortable across backends, cloud platforms and databases when a project needs more than a frontend.
+
+**How long does a project take?**
+A marketing website typically takes 2–4 weeks. A full web application with dashboards and a backend can take 6–12 weeks. You'll see real progress at every milestone, not just at the end.
+
+**Do you design too, or only develop?**
+Both. My core is engineering, but I have a strong eye for UI and UX. I'm happy to work from your designer's Figma files or shape the design with you from scratch.
+
+**What happens after launch?**
+You get documentation, full access to the codebase, and 14 days of post-launch support for anything urgent. If you want ongoing help with new features and scaling, I offer hourly support with no minimum commitment.

@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
 import { projects } from '../src/data/projects.js'
+import { homeJsonLd, caseJsonLd, writeSeoFiles } from './seo.mjs'
 
 const SITE = 'https://shivakumar-dev.vercel.app'
 const pad = (n) => String(n).padStart(2, '0')
@@ -50,10 +51,16 @@ function card(p, i) {
 const indexPath = 'index.html'
 const indexHtml = fs.readFileSync(indexPath, 'utf8')
 const cards = projects.map(card).join('\n')
-const updated = indexHtml.replace(
+let updated = indexHtml.replace(
   /(<!-- work:start -->)[\s\S]*?(\s*<!-- work:end -->)/,
   `$1\n${cards}\n$2`,
 )
+// Structured data + AI/search files, generated from the same sources
+updated = updated.replace(
+  /(<!-- ld:start -->)[\s\S]*?(<!-- ld:end -->)/,
+  `$1\n  <script type="application/ld+json">\n  ${JSON.stringify(homeJsonLd(updated), null, 2).replace(/\n/g, '\n  ')}\n  </script>\n  $2`,
+)
+writeSeoFiles(updated)
 if (updated !== indexHtml) fs.writeFileSync(indexPath, updated)
 
 /* ---------------------------------------------------------
@@ -246,16 +253,7 @@ ${phones
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/site.webmanifest" />
   <script type="application/ld+json">
-  ${JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: `${p.name} — case study`,
-    url,
-    description: p.line,
-    image: og,
-    author: { '@type': 'Person', name: 'Shiva Kumar', url: `${SITE}/` },
-    about: { '@type': 'Organization', name: p.name, url: p.url },
-  })}
+  ${JSON.stringify(caseJsonLd(p, og))}
   </script>
   <script>
     document.documentElement.classList.add('js');

@@ -1,0 +1,38 @@
+# Shiva Kumar — Frontend Engineer (Bengaluru, India)
+
+> Independent frontend engineer in Bengaluru, India who plans, designs and hand-codes fast, story-driven websites and web apps with React, Next.js, TypeScript and GSAP, with Core Web Vitals and technical SEO built in. 35+ websites shipped for 20+ brands across 10+ industries. Works directly with clients worldwide; no hand-offs, account managers or templates.
+
+Key facts:
+- Name: Shiva Kumar · Role: independent frontend engineer · Based in Bengaluru, India (IST, UTC+5:30)
+- Core stack: React, Next.js, TypeScript, GSAP, Three.js, Tailwind, CSS architecture, REST APIs
+- Strengths: scroll storytelling and motion, Core Web Vitals and performance, technical SEO, accessibility, re-skinning locked SaaS platforms with custom CSS/JS
+- Typical timelines: marketing site 2–4 weeks; web app with dashboards and backend 6–12 weeks
+- Every project includes full code ownership, documentation and handover, and 14 days of post-launch support
+- Contact: shivakumar.frontend@gmail.com · WhatsApp https://wa.me/916283937782 · https://shivakumar-dev.vercel.app/#contact
+
+## Services and pricing
+
+- **Landing page or website** (from $1,000): A fast, animated landing page or marketing website that tells your story, ranks on Google and converts. Most land between $1,000 and $2,000; multi-page sites are quoted after a short call.
+- **Custom web application** (custom quote): End-to-end development of a secure, scalable web application shaped around your business logic.
+- **Ongoing support** ($25–35/hour): New pages, campaign modules, fixes and performance work on your existing site. Billed hourly, no minimum commitment.
+
+## Case studies
+
+- [UnivAssist](https://shivakumar-dev.vercel.app/work/univassist/): Six virtual university fairs, six brands, one locked SaaS platform, re-skinned with nothing but a CSS file and a JavaScript file. (EdTech · Virtual events, Brazil & UAE; Custom CSS, JavaScript, MutationObserver, jsDelivr CDN)
+- [Agan Health](https://shivakumar-dev.vercel.app/work/agan-health/): A calm, trustworthy front door for a mental-health clinic, so people can find the right therapist and book in minutes. (Mental healthcare, Bengaluru & Trichy; React, TypeScript, Redux Toolkit)
+- [Trident Hyundai](https://shivakumar-dev.vercel.app/work/trident-hyundai/): Six showrooms, one fast website: browse the full Hyundai range, customise a car and book a test drive in a few taps. (Automotive dealership, Bangalore; React, Redux, Tailwind CSS)
+- [Kinara Capital](https://shivakumar-dev.vercel.app/work/kinara-capital/): Campaign pages and loan tools that make collateral-free business loans feel simple, for small businesses across India. (Fintech · MSME lending, India; React, GSAP, Tailwind CSS)
+- [Pristine Renault](https://shivakumar-dev.vercel.app/work/pristine-renault/): Model discovery, price calculators and instant trade-in valuation for an authorised Renault dealer in Goa. (Automotive dealership, Goa; React, Figma to code, REST APIs)
+- [Design Esthetics](https://shivakumar-dev.vercel.app/work/design-esthetics/): An agency website with smooth transitions, micro-interactions and case-study galleries that sell the work. (Digital agency, India; React, Framer Motion, Custom CSS)
+- [Pristine Isuzu](https://shivakumar-dev.vercel.app/work/pristine-isuzu/): Pickup and SUV discovery, a dealer locator and smart enquiry routing for an authorised Isuzu dealer in Bangalore. (Commercial vehicles, Bangalore; React, Bootstrap, API integrations)
+
+## Pages
+
+- [Home](https://shivakumar-dev.vercel.app/): story-led portfolio — process, work, toolkit, pricing, about, FAQ and contact
+- [Pricing](https://shivakumar-dev.vercel.app/#pricing): engagements and rates
+- [Contact](https://shivakumar-dev.vercel.app/#contact): project enquiry form, WhatsApp and email
+
+## Optional
+
+- [Full case-study text](https://shivakumar-dev.vercel.app/llms-full.txt): every case study in plain text
+- [Sitemap](https://shivakumar-dev.vercel.app/sitemap.xml)
