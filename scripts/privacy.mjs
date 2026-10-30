@@ -16,7 +16,7 @@ export const PRIVACY_SECTIONS = [
     body: `<ul>
       <li><b>When you use the contact form:</b> your name, email address, project type, budget and message.</li>
       <li><b>When you contact me directly:</b> whatever you choose to send by email or WhatsApp, along with your email address or phone number.</li>
-      <li><b>When you browse this site:</b> Google Analytics records usage such as pages viewed, approximate location, device and browser details, and how you arrived. My hosting provider also keeps technical logs, which can include your IP address.</li>
+      <li><b>When you browse this site:</b> my hosting provider keeps technical logs, which can include your IP address. If you accept analytics cookies, Google Analytics also records usage such as pages viewed, approximate location, device and browser details, and how you arrived.</li>
       <li><b>If I contact you about my services:</b> your name, work email address, role and company, and details about your business, taken from public sources such as company websites and business directories. I also keep any replies you send.</li>
     </ul>`,
   },
@@ -24,15 +24,16 @@ export const PRIVACY_SECTIONS = [
     title: 'Why I use it',
     body: `<ul>
       <li>To reply to your enquiry, discuss your project and provide my services.</li>
-      <li>To understand how this site is used and improve it. The form also tells analytics that an enquiry was sent, with its project type and budget, but not your name, email or message.</li>
+      <li>To understand how this site is used and improve it. If you’ve accepted analytics cookies, the form also tells analytics that an enquiry was sent, with its project type and budget, but not your name, email or message.</li>
       <li>To keep the site secure and working properly.</li>
       <li>To send a small number of relevant business emails about my services, and to record your choice if you ask me to stop.</li>
     </ul>
-    <p>Where laws such as the UK or EU GDPR apply, I rely on steps you ask me to take before a contract, on performing that contract, and on my legitimate interest in running and promoting my business. Where the law requires your consent, I rely on that instead.</p>`,
+    <p>Where laws such as the UK or EU GDPR apply, I rely on steps you ask me to take before a contract, on performing that contract, and on my legitimate interest in running and promoting my business. For analytics cookies, I rely on your consent.</p>`,
   },
   {
     title: 'Cookies and analytics',
-    body: `<p>This site uses Google Tag Manager to load Google Analytics, which sets cookies to tell visits apart. I don’t set any other cookies. You can block cookies in your browser or install Google’s <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Analytics opt-out add-on</a>. Google explains <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how it uses data from sites like this one</a>.</p>`,
+    body: `<p>Google Tag Manager and Google Analytics load only if you choose Accept in the cookie banner. Analytics sets cookies to tell visits apart. If you decline, they don’t load and those cookies aren’t set. I don’t set any other cookies; your choice is saved in your browser’s local storage so the banner doesn’t keep coming back.</p>
+    <p>You can change your mind at any time using <b>Cookie settings</b> in the footer of any page. Google explains <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how it uses data from sites like this one</a>.</p>`,
   },
   {
     title: 'Who helps me process it',

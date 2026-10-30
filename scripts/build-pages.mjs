@@ -113,6 +113,7 @@ const footer = `  <footer class="footer">
           <a href="/#pricing">Pricing</a>
           <a href="/#contact">Contact</a>
           <a href="/privacy/">Privacy</a>
+          <button type="button" class="footer__cookie" data-cookie-settings>Cookie settings</button>
           <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗</a>
         </nav>

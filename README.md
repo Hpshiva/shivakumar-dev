@@ -87,5 +87,5 @@ visitor's message prefilled, so no lead is ever lost.
 
 ## Analytics
 
-Google Tag Manager (`GTM-N5WLVNMQ`) is injected after the page becomes idle and never on localhost.
+Google Tag Manager (`GTM-N5WLVNMQ`) loads only after a visitor accepts the cookie banner (`src/consent.js`), and never on localhost.
 A successful form submission pushes a `generate_lead` event to `dataLayer`.

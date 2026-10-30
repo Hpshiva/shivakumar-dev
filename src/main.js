@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import Lenis from 'lenis'
 import { initContact } from './contact.js'
+import { initConsent } from './consent.js'
 import { buildToolData } from './toolkit-data.js'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -456,19 +457,5 @@ initContact()
 
 window.addEventListener('load', () => ScrollTrigger.refresh())
 
-/* ---------------------------------------------------------
-   Analytics — loaded after the page is idle, never on localhost
-   --------------------------------------------------------- */
-const GTM_ID = 'GTM-N5WLVNMQ'
-if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) {
-  window.addEventListener('load', () => {
-    whenIdle(() => {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
-      const s = document.createElement('script')
-      s.async = true
-      s.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`
-      document.head.appendChild(s)
-    }, 3000)
-  })
-}
+// Analytics only loads after the visitor accepts cookies
+initConsent()
