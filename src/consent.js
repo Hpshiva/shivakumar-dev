@@ -56,10 +56,9 @@ function choose(value) {
   closeBanner()
   if (value === 'accepted') {
     loadAnalytics()
-  } else if (wasLoaded || document.cookie.includes('_ga')) {
-    // A loaded tag can't be unloaded: clear its cookies and reload without it
-    clearAnalyticsCookies()
-    if (wasLoaded) window.location.reload()
+  } else if (wasLoaded) {
+    // A loaded tag can't be unloaded: reload without it (cookies are cleared on load)
+    window.location.reload()
   }
 }
 
@@ -87,8 +86,11 @@ export function initConsent() {
   if (choice === 'accepted') {
     if (document.readyState === 'complete') loadAnalytics()
     else window.addEventListener('load', loadAnalytics, { once: true })
-  } else if (choice !== 'declined') {
-    openBanner()
+  } else {
+    // No consent, no analytics cookies. Clearing on load also catches cookies the
+    // tag rewrites while the page unloads after a withdrawal, and any from older visits.
+    clearAnalyticsCookies()
+    if (choice !== 'declined') openBanner()
   }
 
   document.querySelectorAll('[data-cookie-settings]').forEach((btn) => {
