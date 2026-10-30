@@ -2095,6 +2095,96 @@ ul, ol {
 }
 
 /* =========================================================
+   LEGAL PAGES
+   ========================================================= */
+.legal {
+  max-width: 980px;
+  padding-top: calc(var(--nav-h) + 56px);
+  padding-bottom: clamp(70px, 9vw, 120px);
+}
+.legal__head {
+  padding-bottom: clamp(32px, 5vw, 56px);
+}
+.legal__title {
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  font-stretch: 125%;
+  font-weight: 620;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+.legal__intro {
+  max-width: 44rem;
+  margin-top: 26px;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--soft);
+}
+.legal__section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: 14px clamp(24px, 5vw, 64px);
+  padding-block: clamp(26px, 3.5vw, 40px);
+  border-top: 1px solid var(--line);
+}
+.legal__section h2 {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-stretch: 112%;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.legal__section h2 small {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--dot);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.legal__body {
+  display: grid;
+  gap: 14px;
+  color: var(--soft);
+}
+.legal__body ul {
+  display: grid;
+  gap: 12px;
+}
+.legal__body li {
+  position: relative;
+  padding-left: 18px;
+}
+.legal__body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.legal__body b {
+  font-weight: 600;
+  color: var(--text);
+}
+.legal__body a,
+.form__note a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.form__note {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+@media (max-width: 720px) {
+  .legal__section { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
    Motion helpers
    ========================================================= */
 .js [data-reveal] {

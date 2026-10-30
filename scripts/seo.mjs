@@ -275,6 +275,7 @@ ${projects.map((p) => `- [${p.name}](${SITE}/work/${p.slug}/): ${p.line} (${p.in
 - [Home](${SITE}/): story-led portfolio — process, work, toolkit, pricing, about, FAQ and contact
 - [Pricing](${SITE}/#pricing): engagements and rates
 - [Contact](${SITE}/#contact): project enquiry form, WhatsApp and email
+- [Privacy policy](${SITE}/privacy/): how personal information is handled
 
 ## Optional
 
@@ -310,10 +311,10 @@ ${faq.map((f) => `**${f.q}**\n${f.a}`).join('\n\n')}
 }
 
 export function sitemapXml() {
-  const urls = [`${SITE}/`, ...projects.map((p) => `${SITE}/work/${p.slug}/`)]
+  const urls = [`${SITE}/`, ...projects.map((p) => `${SITE}/work/${p.slug}/`), `${SITE}/privacy/`]
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u, i) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod><priority>${i === 0 ? '1.0' : '0.8'}</priority></url>`).join('\n')}
+${urls.map((u, i) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod><priority>${i === 0 ? '1.0' : u.endsWith('/privacy/') ? '0.3' : '0.8'}</priority></url>`).join('\n')}
 </urlset>
 `
 }

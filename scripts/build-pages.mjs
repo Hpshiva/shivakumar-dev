@@ -5,6 +5,7 @@ import path from 'node:path'
 import sharp from 'sharp'
 import { projects } from '../src/data/projects.js'
 import { homeJsonLd, caseJsonLd, writeSeoFiles } from './seo.mjs'
+import { UPDATED, PRIVACY_INTRO, PRIVACY_SECTIONS } from './privacy.mjs'
 
 const SITE = 'https://shivakumar-dev.vercel.app'
 const pad = (n) => String(n).padStart(2, '0')
@@ -111,6 +112,7 @@ const footer = `  <footer class="footer">
           <a href="/#work">Work</a>
           <a href="/#pricing">Pricing</a>
           <a href="/#contact">Contact</a>
+          <a href="/privacy/">Privacy</a>
           <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗</a>
         </nav>
@@ -332,5 +334,64 @@ projects.forEach((p, i) => {
   fs.mkdirSync(dir, { recursive: true })
   fs.writeFileSync(path.join(dir, 'index.html'), caseStudy(p, i))
 })
+
+// Privacy page, sharing the nav and footer of the other inner pages
+const privacyTitle = 'Privacy policy — Shiva Kumar'
+const privacyDesc = 'What personal information Shiva Kumar collects through this website and business outreach, why, who processes it, and your choices.'
+fs.mkdirSync('privacy', { recursive: true })
+fs.writeFileSync(
+  path.join('privacy', 'index.html'),
+  `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070708" />
+  <meta name="color-scheme" content="dark" />
+  <title>${privacyTitle}</title>
+  <meta name="description" content="${privacyDesc}" />
+  <link rel="canonical" href="https://shivakumar-dev.vercel.app/privacy/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shivakumar-dev.vercel.app/privacy/" />
+  <meta property="og:site_name" content="Shiva Kumar" />
+  <meta property="og:title" content="${privacyTitle}" />
+  <meta property="og:description" content="${privacyDesc}" />
+  <meta property="og:image" content="https://shivakumar-dev.vercel.app/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+${nav}
+
+  <main id="main">
+    <article class="legal container">
+      <header class="legal__head">
+        <p class="chapter__label hud"><span class="hud__bracket">[</span> Legal <span class="hud__bracket">]</span> Last updated ${UPDATED}</p>
+        <h1 class="legal__title">Privacy policy</h1>
+        <p class="legal__intro">${PRIVACY_INTRO}</p>
+      </header>
+${PRIVACY_SECTIONS.map(
+  (sec, i) => `      <section class="legal__section">
+        <h2><small>${pad(i + 1)}</small>${sec.title}</h2>
+        <div class="legal__body">${sec.body}</div>
+      </section>`,
+).join('\n')}
+    </article>
+  </main>
+
+${footer}
+</body>
+</html>
+`,
+)
 
 console.log(`✓ ${projects.length} work cards + ${projects.length} case-study pages`)

@@ -31,6 +31,7 @@ Key facts:
 - [Home](https://shivakumar-dev.vercel.app/): story-led portfolio — process, work, toolkit, pricing, about, FAQ and contact
 - [Pricing](https://shivakumar-dev.vercel.app/#pricing): engagements and rates
 - [Contact](https://shivakumar-dev.vercel.app/#contact): project enquiry form, WhatsApp and email
+- [Privacy policy](https://shivakumar-dev.vercel.app/privacy/): how personal information is handled
 
 ## Optional
 
