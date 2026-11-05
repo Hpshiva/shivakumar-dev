@@ -185,7 +185,7 @@ function setupParallax() {
 
   // Hero: the wall of live sites tilts toward you and flies past as you scroll
   const stage = document.querySelector('[data-stage]')
-  if (stage) {
+  if (stage && window.matchMedia('(hover: hover)').matches) {
     gsap
       .timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
       .to('[data-ring-tilt]', { '--tilt': '22deg', ease: 'none' }, 0)
@@ -487,3 +487,38 @@ window.addEventListener('load', () => ScrollTrigger.refresh())
 
 // Analytics only loads after the visitor accepts cookies
 initConsent()
+
+// Hero ring: a focused screen turns to face the visitor, so keyboard focus is never
+// on a screen hidden at the back. The spin then resumes from the same angle.
+const ring = document.querySelector('[data-ring]')
+if (ring && window.matchMedia('(hover: hover)').matches) {
+  const SPIN = 60 // seconds per turn, matches the CSS animation
+  const angleOf = () => {
+    const t = getComputedStyle(ring).transform
+    if (!t || t === 'none') return 0
+    const m = t.match(/matrix3d\(([^)]+)\)/)?.[1].split(',').map(Number)
+    return m ? (Math.atan2(-m[2], m[0]) * 180) / Math.PI : 0
+  }
+  let angle = 0
+  ring.addEventListener('focusin', (e) => {
+    const screen = e.target.closest('[data-screen]')
+    if (!screen) return
+    if (!ring.classList.contains('is-steered')) {
+      angle = angleOf()
+      ring.style.transform = `rotateY(${angle}deg)`
+      ring.classList.add('is-steered')
+      void ring.offsetWidth // commit the start angle before transitioning
+    }
+    // Shortest turn that brings this screen to the front
+    const target = -Number(screen.dataset.screen) * 60
+    angle += ((((target - angle) % 360) + 540) % 360) - 180
+    ring.style.transform = `rotateY(${angle}deg)`
+  })
+  ring.addEventListener('focusout', (e) => {
+    if (ring.contains(e.relatedTarget)) return
+    const progress = (((-angle % 360) + 360) % 360) / 360
+    ring.classList.remove('is-steered')
+    ring.style.transform = ''
+    ring.style.animationDelay = `${-progress * SPIN}s`
+  })
+}

@@ -598,8 +598,14 @@ ul, ol {
 .ring {
   animation: spin 60s linear infinite;
 }
-.stage:hover .ring {
+.stage:hover .ring,
+.stage:focus-within .ring {
   animation-play-state: paused;
+}
+/* Keyboard focus: JS turns the focused screen to the front */
+.ring.is-steered {
+  animation: none;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes spin {
   to { transform: rotateY(-360deg); }
@@ -619,6 +625,18 @@ ul, ol {
   box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.3s ease;
+}
+.screen:hover,
+.screen:focus-visible {
+  border-color: var(--accent);
+}
+.screen:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 .screen img {
   width: 100%;
@@ -626,8 +644,11 @@ ul, ol {
   object-fit: cover;
   object-position: top;
 }
-.screen figcaption {
+.screen__cap {
   position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   left: 10px;
   top: 10px;
   padding: 4px 9px;
@@ -638,6 +659,17 @@ ul, ol {
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--text);
+}
+.screen__go {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--accent);
+  transition: max-width 0.4s ease;
+}
+.screen:hover .screen__go,
+.screen:focus-visible .screen__go {
+  max-width: 12em;
 }
 .stage__floor {
   position: absolute;
@@ -710,6 +742,50 @@ ul, ol {
   .hero__head { grid-template-columns: 1fr; }
   .stage { --w: clamp(170px, 46vw, 260px); margin-top: 20px; }
   .stats { gap: 22px; }
+}
+/* Touch devices: a spinning 3D target is hard to tap, so show a swipeable row */
+@media (hover: none) {
+  .stage {
+    --w: clamp(220px, 62vw, 340px);
+    height: auto;
+    perspective: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .ring-tilt,
+  .ring {
+    position: static;
+    transform: none;
+    transform-style: flat;
+  }
+  .ring {
+    display: flex;
+    gap: 14px;
+    padding: 4px max(16px, calc((100vw - var(--w)) / 2)) 28px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    animation: none;
+  }
+  .ring::-webkit-scrollbar { display: none; }
+  .screen {
+    position: relative;
+    left: auto;
+    top: auto;
+    flex: 0 0 var(--w);
+    margin: 0;
+    transform: none;
+    scroll-snap-align: center;
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.9);
+  }
+  /* Caption sits at the bottom so it doesn't cover the site's own logo */
+  .screen__cap {
+    top: auto;
+    bottom: 10px;
+    font-size: 10px;
+  }
+  .screen__go { max-width: 12em; }
+  .stage__floor { display: none; }
 }
 @media (max-width: 520px) {
   .hero__status { display: none; }
