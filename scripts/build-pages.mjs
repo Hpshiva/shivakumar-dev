@@ -76,8 +76,8 @@ const nav = `  <header class="nav" data-nav>
         <span class="nav__name">Shiva Kumar</span>
       </a>
       <nav class="nav__links" aria-label="Primary">
-        <a href="/#process">Process</a>
         <a href="/#work">Work</a>
+        <a href="/#process">Process</a>
         <a href="/#pricing">Pricing</a>
         <a href="/#note">About</a>
         <a href="/#faq">FAQ</a>
@@ -94,8 +94,8 @@ const nav = `  <header class="nav" data-nav>
     <div class="mobile-menu" id="mobile-menu" hidden data-menu>
       <nav aria-label="Mobile">
         <a href="/"><small>00</small> Home</a>
-        <a href="/#process"><small>02</small> How I work</a>
-        <a href="/#work"><small>03</small> The work</a>
+        <a href="/#work"><small>01</small> The work</a>
+        <a href="/#process"><small>03</small> How I work</a>
         <a href="/#toolkit"><small>04</small> Toolkit</a>
         <a href="/#pricing"><small>05</small> What you get</a>
         <a href="/#contact"><small>08</small> Contact</a>
