@@ -25,7 +25,9 @@
   <meta name="twitter:description" content="Frontend engineer in Bengaluru. Fast, story-driven websites, thought through and hand-coded." />
   <meta name="twitter:image" content="https://shivakumar-dev.vercel.app/images/og-image.jpg" />
 
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <script>
     document.documentElement.classList.add('js');
@@ -150,10 +152,10 @@
             between meetings, with three other tabs open, and the beautiful site quietly loses them.
           </p>
           <div class="problem__foot">
-            <aside class="problem__stat">
+            <div class="problem__stat">
               <span class="problem__num">53%</span>
               <span>of mobile visits are abandoned when a page takes longer than three seconds to load.<cite>Source: Google research</cite></span>
-            </aside>
+            </div>
             <p class="problem__turn">I build <span class="marked">the other kind.</span></p>
           </div>
         </div>
@@ -240,6 +242,7 @@
     <!-- ============ CLIENT TICKER ============ -->
     <section class="ticker" aria-label="Brands I've shipped for">
       <p class="hud ticker__label container"><span class="hud__bracket">[</span> Trusted with real launches <span class="hud__bracket">]</span></p>
+      <button type="button" class="ticker__pause hud" data-ticker-pause aria-pressed="false">Pause</button>
       <div class="ticker__track">
         <ul class="ticker__list">
           <li>UnivAssist</li><li>Agan Health</li><li>Trident Hyundai</li><li>Kinara Capital</li><li>Pristine Renault</li><li>Design Esthetics</li><li>Pristine Isuzu</li>
@@ -472,6 +475,13 @@
 
 
 
+
+
+
+
+
+
+
             <!-- work:end -->
           </div>
         </div>
@@ -636,11 +646,11 @@
           <div class="contact__direct" data-reveal>
             <a class="direct" href="https://wa.me/916283937782?text=Hi%20Shiva!%20I%20saw%20your%20website%20and%20would%20love%20to%20discuss%20a%20project." target="_blank" rel="noopener">
               <span class="direct__label hud">WhatsApp</span>
-              <span class="direct__value">+91 62839 37782</span>
+              <span class="direct__value">+91 62839 37782</span><span class="sr-only"> (opens WhatsApp in a new tab)</span>
               <span class="direct__arrow" aria-hidden="true">↗</span>
             </a>
             <button class="direct" type="button" data-copy="shivakumar.frontend@gmail.com">
-              <span class="direct__label hud" data-copy-label>Copy email</span>
+              <span class="direct__label hud" data-copy-label aria-live="polite">Copy email</span>
               <span class="direct__value">shivakumar.frontend@gmail.com</span>
               <span class="direct__arrow" aria-hidden="true">⧉</span>
             </button>
@@ -649,14 +659,16 @@
 
         <form class="form" data-contact-form novalidate data-reveal>
           <div class="form__row">
-            <label class="field">
-              <span>Your name</span>
-              <input name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Jane Doe" />
-            </label>
-            <label class="field">
-              <span>Email</span>
-              <input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="jane@company.com" />
-            </label>
+            <div class="field">
+              <label for="f-name">Your name <span class="field__req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Jane Doe" aria-describedby="err-name" />
+              <p class="field__error" id="err-name" data-error-for="name"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="field__req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" placeholder="jane@company.com" aria-describedby="err-email" />
+              <p class="field__error" id="err-email" data-error-for="email"></p>
+            </div>
           </div>
 
           <fieldset class="field">
@@ -669,9 +681,9 @@
             </div>
           </fieldset>
 
-          <label class="field">
-            <span>Budget</span>
-            <select name="budget">
+          <div class="field">
+            <label for="f-budget">Budget</label>
+            <select id="f-budget" name="budget">
               <option value="Not sure yet">Not sure yet</option>
               <option value="Under $1,000">Under $1,000</option>
               <option value="$1,000 – $2,000">$1,000 – $2,000</option>
@@ -679,12 +691,13 @@
               <option value="$5,000 – $10,000">$5,000 – $10,000</option>
               <option value="$10,000+">$10,000+</option>
             </select>
-          </label>
+          </div>
 
-          <label class="field">
-            <span>Tell me about the project</span>
-            <textarea name="message" rows="4" required maxlength="4000" placeholder="Goals, timeline, links — anything that helps."></textarea>
-          </label>
+          <div class="field">
+            <label for="f-message">Tell me about the project <span class="field__req" aria-hidden="true">*</span></label>
+            <textarea id="f-message" name="message" rows="4" required maxlength="4000" placeholder="Goals, timeline, links — anything that helps." aria-describedby="err-message"></textarea>
+            <p class="field__error" id="err-message" data-error-for="message"></p>
+          </div>
 
           <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
 
@@ -692,7 +705,7 @@
             <span data-submit-label>Send message</span><span class="btn__chip" aria-hidden="true">↗</span>
           </button>
 
-          <p class="form__note">I use your details to reply to your enquiry. See the <a href="/privacy/">privacy policy</a>.</p>
+          <p class="form__note"><span aria-hidden="true">*</span> Required. I use your details to reply to your enquiry. See the <a href="/privacy/">privacy policy</a>.</p>
 
           <div class="form__status" role="status" aria-live="polite" data-form-status></div>
         </form>
@@ -711,8 +724,8 @@
           <a href="#contact">Contact</a>
           <a href="/privacy/">Privacy</a>
           <button type="button" class="footer__cookie" data-cookie-settings>Cookie settings</button>
-          <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗</a>
+          <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
+          <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗<span class="sr-only"> (opens in a new tab)</span></a>
         </nav>
       </div>
       <p class="footer__word" aria-hidden="true">Shiva Kumar</p>

@@ -1259,6 +1259,7 @@ ul, ol {
   margin-top: 22px;
 }
 .toolkit__chips button {
+  min-height: 44px;
   padding: 7px 14px;
   border: 1px solid var(--line-2);
   border-radius: 999px;
@@ -1650,6 +1651,7 @@ ul, ol {
   border: 0;
 }
 .field > span,
+.field > label,
 .field legend {
   padding: 0;
   font-family: var(--dot);
@@ -2092,6 +2094,101 @@ ul, ol {
   display: block;
   margin-top: 14px;
   color: var(--muted);
+}
+
+.field__req {
+  color: var(--accent);
+}
+.field__error {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ff8a7a;
+}
+.field__error:empty {
+  display: none;
+}
+
+/* Bigger hit areas for small inline links (WCAG 2.5.8 / comfortable 44px) */
+.card__live,
+.toolkit__projects a,
+.footer__links a,
+.footer__cookie,
+.footer__bottom a,
+.cs-back,
+.cs-meta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.toolkit__projects li {
+  padding: 0 12px;
+}
+.ticker__pause {
+  position: absolute;
+  right: var(--gutter);
+  top: clamp(80px, 10vw, 140px);
+  z-index: 2;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--soft);
+  cursor: pointer;
+}
+.ticker__pause:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+.ticker.is-paused .ticker__list {
+  animation-play-state: paused;
+}
+
+.notfound {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 24px;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + 40px);
+  padding-bottom: 80px;
+}
+.notfound__title {
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-stretch: 125%;
+  font-weight: 620;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+.notfound__title em {
+  font-style: normal;
+  color: var(--accent);
+}
+.notfound__text {
+  max-width: 36rem;
+  font-size: 1.1rem;
+  color: var(--soft);
+}
+.notfound__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.notfound__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--soft);
+}
+.notfound__links a:hover {
+  border-color: var(--accent);
+  color: var(--text);
 }
 
 /* =========================================================

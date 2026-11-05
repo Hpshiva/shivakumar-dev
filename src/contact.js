@@ -74,11 +74,30 @@ export function initContact() {
     })
   })
 
+  // Field-level messages, linked to each input through aria-describedby
+  const MESSAGES = {
+    name: { missing: 'Please add your name.' },
+    email: { missing: 'Please add your email.', invalid: 'That email doesn’t look right. Check for typos, e.g. jane@company.com.' },
+    message: { missing: 'Please tell me a little about the project.' },
+  }
+  const errorFor = (input) => form.querySelector(`[data-error-for="${input.name}"]`)
+  const validate = (input) => {
+    const empty = input.value.trim() === ''
+    const valid = !empty && input.checkValidity()
+    const msgs = MESSAGES[input.name] || {}
+    const text = valid ? '' : empty ? msgs.missing : msgs.invalid || msgs.missing
+    input.setAttribute('aria-invalid', String(!valid))
+    const slot = errorFor(input)
+    if (slot) slot.textContent = text || ''
+    return valid
+  }
+
   form.querySelectorAll('[required]').forEach((input) => {
     input.addEventListener('input', () => {
-      if (input.getAttribute('aria-invalid') === 'true' && input.checkValidity()) {
-        input.setAttribute('aria-invalid', 'false')
-      }
+      if (input.getAttribute('aria-invalid') === 'true') validate(input)
+    })
+    input.addEventListener('blur', () => {
+      if (input.value.trim() !== '') validate(input)
     })
   })
 
@@ -86,13 +105,17 @@ export function initContact() {
     e.preventDefault()
 
     let firstInvalid = null
+    let invalidCount = 0
     form.querySelectorAll('[required]').forEach((input) => {
-      const valid = input.value.trim() !== '' && input.checkValidity()
-      input.setAttribute('aria-invalid', String(!valid))
-      if (!valid && !firstInvalid) firstInvalid = input
+      if (!validate(input)) {
+        invalidCount++
+        if (!firstInvalid) firstInvalid = input
+      }
     })
     if (firstInvalid) {
-      status.replaceChildren(el('span', { className: 'err' }, 'Please add your name, a valid email and a short message.'))
+      status.replaceChildren(
+        el('span', { className: 'err' }, invalidCount > 1 ? `Please fix the ${invalidCount} highlighted fields.` : 'Please fix the highlighted field.'),
+      )
       firstInvalid.focus()
       return
     }

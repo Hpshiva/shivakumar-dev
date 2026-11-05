@@ -12,7 +12,8 @@
     "capture": "node scripts/capture-sites.mjs",
     "pages": "node scripts/build-pages.mjs",
     "predev": "node scripts/build-pages.mjs",
-    "prebuild": "node scripts/build-pages.mjs"
+    "prebuild": "node scripts/build-pages.mjs",
+    "icons": "node scripts/icons.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

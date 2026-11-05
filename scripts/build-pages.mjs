@@ -114,8 +114,8 @@ const footer = `  <footer class="footer">
           <a href="/#contact">Contact</a>
           <a href="/privacy/">Privacy</a>
           <button type="button" class="footer__cookie" data-cookie-settings>Cookie settings</button>
-          <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗</a>
-          <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗</a>
+          <a href="https://github.com/Hpshiva" target="_blank" rel="noopener">GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a>
+          <a href="https://wa.me/916283937782" target="_blank" rel="noopener">WhatsApp ↗<span class="sr-only"> (opens in a new tab)</span></a>
         </nav>
       </div>
       <p class="footer__word" aria-hidden="true">Shiva Kumar</p>
@@ -227,7 +227,7 @@ ${phones
     `<div class="cs-body">
           <ul class="cs-delivered">${p.delivered.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>
           <div class="hero__ctas" style="margin-top:24px">
-            <a class="btn btn--light" href="${p.url}" target="_blank" rel="noopener"><span>Visit ${esc(p.domain)}</span><span class="btn__chip" aria-hidden="true">↗</span></a>
+            <a class="btn btn--light" href="${p.url}" target="_blank" rel="noopener"><span>Visit ${esc(p.domain)}</span><span class="sr-only"> (opens in a new tab)</span><span class="btn__chip" aria-hidden="true">↗</span></a>
             <a class="btn btn--line" href="/#contact"><span>Start a similar project</span></a>
           </div>
         </div>`,
@@ -255,7 +255,9 @@ ${phones
   <meta name="twitter:title" content="${esc(p.name)} — case study by Shiva Kumar" />
   <meta name="twitter:description" content="${esc(p.line)}" />
   <meta name="twitter:image" content="${og}" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <script type="application/ld+json">
   ${JSON.stringify(caseJsonLd(p, og))}
@@ -284,7 +286,7 @@ ${nav}
         <div><dt>Location</dt><dd>${esc(p.location)}</dd></div>
         <div><dt>My role</dt><dd>${esc(p.role)}</dd></div>
         <div><dt>Stack</dt><dd>${esc(p.stack.join(', '))}</dd></div>
-        <div><dt>Live site</dt><dd><a href="${p.url}" target="_blank" rel="noopener">${esc(p.domain)} ↗</a></dd></div>
+        <div><dt>Live site</dt><dd><a href="${p.url}" target="_blank" rel="noopener">${esc(p.domain)} ↗<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
       </dl>
     </section>
 
@@ -359,7 +361,9 @@ fs.writeFileSync(
   <meta property="og:description" content="${privacyDesc}" />
   <meta property="og:image" content="https://shivakumar-dev.vercel.app/images/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <script>
     document.documentElement.classList.add('js');
@@ -387,6 +391,54 @@ ${PRIVACY_SECTIONS.map(
       </section>`,
 ).join('\n')}
     </article>
+  </main>
+
+${footer}
+</body>
+</html>
+`,
+)
+
+// Branded 404 (Vercel serves dist/404.html with a 404 status for unknown URLs)
+fs.writeFileSync(
+  '404.html',
+  `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070708" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="noindex" />
+  <title>Page not found — Shiva Kumar</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script>
+    document.documentElement.classList.add('js');
+    setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+${nav}
+
+  <main id="main">
+    <section class="notfound container" aria-labelledby="nf-title">
+      <p class="chapter__label hud"><span class="hud__bracket">[</span> 404 <span class="hud__bracket">]</span> Page not found</p>
+      <h1 class="notfound__title" id="nf-title">This page took a <em>wrong turn.</em></h1>
+      <p class="notfound__text">The link may be old or mistyped. Everything I’ve built is still one click away.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--light" href="/#work"><span>See the work</span><span class="btn__chip" aria-hidden="true">↗</span></a>
+        <a class="btn btn--line" href="/#contact"><span>Start a project</span></a>
+      </div>
+      <ul class="notfound__links" aria-label="Case studies">
+${projects.map((p) => `        <li><a href="/work/${p.slug}/">${esc(p.name)}</a></li>`).join('\n')}
+      </ul>
+    </section>
   </main>
 
 ${footer}

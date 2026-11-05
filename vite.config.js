@@ -37,7 +37,7 @@ export default defineConfig({
   build: {
     target: 'es2020',
     rollupOptions: {
-      input: { main: path.resolve('index.html'), privacy: path.resolve('privacy/index.html'), ...workPages },
+      input: { main: path.resolve('index.html'), privacy: path.resolve('privacy/index.html'), notFound: path.resolve('404.html'), ...workPages },
     },
     // Never base64-inline fonts into the render-blocking CSS
     assetsInlineLimit: (file) => (/\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),

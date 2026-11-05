@@ -33,7 +33,7 @@ export const PRIVACY_SECTIONS = [
   {
     title: 'Cookies and analytics',
     body: `<p>Google Tag Manager and Google Analytics load only if you choose Accept in the cookie banner. Analytics sets cookies to tell visits apart. If you decline, they don’t load and those cookies aren’t set. I don’t set any other cookies; your choice is saved in your browser’s local storage so the banner doesn’t keep coming back.</p>
-    <p>You can change your mind at any time using <b>Cookie settings</b> in the footer of any page. Google explains <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how it uses data from sites like this one</a>.</p>`,
+    <p>You can change your mind at any time using <b>Cookie settings</b> in the footer of any page. Google explains <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how it uses data from sites like this one<span class="sr-only"> (opens in a new tab)</span></a>.</p>`,
   },
   {
     title: 'Who helps me process it',

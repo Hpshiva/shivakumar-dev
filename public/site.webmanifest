@@ -1,10 +1,15 @@
 {
   "name": "Shiva Kumar — Frontend Engineer",
   "short_name": "Shiva Kumar",
-  "description": "High-performance websites and web apps with cinematic motion, built in Bengaluru.",
+  "description": "Fast, story-driven websites and web apps, designed and hand-coded in Bengaluru.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07080a",
-  "theme_color": "#07080a",
-  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+  "background_color": "#070708",
+  "theme_color": "#070708",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
 }

@@ -44,6 +44,10 @@ function setMenu(open) {
   toggle.setAttribute('aria-expanded', String(open))
   toggle.querySelector('.sr-only').textContent = open ? 'Close menu' : 'Open menu'
   menu.hidden = !open
+  // Keep keyboard and screen-reader focus inside the open menu
+  for (const el of document.body.children) {
+    if (el !== nav && !el.matches('script')) el.inert = open
+  }
   if (open) {
     lenis?.stop()
     gsap.fromTo(menu.querySelectorAll('a'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.04, duration: 0.5, ease: 'expo.out' })
@@ -53,9 +57,24 @@ function setMenu(open) {
 }
 toggle?.addEventListener('click', () => setMenu(menu.hidden))
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && menu && !menu.hidden) {
+  if (!menu || menu.hidden) return
+  if (e.key === 'Escape') {
     setMenu(false)
     toggle.focus()
+    return
+  }
+  // Wrap Tab / Shift+Tab inside the open menu (the toggle, the CTA and the menu links)
+  if (e.key === 'Tab') {
+    const items = [...nav.querySelectorAll('a[href], button:not([disabled])')].filter((el) => el.offsetParent !== null)
+    const first = items[0]
+    const last = items[items.length - 1]
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
   }
 })
 
@@ -202,7 +221,7 @@ function setupProblem() {
         scrub: 0.6,
       },
     })
-    .to(split.words, { color: '#171512', stagger: 0.1, ease: 'none' })
+    .to(split.words, { color: '#f4f4f1', stagger: 0.1, ease: 'none' })
     .from('.problem__foot', { opacity: 0, y: 40, duration: 1.2, ease: 'power2.out' }, '-=0.4')
     .call(() => turn.classList.add('is-drawn'))
     .to({}, { duration: 0.6 })
@@ -454,6 +473,15 @@ if (clock) {
 document.querySelectorAll('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()))
 
 initContact()
+
+// Auto-scrolling client ticker: a visible control to pause it (WCAG 2.2.2)
+const tickerPause = document.querySelector('[data-ticker-pause]')
+tickerPause?.addEventListener('click', () => {
+  const paused = tickerPause.getAttribute('aria-pressed') !== 'true'
+  tickerPause.setAttribute('aria-pressed', String(paused))
+  tickerPause.textContent = paused ? 'Play' : 'Pause'
+  tickerPause.closest('.ticker').classList.toggle('is-paused', paused)
+})
 
 window.addEventListener('load', () => ScrollTrigger.refresh())
 
