@@ -22,6 +22,13 @@ function picture(base, widths, sizes, alt, { lazy = true, attrs = '' } = {}) {
               </picture>`
 }
 
+// Height of each full-page capture (1200px wide), for the scroll-through previews
+const fullHeights = {}
+for (const p of projects) {
+  const file = path.join('public', `images/cases/${p.slug}-full-1200.webp`)
+  if (fs.existsSync(file)) fullHeights[p.slug] = (await sharp(file).metadata()).height
+}
+
 /* ---------------------------------------------------------
    Homepage cards
    --------------------------------------------------------- */
@@ -40,7 +47,7 @@ function card(p, i) {
                   <a class="card__live" href="${p.url}" target="_blank" rel="noopener">Live site ↗<span class="sr-only"> (opens in a new tab)</span></a>
                 </div>
               </div>
-              <a class="shot" href="/work/${p.slug}/" tabindex="-1" aria-hidden="true">
+              <a class="shot" href="/work/${p.slug}/" tabindex="-1" aria-hidden="true" data-slug="${p.slug}"${fullHeights[p.slug] ? ` data-full="/images/cases/${p.slug}-full-1200" data-full-h="${fullHeights[p.slug]}"` : ''}>
                 <span class="shot__bar"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></span>
                 <span class="shot__media">
               ${picture(p.image || p.slug, [480, 960, 1440, 1920], '(min-width: 1360px) 700px, (min-width: 860px) 52vw, 90vw', `${p.name} homepage`, { attrs: ' width="1440" height="900" data-shot' })}
@@ -131,12 +138,6 @@ function section(num, kicker, title, body) {
         <h2><small>${pad(num)} — ${kicker}</small>${title}</h2>
         ${body}
       </section>`
-}
-
-const fullHeights = {}
-for (const p of projects) {
-  const file = path.join('public', `images/cases/${p.slug}-full-1200.webp`)
-  if (fs.existsSync(file)) fullHeights[p.slug] = (await sharp(file).metadata()).height
 }
 
 function caseStudy(p, i) {
@@ -264,6 +265,21 @@ ${phones
   </script>
   <script>
     document.documentElement.classList.add('js');
+    // Page transitions, arriving side: name the screenshot that should morph in
+    addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition) return;
+      document.documentElement.classList.add('vt-in');
+      var from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || '';
+      var slug = (from.match(/\\/work\\/([a-z0-9-]+)\\/?$/) || [])[1];
+      var el = /^\\/work\\//.test(location.pathname)
+        ? document.querySelector('[data-cover-shot]')
+        : slug && document.querySelector('.shot[data-slug="' + slug + '"]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= innerHeight) return;
+      el.style.viewTransitionName = 'case-shot';
+      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+    });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
   <script type="module" src="/src/main.js"></script>
@@ -291,7 +307,7 @@ ${nav}
     </section>
 
     <section class="cs-cover container hero-in" style="--d:.6s" aria-label="Homepage">
-      <div class="shot">
+      <div class="shot" data-cover-shot>
         <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></div>
         <div class="shot__media">
           ${picture(p.image || p.slug, [960, 1440, 1920, 2560], '(min-width: 1320px) 1220px, 92vw', `${p.name} homepage`, { lazy: false, attrs: ' width="1440" height="900" data-shot' })}
@@ -326,6 +342,10 @@ ${delivered}
     </a>
   </main>
 
+  <div class="mcta" data-mcta>
+    <a class="btn btn--light mcta__main" href="/#contact"><span>Start a project</span><span class="btn__chip" aria-hidden="true">↗</span></a>
+    <a class="mcta__wa" href="https://wa.me/916283937782" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg><span class="sr-only">Chat on WhatsApp (opens in a new tab)</span></a>
+  </div>
 ${footer}
 </body>
 </html>
@@ -367,6 +387,21 @@ fs.writeFileSync(
   <link rel="manifest" href="/site.webmanifest" />
   <script>
     document.documentElement.classList.add('js');
+    // Page transitions, arriving side: name the screenshot that should morph in
+    addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition) return;
+      document.documentElement.classList.add('vt-in');
+      var from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || '';
+      var slug = (from.match(/\\/work\\/([a-z0-9-]+)\\/?$/) || [])[1];
+      var el = /^\\/work\\//.test(location.pathname)
+        ? document.querySelector('[data-cover-shot]')
+        : slug && document.querySelector('.shot[data-slug="' + slug + '"]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= innerHeight) return;
+      el.style.viewTransitionName = 'case-shot';
+      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+    });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
   <script type="module" src="/src/main.js"></script>
@@ -416,6 +451,21 @@ fs.writeFileSync(
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <script>
     document.documentElement.classList.add('js');
+    // Page transitions, arriving side: name the screenshot that should morph in
+    addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition) return;
+      document.documentElement.classList.add('vt-in');
+      var from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || '';
+      var slug = (from.match(/\\/work\\/([a-z0-9-]+)\\/?$/) || [])[1];
+      var el = /^\\/work\\//.test(location.pathname)
+        ? document.querySelector('[data-cover-shot]')
+        : slug && document.querySelector('.shot[data-slug="' + slug + '"]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= innerHeight) return;
+      el.style.viewTransitionName = 'case-shot';
+      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+    });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
   <script type="module" src="/src/main.js"></script>

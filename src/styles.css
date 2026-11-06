@@ -2472,3 +2472,143 @@ ul, ol {
 .plan .plan__flag {
   background: #c93d08;
 }
+
+/* =========================================================
+   Work cards: hover-to-scroll preview of the whole homepage
+   ========================================================= */
+.shot__media {
+  position: relative;
+}
+.shot__full {
+  position: absolute;
+  inset: 0 0 auto;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+.shot__full img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.shot.is-previewing .shot__full.is-ready {
+  opacity: 1;
+}
+.shot.is-playing .shot__full {
+  transition: opacity 0.35s ease, transform var(--scroll-dur, 8s) cubic-bezier(0.45, 0, 0.55, 1);
+}
+.shot__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.shot.is-playing .shot__progress {
+  transform: scaleX(1);
+  transition: transform var(--scroll-dur, 8s) cubic-bezier(0.45, 0, 0.55, 1);
+}
+/* A quiet hint in the browser bar, only where hovering is possible */
+@media (hover: hover) and (pointer: fine) {
+  .shot[data-full] .shot__bar::after {
+    content: '↓ Hover to scroll';
+    font-family: var(--dot);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    transition: color 0.3s ease;
+  }
+  .shot[data-full].is-previewing .shot__bar::after {
+    color: var(--accent);
+  }
+}
+
+/* =========================================================
+   Page transitions (cross-document View Transitions)
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+::view-transition-group(case-shot) {
+  z-index: 60;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-old(case-shot),
+::view-transition-new(case-shot) {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+/* The cover arrives by morphing, so it skips its own fade-in */
+.vt-in .cs-cover.hero-in {
+  animation: none;
+}
+
+/* =========================================================
+   Mobile contact bar
+   ========================================================= */
+.mcta {
+  display: none;
+}
+@media (max-width: 860px) {
+  .mcta {
+    position: fixed;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 55;
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(13, 13, 15, 0.82);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.4s ease, transform 0.5s var(--ease), visibility 0s linear 0.5s;
+  }
+  .mcta.is-shown {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.4s ease, transform 0.5s var(--ease), visibility 0s;
+  }
+  .mcta__main {
+    flex: 1;
+    justify-content: center;
+  }
+  .mcta__wa {
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    height: 48px;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    color: #25d366;
+  }
+  /* One floating element at a time: the chapter pill steps aside */
+  .mcta-on .chapter-nav {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  body:has(.consent) .mcta,
+  body:has(.nav.is-open) .mcta {
+    display: none;
+  }
+}

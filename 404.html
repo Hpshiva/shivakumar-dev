@@ -12,6 +12,21 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <script>
     document.documentElement.classList.add('js');
+    // Page transitions, arriving side: name the screenshot that should morph in
+    addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition) return;
+      document.documentElement.classList.add('vt-in');
+      var from = (window.navigation && navigation.activation && navigation.activation.from && navigation.activation.from.url) || '';
+      var slug = (from.match(/\/work\/([a-z0-9-]+)\/?$/) || [])[1];
+      var el = /^\/work\//.test(location.pathname)
+        ? document.querySelector('[data-cover-shot]')
+        : slug && document.querySelector('.shot[data-slug="' + slug + '"]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= innerHeight) return;
+      el.style.viewTransitionName = 'case-shot';
+      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+    });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
   <script type="module" src="/src/main.js"></script>

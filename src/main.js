@@ -522,3 +522,101 @@ if (ring && window.matchMedia('(hover: hover)').matches) {
     ring.style.animationDelay = `${-progress * SPIN}s`
   })
 }
+
+/* ---------------------------------------------------------
+   Work cards: hover the screenshot to scroll through the whole homepage
+   --------------------------------------------------------- */
+if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.shot[data-full]').forEach((shot) => {
+    const media = shot.querySelector('.shot__media')
+    const fullH = Number(shot.dataset.fullH)
+    let layer = null
+    let timer = 0
+
+    const build = () => {
+      layer = document.createElement('span')
+      layer.className = 'shot__full'
+      layer.innerHTML = `<picture><source type="image/avif" srcset="${shot.dataset.full}.avif" /><img src="${shot.dataset.full}.webp" alt="" decoding="async" /></picture>`
+      media.append(layer)
+      const bar = document.createElement('span')
+      bar.className = 'shot__progress'
+      media.append(bar)
+      const img = layer.querySelector('img')
+      const ready = () => {
+        layer.classList.add('is-ready')
+        if (shot.classList.contains('is-previewing')) play()
+      }
+      if (img.complete) ready()
+      else img.addEventListener('load', ready, { once: true })
+    }
+
+    const play = () => {
+      if (!layer?.classList.contains('is-ready')) return
+      const dist = Math.max(0, (media.clientWidth * fullH) / 1200 - media.clientHeight)
+      const secs = Math.min(14, Math.max(4, dist / 320))
+      media.style.setProperty('--scroll-dur', `${secs}s`)
+      layer.style.transform = `translateY(${-dist}px)`
+      shot.classList.add('is-playing')
+    }
+
+    shot.addEventListener('pointerenter', () => {
+      // A short pause, so cards don't start scrolling as the cursor passes over them
+      timer = setTimeout(() => {
+        shot.classList.add('is-previewing')
+        if (!layer) build()
+        else play()
+      }, 180)
+    })
+    shot.addEventListener('pointerleave', () => {
+      clearTimeout(timer)
+      shot.classList.remove('is-previewing', 'is-playing')
+      if (layer) layer.style.transform = ''
+    })
+  })
+}
+
+/* ---------------------------------------------------------
+   Page transitions: the screenshot you clicked grows into the case study cover.
+   The arriving side is handled by an inline script in <head> (pagereveal).
+   --------------------------------------------------------- */
+let lastLink = null
+document.addEventListener('click', (e) => (lastLink = e.target.closest('a')), true)
+window.addEventListener('pageswap', (e) => {
+  if (!e.viewTransition) return
+  const to = new URL(e.activation?.entry?.url || location.href)
+  const inView = (el) => {
+    const r = el?.getBoundingClientRect()
+    return r && r.bottom > 0 && r.top < innerHeight
+  }
+  let el = null
+  if (/^\/work\/[a-z0-9-]+\/?$/.test(to.pathname)) {
+    el = lastLink?.closest('[data-card]')?.querySelector('.shot') || (lastLink?.matches('.screen') ? lastLink : null)
+  } else if (to.pathname === '/') {
+    el = document.querySelector('[data-cover-shot]')
+  }
+  if (inView(el)) el.style.viewTransitionName = 'case-shot'
+})
+
+/* ---------------------------------------------------------
+   Mobile: a small "Start a project / WhatsApp" bar after the hero,
+   hidden while the contact form or footer is on screen
+   --------------------------------------------------------- */
+const mcta = document.querySelector('[data-mcta]')
+if (mcta) {
+  const seen = new Map()
+  const hero = document.querySelector('.hero, .cs-hero')
+  const blockers = [hero, document.querySelector('#contact'), document.querySelector('.footer')].filter(Boolean)
+  const update = () => {
+    const show = [...seen.values()].every((v) => !v)
+    mcta.classList.toggle('is-shown', show)
+    document.documentElement.classList.toggle('mcta-on', show)
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => seen.set(en.target, en.isIntersecting))
+    update()
+  })
+  blockers.forEach((el) => {
+    seen.set(el, true)
+    io.observe(el)
+  })
+}
