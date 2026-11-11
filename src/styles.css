@@ -2666,3 +2666,127 @@ ul, ol {
 @keyframes read-progress {
   to { transform: scaleX(1); }
 }
+
+/* =========================================================
+   Hero: dot-matrix field (canvas added by src/fx.js)
+   ========================================================= */
+.hero__dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Fade to nothing at the edges, like the grid lines behind it */
+  -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 42%, #000 35%, transparent 88%);
+  mask-image: radial-gradient(ellipse 78% 72% at 50% 42%, #000 35%, transparent 88%);
+  animation: dots-in 1.4s ease both;
+}
+@keyframes dots-in {
+  from { opacity: 0; }
+}
+
+/* =========================================================
+   Cursor tag (mouse only, added by src/fx.js)
+   ========================================================= */
+.cursor-tag {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  margin: 18px 0 0 16px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  font-family: var(--dot);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #0b0b0c;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.6;
+  transform-origin: 0 0;
+  transition: opacity 0.25s ease, scale 0.35s var(--ease);
+}
+.cursor-tag.is-on {
+  opacity: 1;
+  scale: 1;
+}
+
+/* Work screenshots tilt toward the cursor */
+@media (hover: hover) and (pointer: fine) {
+  [data-card] .shot {
+    transition: transform 0.5s var(--ease), border-color 0.3s ease;
+    will-change: transform;
+  }
+  [data-card] .shot:hover {
+    border-color: var(--line-2);
+  }
+}
+
+/* The ticker leans with the scroll (--lean is set from JS) */
+.ticker__track {
+  transform: skewX(var(--lean, 0deg));
+  transition: transform 0.6s var(--ease);
+}
+
+/* =========================================================
+   About: "right now" status card
+   ========================================================= */
+.note-side {
+  display: grid;
+  gap: 16px;
+}
+.now {
+  padding: 20px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.now__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.now__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--soft);
+}
+.now__rows > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+.now__rows dd {
+  text-align: right;
+  color: var(--text);
+}
+.now__rows time {
+  font-variant-numeric: tabular-nums;
+}
+.now__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--accent);
+}
+.now__cta span {
+  transition: translate 0.3s var(--ease);
+}
+.now__cta:hover span {
+  translate: 6px 0;
+}

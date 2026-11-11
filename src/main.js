@@ -478,6 +478,8 @@ async function boot() {
       setupReveals()
       alignToHash()
     }, 800)
+  // The creative layer (hero dot field, decoding labels, cursor tag…) loads last, as its own chunk
+  whenIdle(() => import('./fx.js').then((fx) => fx.initFx({ lenis, reduceMotion })), 1600)
 }
 
 // Pinned sections change the page height after the browser's own jump to a
@@ -502,10 +504,10 @@ requestAnimationFrame(() => setTimeout(boot, 0))
 // Background tabs don't run animation frames: make sure the page still sets up
 setTimeout(boot, 1200)
 
-const clock = document.querySelector('[data-clock]')
-if (clock) {
+const clocks = document.querySelectorAll('[data-clock]')
+if (clocks.length) {
   const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' })
-  const tick = () => (clock.textContent = fmt.format(new Date()))
+  const tick = () => clocks.forEach((clock) => (clock.textContent = fmt.format(new Date())))
   tick()
   setInterval(tick, 15000)
 }
@@ -666,7 +668,7 @@ if (mcta) {
    sweeps the giant footer name.
    --------------------------------------------------------- */
 if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  const GLOW = '.module, .plan, .note-stat, .direct, .form, .problem__stat, .cs-features li, .cs-results li, [data-card]'
+  const GLOW = '.module, .plan, .note-stat, .now, .direct, .form, .problem__stat, .cs-features li, .cs-results li, [data-card]'
   document.querySelectorAll(GLOW).forEach((el) => {
     if (getComputedStyle(el).position === 'static') el.style.position = 'relative'
     el.classList.add('has-glow')
