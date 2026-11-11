@@ -64,10 +64,10 @@ function slide(p, i) {
   const half = Math.floor(projects.length / 2)
   const o = i <= half ? i : i - projects.length
   const far = Math.abs(o) >= 3
-  return `          <a class="screen${o === 0 ? ' is-active' : ''}" href="/work/${p.slug}/" data-screen="${i}" data-name="${esc(p.name)}" draggable="false" style="--o:${o};--a:${Math.abs(o)}"${far ? ' data-far' : ''} aria-label="${esc(p.name)} case study">
+  return `          <a class="screen${o === 0 ? ' is-active' : ''}" href="/work/${p.slug}/" data-screen="${i}" data-name="${esc(p.name)}" draggable="false" style="--o:${o};--a:${Math.abs(o)}"${far ? ' data-far' : ''} aria-label="${esc(p.shotDomain || p.domain)}: ${esc(p.name)} case study">
             <span class="screen__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></span>
             <span class="screen__media">
-              ${picture(p.image || p.slug, [480, 960, 1440, 1920], '(min-width: 860px) 44vw, 78vw', '', { lazy: i !== 0, attrs: ' width="1440" height="900" draggable="false"' })}
+              ${picture(p.image || p.slug, [480, 960, 1440, 1920], '(min-width: 860px) 44vw, 78vw', '', { lazy: i !== 0, attrs: ` width="1440" height="900" draggable="false"${i !== 0 ? ' fetchpriority="low"' : ''}` })}
             </span>
           </a>`
 }

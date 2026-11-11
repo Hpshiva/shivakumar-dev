@@ -732,7 +732,7 @@ ul, ol {
 .deck__pip {
   display: grid;
   place-items: center;
-  width: 22px;
+  width: 24px;
   height: 44px;
   cursor: pointer;
   transition: width 0.5s var(--ease);

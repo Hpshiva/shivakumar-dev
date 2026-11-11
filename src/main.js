@@ -330,6 +330,7 @@ function setupToolkit() {
   }
   const shot = (p, sizes) => {
     const img = make('img')
+    img.loading = 'lazy' // the section is far below the fold: fetch only when it is near
     const base = `/images/${p.image || p.slug}`
     img.src = `${base}-480.webp`
     img.srcset = `${base}-480.webp 480w, ${base}-960.webp 960w`
@@ -742,8 +743,6 @@ if (deck) {
     schedule()
   }).observe(stageEl)
 
-  // Fetch the screens waiting off to the sides before they are needed
-  whenIdle(() => screens.forEach((screen) => screen.querySelector('img')?.setAttribute('loading', 'eager')), 2500)
   schedule()
 }
 
