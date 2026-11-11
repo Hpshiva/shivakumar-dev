@@ -141,9 +141,10 @@ function heroDots(reduceMotion) {
 function cursorTag() {
   const TARGETS = [
     ['[data-card] .shot', 'View case ↗'],
-    ['.screen', 'View case ↗'],
+    ['.screen.is-active', 'View case ↗'],
+    ['.screen', 'Bring forward'],
     ['.cs-next', 'Next case →'],
-    ['[data-toolkit-canvas]', 'Drag to spin'],
+    ['.stack__card[href]', 'View case ↗'],
   ]
   const tag = document.createElement('div')
   tag.className = 'cursor-tag'

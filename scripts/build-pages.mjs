@@ -56,6 +56,24 @@ function card(p, i) {
             </article>`
 }
 
+/* ---------------------------------------------------------
+   Hero showcase deck: one slide per project. Offsets are written inline so the
+   deck is already laid out on first paint, before any script runs.
+   --------------------------------------------------------- */
+function slide(p, i) {
+  const half = Math.floor(projects.length / 2)
+  const o = i <= half ? i : i - projects.length
+  const far = Math.abs(o) >= 3
+  return `          <a class="screen${o === 0 ? ' is-active' : ''}" href="/work/${p.slug}/" data-screen="${i}" data-name="${esc(p.name)}" draggable="false" style="--o:${o};--a:${Math.abs(o)}"${far ? ' data-far' : ''} aria-label="${esc(p.name)} case study">
+            <span class="screen__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.shotDomain || p.domain)}</span></span>
+            <span class="screen__media">
+              ${picture(p.image || p.slug, [480, 960, 1440, 1920], '(min-width: 860px) 44vw, 78vw', '', { lazy: i !== 0, attrs: ' width="1440" height="900" draggable="false"' })}
+            </span>
+          </a>`
+}
+const pip = (p, i) =>
+  `            <button type="button" class="deck__pip${i === 0 ? ' is-active' : ''}" data-deck-pip="${i}" aria-label="Show ${esc(p.name)}"${i === 0 ? ' aria-current="true"' : ''}></button>`
+
 const indexPath = 'index.html'
 const indexHtml = fs.readFileSync(indexPath, 'utf8')
 const cards = projects.map(card).join('\n')
@@ -63,6 +81,11 @@ let updated = indexHtml.replace(
   /(<!-- work:start -->)[\s\S]*?(\s*<!-- work:end -->)/,
   (_, start) => `${start}\n${cards}\n            <!-- work:end -->`,
 )
+updated = updated
+  .replace(/(<!-- deck:start -->)[\s\S]*?\s*(<!-- deck:end -->)/, (_, start, end) => `${start}\n${projects.map(slide).join('\n')}\n          ${end}`)
+  .replace(/(<!-- pips:start -->)[\s\S]*?\s*(<!-- pips:end -->)/, (_, start, end) => `${start}\n${projects.map(pip).join('\n')}\n            ${end}`)
+  .replace(/(<span data-deck-total>)\d+(<\/span>)/, (_, a, b) => `${a}${pad(projects.length)}${b}`)
+  .replace(/(data-deck-name>)[^<]*(<\/span>)/, (_, a, b) => `${a}${esc(projects[0].name)}${b}`)
 // Structured data + AI/search files, generated from the same sources
 // Replacer function, not a string: JSON text like "$25" must never be read as $2
 const ld = JSON.stringify(homeJsonLd(updated), null, 2).replace(/\n/g, '\n  ').replace(/</g, '\\u003c')

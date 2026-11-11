@@ -143,6 +143,14 @@ function setupChapters() {
     })
   }
 
+  // The pill steps aside at the end of the page so it never covers the footer text
+  const pageEnd = document.querySelector('.footer__bottom')
+  if (box && pageEnd) {
+    new IntersectionObserver(([entry]) => box.classList.toggle('is-away', entry.isIntersecting), {
+      rootMargin: '0px 0px 80px 0px',
+    }).observe(pageEnd)
+  }
+
   document.querySelectorAll('.nav__links a[href^="#"]').forEach((link) => {
     const section = document.querySelector(link.getAttribute('href'))
     if (!section) return
@@ -184,13 +192,12 @@ function setupParallax() {
     })
   })
 
-  // Hero: the wall of live sites tilts toward you and flies past as you scroll
+  // Hero: the showcase deck drifts forward and fades as you scroll past
   const stage = document.querySelector('[data-stage]')
   if (stage && window.matchMedia('(hover: hover)').matches) {
     gsap
       .timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
-      .to('[data-ring-tilt]', { '--tilt': '22deg', ease: 'none' }, 0)
-      .to(stage, { scale: 1.35, yPercent: 10, opacity: 0, ease: 'power1.in' }, 0)
+      .to(stage, { scale: 1.1, yPercent: 8, opacity: 0, ease: 'power1.in' }, 0)
   }
 
   // Stats count up once
@@ -297,82 +304,162 @@ function setupWork() {
 }
 
 /* ---------------------------------------------------------
-   Chapter 4: toolkit — accessible chips + lazy Three.js constellation
+   Chapter 4: toolkit — a big type list of tools. The active tool shows the
+   client sites it shipped in: a fanned stack of screenshots beside the list
+   on wide screens, an inline panel under the row on small ones.
    --------------------------------------------------------- */
 function setupToolkit() {
-  const stage = document.querySelector('[data-toolkit]')
-  if (!stage) return
-  const { tools } = buildToolData()
-  const chips = document.querySelector('[data-toolkit-chips]')
-  const nameEl = document.querySelector('[data-toolkit-name]')
-  const countEl = document.querySelector('[data-toolkit-count]')
-  const listEl = document.querySelector('[data-toolkit-projects]')
-  let scene = null
-  let current = tools[0].name
-
-  function show(tool) {
-    current = tool.name
-    nameEl.textContent = tool.name
-    const real = tool.projects.filter((p) => p.slug)
-    countEl.textContent = real.length
-      ? `Used in ${real.length} client project${real.length > 1 ? 's' : ''}${real.length < tool.projects.length ? ' + this website' : ''}`
-      : 'Used to build this website'
-    listEl.replaceChildren(
-      ...tool.projects.map((p) => {
-        const li = document.createElement('li')
-        if (p.slug) {
-          const a = document.createElement('a')
-          a.href = `/work/${p.slug}/`
-          a.textContent = `${p.name} →`
-          li.append(a)
-        } else {
-          li.textContent = p.name
-        }
-        return li
-      }),
-    )
-    chips.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool === tool.name)))
+  const root = document.querySelector('[data-stack]')
+  if (!root) return
+  const { tools, projects } = buildToolData()
+  const clients = projects.filter((p) => p.slug)
+  const list = root.querySelector('[data-stack-list]')
+  const nameEl = root.querySelector('[data-stack-name]')
+  const countEl = root.querySelector('[data-stack-count]')
+  const bigEl = root.querySelector('[data-stack-big]')
+  const fan = root.querySelector('[data-stack-fan]')
+  const chips = root.querySelector('[data-stack-projects]')
+  const wide = window.matchMedia('(min-width: 961px)')
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  const pad2 = (n) => String(n).padStart(2, '0')
+  const make = (tag, className, text) => {
+    const el = document.createElement(tag)
+    if (className) el.className = className
+    if (text) el.textContent = text
+    return el
   }
-
-  tools.forEach((tool) => {
-    const b = document.createElement('button')
-    b.type = 'button'
-    b.dataset.tool = tool.name
-    b.textContent = tool.name
-    b.addEventListener('click', () => {
-      show(tool)
-      scene?.select(tool.name)
+  const shot = (p, sizes) => {
+    const img = make('img')
+    const base = `/images/${p.image || p.slug}`
+    img.src = `${base}-480.webp`
+    img.srcset = `${base}-480.webp 480w, ${base}-960.webp 960w`
+    img.sizes = sizes
+    img.width = 480
+    img.height = 300
+    img.alt = ''
+    img.decoding = 'async'
+    return img
+  }
+  const chipList = (tool) =>
+    tool.projects.map((p) => {
+      const li = make('li')
+      if (p.slug) {
+        const a = make('a', '', `${p.name} →`)
+        a.href = `/work/${p.slug}/`
+        li.append(a)
+      } else {
+        li.textContent = p.name
+      }
+      return li
     })
-    chips.append(b)
-  })
-  show(tools[0])
 
-  const canvas = stage.querySelector('[data-toolkit-canvas]')
-  let webgl = false
-  try {
-    webgl = !!document.createElement('canvas').getContext('webgl2')
-  } catch {
-    webgl = false
+  // One marker slides to the active row; one panel moves under it on small screens
+  const marker = make('span', 'stack__marker')
+  marker.setAttribute('aria-hidden', 'true')
+  const panel = make('div', 'stack__panel')
+  let active = null
+  let hovering = false
+
+  const rows = tools.map((tool, i) => {
+    const real = tool.projects.filter((p) => p.slug)
+    const li = make('li', 'stack__row')
+    const btn = make('button', 'stack__btn')
+    btn.type = 'button'
+    btn.setAttribute('aria-pressed', 'false')
+    const pips = make('span', 'stack__pips')
+    pips.setAttribute('aria-hidden', 'true')
+    clients.forEach((p) => pips.append(make('i', tool.projects.includes(p) ? 'on' : '')))
+    btn.append(
+      make('span', 'stack__num hud', pad2(i + 1)),
+      make('span', `stack__tool${tool.name.length > 11 ? ' stack__tool--long' : ''}`, tool.name),
+      pips,
+      make('span', 'stack__count hud', real.length ? `${real.length} project${real.length > 1 ? 's' : ''}` : 'This site'),
+    )
+    li.append(btn)
+    list.append(li)
+    const row = { tool, real, li, btn }
+    btn.addEventListener('click', () => select(row))
+    btn.addEventListener('focus', () => select(row))
+    if (finePointer) btn.addEventListener('pointerenter', () => select(row))
+    return row
+  })
+  list.append(marker)
+
+  const placeMarker = () => {
+    if (!active) return
+    marker.style.height = `${active.btn.offsetHeight}px`
+    marker.style.transform = `translateY(${active.li.offsetTop}px)`
   }
-  if (!webgl) {
-    stage.hidden = true
-    return
+
+  function select(row) {
+    if (row === active) return
+    active?.li.classList.remove('is-active')
+    active?.btn.setAttribute('aria-pressed', 'false')
+    active = row
+    row.li.classList.add('is-active')
+    row.btn.setAttribute('aria-pressed', 'true')
+    const { tool, real } = row
+    const extra = real.length < tool.projects.length
+
+    nameEl.textContent = tool.name
+    bigEl.textContent = pad2(real.length || 1)
+    countEl.textContent = real.length
+      ? `${real.length} client project${real.length > 1 ? 's' : ''}${extra ? ' + this site' : ''}`
+      : 'Built this site'
+
+    // Fanned stack of up to three screenshots; the rest are listed as chips below
+    const cards = real.slice(0, 3).map((p, k, all) => {
+      const a = make('a', 'stack__card')
+      a.href = `/work/${p.slug}/`
+      a.setAttribute('aria-label', `${p.name} case study`)
+      a.style.setProperty('--k', k - (all.length - 1) / 2)
+      a.style.setProperty('--n', k)
+      a.append(shot(p, '340px'), make('span', '', p.name))
+      return a
+    })
+    if (!cards.length) {
+      const self = make('div', 'stack__card stack__card--self')
+      self.style.setProperty('--k', 0)
+      self.style.setProperty('--n', 0)
+      self.append(make('b', '', 'This website'), make('span', '', 'You are looking at it.'))
+      cards.push(self)
+    }
+    fan.replaceChildren(...cards)
+    chips.replaceChildren(...chipList(tool))
+
+    // Small screens: the same proof, inline under the row
+    const strip = make('div', 'stack__strip')
+    real.forEach((p) => {
+      const a = make('a', 'stack__thumb')
+      a.href = `/work/${p.slug}/`
+      a.append(shot(p, '200px'), make('span', '', p.name))
+      strip.append(a)
+    })
+    const inlineChips = make('ul', 'stack__projects')
+    inlineChips.append(...chipList(tool))
+    panel.replaceChildren(...(real.length ? [strip] : []), inlineChips)
+    row.li.append(panel)
+    placeMarker()
   }
+
+  // On wide screens the row crossing the middle of the viewport becomes active as
+  // you scroll, unless the pointer is choosing rows itself
+  list.addEventListener('pointerenter', () => (hovering = true))
+  list.addEventListener('pointerleave', () => (hovering = false))
   const io = new IntersectionObserver(
-    ([entry]) => {
-      if (!entry.isIntersecting) return
-      io.disconnect()
-      import('./toolkit.js').then(({ createToolkit }) => {
-        scene = createToolkit(canvas, {
-          reduceMotion,
-          initial: current,
-          onSelect: (tool) => show(tools.find((t) => t.name === tool.name) || tool),
-        })
-      })
+    (entries) => {
+      if (hovering || !wide.matches || list.contains(document.activeElement)) return
+      // Near the end of the list the viewer scrolls away: stop switching it by scroll there
+      if (root.querySelector('[data-stack-viewer]').getBoundingClientRect().top < 0) return
+      const hit = entries.find((entry) => entry.isIntersecting)
+      if (hit) select(rows.find((row) => row.li === hit.target))
     },
-    { rootMargin: '800px 0px' },
+    { rootMargin: '-46% 0px -46% 0px' },
   )
-  io.observe(stage)
+  rows.forEach((row) => io.observe(row.li))
+  new ResizeObserver(placeMarker).observe(list)
+
+  select(rows[0])
 }
 
 /* ---------------------------------------------------------
@@ -529,39 +616,135 @@ window.addEventListener('load', () => ScrollTrigger.refresh())
 // Analytics only loads after the visitor accepts cookies
 initConsent()
 
-// Hero ring: a focused screen turns to face the visitor, so keyboard focus is never
-// on a screen hidden at the back. The spin then resumes from the same angle.
-const ring = document.querySelector('[data-ring]')
-if (ring && window.matchMedia('(hover: hover)').matches) {
-  const SPIN = 60 // seconds per turn, matches the CSS animation
-  const angleOf = () => {
-    const t = getComputedStyle(ring).transform
-    if (!t || t === 'none') return 0
-    const m = t.match(/matrix3d\(([^)]+)\)/)?.[1].split(',').map(Number)
-    return m ? (Math.atan2(-m[2], m[0]) * 180) / Math.PI : 0
+/* ---------------------------------------------------------
+   Hero showcase deck: one site in focus, the rest fanned out behind it.
+   Steps on its own every few seconds; arrows, pips, drag/swipe, keyboard
+   focus or a click on a side screen bring another site forward. Any of
+   those also stops the automatic stepping. A click on the front screen
+   opens its case study.
+   --------------------------------------------------------- */
+const deck = document.querySelector('[data-deck]')
+if (deck) {
+  const stageEl = deck.closest('[data-stage]')
+  const screens = [...deck.querySelectorAll('[data-screen]')]
+  const pips = [...stageEl.querySelectorAll('[data-deck-pip]')]
+  const indexEl = stageEl.querySelector('[data-deck-index]')
+  const nameEl = stageEl.querySelector('[data-deck-name]')
+  const count = screens.length
+  const half = Math.floor(count / 2)
+  const AUTO_MS = 4200
+  let active = 0
+  let timer = 0
+  let auto = !reduceMotion
+  let hovering = false
+  let inView = true
+
+  const offsetOf = (i, from) => {
+    let o = i - from
+    if (o > half) o -= count
+    if (o < -half) o += count
+    return o
   }
-  let angle = 0
-  ring.addEventListener('focusin', (e) => {
-    const screen = e.target.closest('[data-screen]')
-    if (!screen) return
-    if (!ring.classList.contains('is-steered')) {
-      angle = angleOf()
-      ring.style.transform = `rotateY(${angle}deg)`
-      ring.classList.add('is-steered')
-      void ring.offsetWidth // commit the start angle before transitioning
-    }
-    // Shortest turn that brings this screen to the front
-    const target = -Number(screen.dataset.screen) * 60
-    angle += ((((target - angle) % 360) + 540) % 360) - 180
-    ring.style.transform = `rotateY(${angle}deg)`
+
+  function schedule() {
+    clearTimeout(timer)
+    const run = auto && !hovering && inView && !document.hidden && !stageEl.matches(':focus-within')
+    // Toggling the class restarts the pip's timer fill from zero
+    stageEl.classList.remove('is-auto')
+    if (!run) return
+    void stageEl.offsetWidth
+    stageEl.classList.add('is-auto')
+    timer = setTimeout(() => go(active + 1), AUTO_MS)
+  }
+
+  function go(to, { user = false } = {}) {
+    to = ((to % count) + count) % count
+    if (user) auto = false
+    screens.forEach((screen, i) => {
+      const before = Number(screen.style.getPropertyValue('--o'))
+      const o = offsetOf(i, to)
+      // A screen that swaps sides round the back must not sweep across the front
+      const wraps = Math.abs(o - before) > half
+      if (wraps) screen.classList.add('no-anim')
+      screen.style.setProperty('--o', o)
+      screen.style.setProperty('--a', Math.abs(o))
+      screen.toggleAttribute('data-far', Math.abs(o) >= 3)
+      screen.classList.toggle('is-active', o === 0)
+      if (wraps) {
+        void screen.offsetWidth
+        screen.classList.remove('no-anim')
+      }
+    })
+    active = to
+    pips.forEach((pip, i) => {
+      pip.classList.toggle('is-active', i === to)
+      if (i === to) pip.setAttribute('aria-current', 'true')
+      else pip.removeAttribute('aria-current')
+    })
+    indexEl.textContent = String(to + 1).padStart(2, '0')
+    nameEl.textContent = screens[to].dataset.name
+    schedule()
+  }
+
+  stageEl.style.setProperty('--deck-auto', `${AUTO_MS}ms`)
+  stageEl.querySelector('[data-deck-prev]').addEventListener('click', () => go(active - 1, { user: true }))
+  stageEl.querySelector('[data-deck-next]').addEventListener('click', () => go(active + 1, { user: true }))
+  pips.forEach((pip, i) => pip.addEventListener('click', () => go(i, { user: true })))
+
+  // Drag or swipe sideways: every 70px steps one site
+  let startX = null
+  let dragged = false
+  let activeAtDown = 0
+  deck.addEventListener('pointerdown', (e) => {
+    startX = e.clientX
+    dragged = false
+    activeAtDown = active
   })
-  ring.addEventListener('focusout', (e) => {
-    if (ring.contains(e.relatedTarget)) return
-    const progress = (((-angle % 360) + 360) % 360) / 360
-    ring.classList.remove('is-steered')
-    ring.style.transform = ''
-    ring.style.animationDelay = `${-progress * SPIN}s`
+  window.addEventListener('pointermove', (e) => {
+    if (startX === null) return
+    const dx = e.clientX - startX
+    if (Math.abs(dx) < 70) return
+    dragged = true
+    startX = e.clientX
+    go(active + (dx < 0 ? 1 : -1), { user: true })
   })
+  const endDrag = () => (startX = null)
+  window.addEventListener('pointerup', endDrag)
+  window.addEventListener('pointercancel', endDrag)
+
+  screens.forEach((screen, i) => {
+    // Keyboard focus brings that screen to the front
+    screen.addEventListener('focus', () => {
+      if (i !== active) go(i, { user: true })
+    })
+    screen.addEventListener('click', (e) => {
+      // Only the screen that was already in front opens its case study
+      if (dragged || i !== activeAtDown) e.preventDefault()
+      if (!dragged && i !== activeAtDown && i !== active) go(i, { user: true })
+    })
+  })
+
+  if (window.matchMedia('(hover: hover)').matches) {
+    stageEl.addEventListener('pointerenter', () => {
+      hovering = true
+      schedule()
+    })
+    stageEl.addEventListener('pointerleave', () => {
+      hovering = false
+      schedule()
+    })
+  }
+  stageEl.addEventListener('focusin', schedule)
+  stageEl.addEventListener('focusout', () => setTimeout(schedule, 0))
+  document.addEventListener('visibilitychange', schedule)
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting
+    schedule()
+  }).observe(stageEl)
+
+  // Fetch the screens waiting off to the sides before they are needed
+  whenIdle(() => screens.forEach((screen) => screen.querySelector('img')?.setAttribute('loading', 'eager')), 2500)
+  schedule()
 }
 
 /* ---------------------------------------------------------

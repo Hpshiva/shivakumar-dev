@@ -9,7 +9,7 @@ const ALIAS = {
   'API integrations': 'REST APIs',
   'Custom CSS': 'CSS',
 }
-const THIS_SITE = { slug: null, name: 'This website', stack: ['Three.js', 'GSAP', 'Vite', 'CSS'] }
+const THIS_SITE = { slug: null, name: 'This website', stack: ['GSAP', 'Vite', 'CSS'] }
 
 export function buildToolData() {
   const all = [...projects, THIS_SITE]
