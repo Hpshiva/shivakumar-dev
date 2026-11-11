@@ -1,7 +1,7 @@
 // Creative layer, loaded after the page is up and running (its own small chunk):
-// a living dot-matrix field behind the hero, labels that decode as they appear,
-// a cursor tag over clickable work, tilting screenshots and a ticker that leans
-// with the scroll. None of it is needed to read or use the site.
+// a living dot-matrix field behind the hero, a cursor tag over clickable work and
+// tilting screenshots. None of it is needed to read or use the site, and none of
+// it alters how text is drawn.
 
 const FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
@@ -136,54 +136,6 @@ function heroDots(reduceMotion) {
 }
 
 /* ---------------------------------------------------------
-   Chapter labels decode from dot-matrix noise as they scroll into view
-   --------------------------------------------------------- */
-function decodeLabels() {
-  const NOISE = '01#/<>[]_=+*'
-  const run = (el) => {
-    const nodes = []
-    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
-    while (walker.nextNode()) {
-      const node = walker.currentNode
-      if (node.nodeValue.trim()) nodes.push({ node, text: node.nodeValue })
-    }
-    const total = nodes.reduce((n, item) => n + item.text.length, 0)
-    const began = performance.now()
-    let tick = 0
-    const step = (now) => {
-      const progress = Math.min(1, (now - began) / 750)
-      // Change the noise every third frame: it should tick, not shimmer
-      if (tick++ % 3 === 0 || progress === 1) {
-        let index = 0
-        for (const { node, text } of nodes) {
-          let out = ''
-          for (const ch of text) {
-            out += ch === ' ' || ch === '\n' || index / total < progress ? ch : NOISE[(Math.random() * NOISE.length) | 0]
-            index++
-          }
-          node.nodeValue = out
-        }
-      }
-      if (progress < 1) requestAnimationFrame(step)
-    }
-    requestAnimationFrame(step)
-  }
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return
-        io.unobserve(entry.target)
-        run(entry.target)
-      }),
-    { threshold: 0.6 },
-  )
-  // Labels already on screen at load stay as they are
-  document.querySelectorAll('.chapter__label').forEach((el) => {
-    if (el.getBoundingClientRect().top > window.innerHeight) io.observe(el)
-  })
-}
-
-/* ---------------------------------------------------------
    Cursor tag: a small label trails the cursor over things worth opening
    --------------------------------------------------------- */
 function cursorTag() {
@@ -257,28 +209,9 @@ function tiltShots() {
   })
 }
 
-/* ---------------------------------------------------------
-   The brand ticker leans into the direction and speed of the scroll
-   --------------------------------------------------------- */
-function leanTicker(lenis) {
-  const track = document.querySelector('.ticker__track')
-  if (!track || !lenis) return
-  let settle = 0
-  lenis.on('scroll', ({ velocity }) => {
-    const lean = Math.max(-1, Math.min(1, velocity / 45))
-    track.style.setProperty('--lean', `${(lean * -9).toFixed(2)}deg`)
-    clearTimeout(settle)
-    settle = setTimeout(() => track.style.setProperty('--lean', '0deg'), 140)
-  })
-}
-
-export function initFx({ lenis, reduceMotion }) {
+export function initFx({ reduceMotion }) {
   heroDots(reduceMotion)
-  if (reduceMotion) return
-  decodeLabels()
-  leanTicker(lenis)
-  if (FINE) {
-    cursorTag()
-    tiltShots()
-  }
+  if (reduceMotion || !FINE) return
+  cursorTag()
+  tiltShots()
 }

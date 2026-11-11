@@ -478,8 +478,8 @@ async function boot() {
       setupReveals()
       alignToHash()
     }, 800)
-  // The creative layer (hero dot field, decoding labels, cursor tag…) loads last, as its own chunk
-  whenIdle(() => import('./fx.js').then((fx) => fx.initFx({ lenis, reduceMotion })), 1600)
+  // The creative layer (hero dot field, cursor tag, tilting screenshots) loads last, as its own chunk
+  whenIdle(() => import('./fx.js').then((fx) => fx.initFx({ reduceMotion })), 1600)
 }
 
 // Pinned sections change the page height after the browser's own jump to a

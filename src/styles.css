@@ -2726,12 +2726,6 @@ ul, ol {
   }
 }
 
-/* The ticker leans with the scroll (--lean is set from JS) */
-.ticker__track {
-  transform: skewX(var(--lean, 0deg));
-  transition: transform 0.6s var(--ease);
-}
-
 /* =========================================================
    About: "right now" status card
    ========================================================= */
