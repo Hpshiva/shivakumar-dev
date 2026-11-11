@@ -301,7 +301,8 @@ ${phones
       var r = el.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= innerHeight) return;
       el.style.viewTransitionName = 'case-shot';
-      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+      var clear = function () { el.style.viewTransitionName = ''; };
+      e.viewTransition.finished.then(clear, clear);
     });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
@@ -430,7 +431,8 @@ fs.writeFileSync(
       var r = el.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= innerHeight) return;
       el.style.viewTransitionName = 'case-shot';
-      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+      var clear = function () { el.style.viewTransitionName = ''; };
+      e.viewTransition.finished.then(clear, clear);
     });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
@@ -494,7 +496,8 @@ fs.writeFileSync(
       var r = el.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= innerHeight) return;
       el.style.viewTransitionName = 'case-shot';
-      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+      var clear = function () { el.style.viewTransitionName = ''; };
+      e.viewTransition.finished.then(clear, clear);
     });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>

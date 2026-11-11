@@ -304,9 +304,10 @@ function setupWork() {
 }
 
 /* ---------------------------------------------------------
-   Chapter 4: toolkit — a big type list of tools. The active tool shows the
-   client sites it shipped in: a fanned stack of screenshots beside the list
-   on wide screens, an inline panel under the row on small ones.
+   Chapter 4: toolkit — a wall of tool names that fits on one screen. The
+   active tool shows the client sites it shipped in (a fanned stack of
+   screenshots). It cycles through the tools on its own until the visitor
+   hovers, taps or focuses one.
    --------------------------------------------------------- */
 function setupToolkit() {
   const root = document.querySelector('[data-stack]')
@@ -319,8 +320,10 @@ function setupToolkit() {
   const bigEl = root.querySelector('[data-stack-big]')
   const fan = root.querySelector('[data-stack-fan]')
   const chips = root.querySelector('[data-stack-projects]')
-  const wide = window.matchMedia('(min-width: 961px)')
+  const pipsEl = root.querySelector('[data-stack-pips]')
+  const meterEl = root.querySelector('[data-stack-meter]')
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  const AUTO_MS = 3200
   const pad2 = (n) => String(n).padStart(2, '0')
   const make = (tag, className, text) => {
     const el = document.createElement(tag)
@@ -328,72 +331,63 @@ function setupToolkit() {
     if (text) el.textContent = text
     return el
   }
-  const shot = (p, sizes) => {
+  const shot = (p) => {
     const img = make('img')
     img.loading = 'lazy' // the section is far below the fold: fetch only when it is near
     const base = `/images/${p.image || p.slug}`
     img.src = `${base}-480.webp`
     img.srcset = `${base}-480.webp 480w, ${base}-960.webp 960w`
-    img.sizes = sizes
+    img.sizes = '(min-width: 961px) 340px, 56vw'
     img.width = 480
     img.height = 300
     img.alt = ''
     img.decoding = 'async'
     return img
   }
-  const chipList = (tool) =>
-    tool.projects.map((p) => {
-      const li = make('li')
-      if (p.slug) {
-        const a = make('a', '', `${p.name} →`)
-        a.href = `/work/${p.slug}/`
-        li.append(a)
-      } else {
-        li.textContent = p.name
-      }
-      return li
-    })
 
-  // One marker slides to the active row; one panel moves under it on small screens
-  const marker = make('span', 'stack__marker')
-  marker.setAttribute('aria-hidden', 'true')
-  const panel = make('div', 'stack__panel')
+  // One square per client project, lit for the ones built with the active tool
+  const pips = clients.map(() => pipsEl.appendChild(make('i')))
+
   let active = null
+  let auto = !reduceMotion
   let hovering = false
+  let inView = false
+  let timer = 0
 
-  const rows = tools.map((tool, i) => {
+  const rows = tools.map((tool) => {
     const real = tool.projects.filter((p) => p.slug)
     const li = make('li', 'stack__row')
     const btn = make('button', 'stack__btn')
     btn.type = 'button'
     btn.setAttribute('aria-pressed', 'false')
-    const pips = make('span', 'stack__pips')
-    pips.setAttribute('aria-hidden', 'true')
-    clients.forEach((p) => pips.append(make('i', tool.projects.includes(p) ? 'on' : '')))
-    btn.append(
-      make('span', 'stack__num hud', pad2(i + 1)),
-      make('span', `stack__tool${tool.name.length > 11 ? ' stack__tool--long' : ''}`, tool.name),
-      pips,
-      make('span', 'stack__count hud', real.length ? `${real.length} project${real.length > 1 ? 's' : ''}` : 'This site'),
-    )
+    btn.append(make('span', 'stack__tool', tool.name), make('sup', 'stack__sup', real.length ? String(real.length) : '·'))
+    btn.setAttribute('aria-label', `${tool.name}, ${real.length ? `${real.length} client project${real.length > 1 ? 's' : ''}` : 'used to build this website'}`)
     li.append(btn)
     list.append(li)
     const row = { tool, real, li, btn }
-    btn.addEventListener('click', () => select(row))
-    btn.addEventListener('focus', () => select(row))
-    if (finePointer) btn.addEventListener('pointerenter', () => select(row))
+    const choose = () => select(row, { user: true })
+    btn.addEventListener('click', choose)
+    btn.addEventListener('focus', choose)
+    if (finePointer) btn.addEventListener('pointerenter', choose)
     return row
   })
-  list.append(marker)
 
-  const placeMarker = () => {
-    if (!active) return
-    marker.style.height = `${active.btn.offsetHeight}px`
-    marker.style.transform = `translateY(${active.li.offsetTop}px)`
+  function schedule() {
+    clearTimeout(timer)
+    const run = auto && inView && !hovering && !document.hidden
+    root.classList.remove('is-auto')
+    if (!run) return
+    void root.offsetWidth // restart the active name's timer underline
+    root.classList.add('is-auto')
+    timer = setTimeout(() => select(rows[(rows.indexOf(active) + 1) % rows.length]), AUTO_MS)
   }
 
-  function select(row) {
-    if (row === active) return
+  function select(row, { user = false } = {}) {
+    if (user) auto = false
+    if (row === active) {
+      schedule()
+      return
+    }
     active?.li.classList.remove('is-active')
     active?.btn.setAttribute('aria-pressed', 'false')
     active = row
@@ -407,15 +401,17 @@ function setupToolkit() {
     countEl.textContent = real.length
       ? `${real.length} client project${real.length > 1 ? 's' : ''}${extra ? ' + this site' : ''}`
       : 'Built this site'
+    clients.forEach((p, i) => pips[i].classList.toggle('on', tool.projects.includes(p)))
+    meterEl.textContent = real.length ? `Used in ${real.length} of ${clients.length} client projects` : 'Used to build this website'
 
-    // Fanned stack of up to three screenshots; the rest are listed as chips below
+    // Fanned stack of up to three screenshots; every project is listed as a chip below
     const cards = real.slice(0, 3).map((p, k, all) => {
       const a = make('a', 'stack__card')
       a.href = `/work/${p.slug}/`
       a.setAttribute('aria-label', `${p.name} case study`)
       a.style.setProperty('--k', k - (all.length - 1) / 2)
       a.style.setProperty('--n', k)
-      a.append(shot(p, '340px'), make('span', '', p.name))
+      a.append(shot(p), make('span', '', p.name))
       return a
     })
     if (!cards.length) {
@@ -426,39 +422,39 @@ function setupToolkit() {
       cards.push(self)
     }
     fan.replaceChildren(...cards)
-    chips.replaceChildren(...chipList(tool))
-
-    // Small screens: the same proof, inline under the row
-    const strip = make('div', 'stack__strip')
-    real.forEach((p) => {
-      const a = make('a', 'stack__thumb')
-      a.href = `/work/${p.slug}/`
-      a.append(shot(p, '200px'), make('span', '', p.name))
-      strip.append(a)
-    })
-    const inlineChips = make('ul', 'stack__projects')
-    inlineChips.append(...chipList(tool))
-    panel.replaceChildren(...(real.length ? [strip] : []), inlineChips)
-    row.li.append(panel)
-    placeMarker()
+    chips.replaceChildren(
+      ...tool.projects.map((p) => {
+        const li = make('li')
+        if (p.slug) {
+          const a = make('a', '', `${p.name} →`)
+          a.href = `/work/${p.slug}/`
+          li.append(a)
+        } else {
+          li.textContent = p.name
+        }
+        return li
+      }),
+    )
+    schedule()
   }
 
-  // On wide screens the row crossing the middle of the viewport becomes active as
-  // you scroll, unless the pointer is choosing rows itself
-  list.addEventListener('pointerenter', () => (hovering = true))
-  list.addEventListener('pointerleave', () => (hovering = false))
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (hovering || !wide.matches || list.contains(document.activeElement)) return
-      // Near the end of the list the viewer scrolls away: stop switching it by scroll there
-      if (root.querySelector('[data-stack-viewer]').getBoundingClientRect().top < 0) return
-      const hit = entries.find((entry) => entry.isIntersecting)
-      if (hit) select(rows.find((row) => row.li === hit.target))
+  root.style.setProperty('--stack-auto', `${AUTO_MS}ms`)
+  root.addEventListener('pointerenter', () => {
+    hovering = true
+    schedule()
+  })
+  root.addEventListener('pointerleave', () => {
+    hovering = false
+    schedule()
+  })
+  document.addEventListener('visibilitychange', schedule)
+  new IntersectionObserver(
+    ([entry]) => {
+      inView = entry.isIntersecting
+      schedule()
     },
-    { rootMargin: '-46% 0px -46% 0px' },
-  )
-  rows.forEach((row) => io.observe(row.li))
-  new ResizeObserver(placeMarker).observe(list)
+    { threshold: 0.35 },
+  ).observe(root)
 
   select(rows[0])
 }

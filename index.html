@@ -44,7 +44,8 @@
       var r = el.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= innerHeight) return;
       el.style.viewTransitionName = 'case-shot';
-      e.viewTransition.finished.finally(function () { el.style.viewTransitionName = ''; });
+      var clear = function () { el.style.viewTransitionName = ''; };
+      e.viewTransition.finished.then(clear, clear);
     });
     setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.add('no-motion'); }, 3000);
   </script>
@@ -539,9 +540,13 @@
           <p class="chapter__sub">No buzzword soup. Every tool here has shipped in real client work. Pick one to see exactly where.</p>
         </header>
 
-        <!-- Rows and the viewer's contents are built from src/data/projects.js by setupToolkit() -->
+        <!-- Tool names and the viewer's contents are built from src/data/projects.js by setupToolkit() -->
         <div class="stack" data-stack>
-          <ol class="stack__list" data-stack-list></ol>
+          <div class="stack__left">
+            <p class="hud stack__hint"><span class="hud__bracket">[</span> Hover or tap a tool <span class="hud__bracket">]</span></p>
+            <ol class="stack__list" data-stack-list></ol>
+            <p class="stack__meter"><span class="stack__pips" aria-hidden="true" data-stack-pips></span><span class="hud" data-stack-meter></span></p>
+          </div>
           <aside class="stack__viewer" aria-label="Projects built with the selected tool" data-stack-viewer>
             <span class="stack__big" aria-hidden="true" data-stack-big>06</span>
             <p class="hud stack__viewer-head"><span><span class="hud__bracket">[</span> Selected tool <span class="hud__bracket">]</span></span><span data-stack-count></span></p>
