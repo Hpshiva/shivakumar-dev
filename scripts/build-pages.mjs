@@ -165,6 +165,7 @@ function section(num, kicker, title, body) {
 
 function caseStudy(p, i) {
   const next = projects[(i + 1) % projects.length]
+  const prev = projects[(i - 1 + projects.length) % projects.length]
   const url = `${SITE}/work/${p.slug}/`
   const og = has(`images/cases/${p.slug}-og.jpg`) ? `${SITE}/images/cases/${p.slug}-og.jpg` : `${SITE}/images/og-image.jpg`
   const full = has(`images/cases/${p.slug}-full-1200.avif`)
@@ -203,8 +204,9 @@ ${p.gallery.items
         <p class="hud">[ Keep scrolling — the page scrolls with you ]</p>
       </div>
       <div class="cs-browser">
-        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.domain)}</span></div>
+        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>${esc(p.domain)}</span><b class="cs-browser__pct" data-scroll-pct>000%</b></div>
         <div class="cs-browser__view">
+          <span class="cs-browser__track" aria-hidden="true"><i></i></span>
           ${picture(`cases/${p.slug}-full`, [1200, 2400], '(min-width: 1320px) 1220px, 92vw', `Full-length screenshot of the ${p.name} homepage`, { attrs: ` width="1200" height="${fullHeights[p.slug]}" data-scroll-img` })}
         </div>
       </div>
@@ -323,7 +325,14 @@ ${nav}
 
   <main id="main">
     <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
-      <a class="cs-back" href="/#work">← All work</a>
+      <div class="cs-top">
+        <a class="cs-back" href="/#work">← All work</a>
+        <nav class="cs-pager" aria-label="Other case studies">
+          <a href="/work/${prev.slug}/" aria-label="Previous case study: ${esc(prev.name)}"><span aria-hidden="true">←</span></a>
+          <span class="hud" aria-hidden="true"><b>${pad(i + 1)}</b> / ${pad(projects.length)}</span>
+          <a href="/work/${next.slug}/" aria-label="Next case study: ${esc(next.name)}"><span aria-hidden="true">→</span></a>
+        </nav>
+      </div>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study ${pad(i + 1)} / ${pad(projects.length)} <span class="hud__bracket">]</span> ${esc(p.industry)}</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">${esc(p.name)}</span></span></h1>
       <p class="cs-intro hero-in hero-in--soft" style="--d:.3s">${esc(p.intro)}</p>
@@ -370,6 +379,14 @@ ${delivered}
       <span class="hud">Next case study →</span>
       <span class="cs-next__title">${esc(next.name)}</span>
       <span class="cs-next__meta">${esc(next.industry)} · ${esc(next.location)}</span>
+      <span class="cs-next__peek" aria-hidden="true">
+        <span class="shot cs-next__shot" data-next-shot>
+          <span class="shot__bar"><i></i><i></i><i></i><span>${esc(next.shotDomain || next.domain)}</span></span>
+          <span class="shot__media">
+            ${picture(next.image || next.slug, [480, 960, 1440], '(min-width: 1200px) 1040px, 88vw', '', { attrs: ' width="1440" height="900"' })}
+          </span>
+        </span>
+      </span>
     </a>
   </main>
 

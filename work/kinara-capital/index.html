@@ -97,7 +97,14 @@
 
   <main id="main">
     <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
-      <a class="cs-back" href="/#work">← All work</a>
+      <div class="cs-top">
+        <a class="cs-back" href="/#work">← All work</a>
+        <nav class="cs-pager" aria-label="Other case studies">
+          <a href="/work/trident-hyundai/" aria-label="Previous case study: Trident Hyundai"><span aria-hidden="true">←</span></a>
+          <span class="hud" aria-hidden="true"><b>04</b> / 07</span>
+          <a href="/work/pristine-renault/" aria-label="Next case study: Pristine Renault"><span aria-hidden="true">→</span></a>
+        </nav>
+      </div>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study 04 / 07 <span class="hud__bracket">]</span> Fintech · MSME lending</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">Kinara Capital</span></span></h1>
       <p class="cs-intro hero-in hero-in--soft" style="--d:.3s">Kinara Capital provides collateral-free business loans to small and medium businesses in more than 100 cities across six Indian states. Their campaigns need to reach business owners who are busy, cautious and often new to digital lending.</p>
@@ -142,8 +149,9 @@
         <p class="hud">[ Keep scrolling — the page scrolls with you ]</p>
       </div>
       <div class="cs-browser">
-        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>kinaracapital.com</span></div>
+        <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>kinaracapital.com</span><b class="cs-browser__pct" data-scroll-pct>000%</b></div>
         <div class="cs-browser__view">
+          <span class="cs-browser__track" aria-hidden="true"><i></i></span>
           <picture>
                 <source type="image/avif" srcset="/images/cases/kinara-capital-full-1200.avif 1200w, /images/cases/kinara-capital-full-2400.avif 2400w" sizes="(min-width: 1320px) 1220px, 92vw" />
                 <img src="/images/cases/kinara-capital-full-2400.webp" srcset="/images/cases/kinara-capital-full-1200.webp 1200w, /images/cases/kinara-capital-full-2400.webp 2400w" sizes="(min-width: 1320px) 1220px, 92vw" alt="Full-length screenshot of the Kinara Capital homepage" loading="lazy" decoding="async" width="1200" height="3333" data-scroll-img />
@@ -210,6 +218,17 @@
       <span class="hud">Next case study →</span>
       <span class="cs-next__title">Pristine Renault</span>
       <span class="cs-next__meta">Automotive dealership · Goa</span>
+      <span class="cs-next__peek" aria-hidden="true">
+        <span class="shot cs-next__shot" data-next-shot>
+          <span class="shot__bar"><i></i><i></i><i></i><span>pristinerenault.com</span></span>
+          <span class="shot__media">
+            <picture>
+                <source type="image/avif" srcset="/images/pristine-renault-480.avif 480w, /images/pristine-renault-960.avif 960w, /images/pristine-renault-1440.avif 1440w" sizes="(min-width: 1200px) 1040px, 88vw" />
+                <img src="/images/pristine-renault-960.webp" srcset="/images/pristine-renault-480.webp 480w, /images/pristine-renault-960.webp 960w, /images/pristine-renault-1440.webp 1440w" sizes="(min-width: 1200px) 1040px, 88vw" alt="" loading="lazy" decoding="async" width="1440" height="900" />
+              </picture>
+          </span>
+        </span>
+      </span>
     </a>
   </main>
 

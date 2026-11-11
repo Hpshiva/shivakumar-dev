@@ -459,6 +459,11 @@ function setupCaseStudy() {
     const img = section.querySelector('[data-scroll-img]')
     const view = section.querySelector('.cs-browser__view')
     const distance = () => Math.max(img.offsetHeight - view.clientHeight, 1)
+    // The browser frame shows how far down the captured page you are
+    const browser = section.querySelector('.cs-browser')
+    const pct = section.querySelector('[data-scroll-pct]')
+    let shown = -1
+    browser.classList.add('is-live')
     gsap.to(img, {
       y: () => -distance(),
       ease: 'none',
@@ -469,9 +474,24 @@ function setupCaseStudy() {
         pin: true,
         scrub: 0.6,
         invalidateOnRefresh: true,
+        onUpdate: ({ progress }) => {
+          browser.style.setProperty('--p', progress.toFixed(4))
+          const value = Math.round(progress * 100)
+          if (pct && value !== shown) pct.textContent = `${String((shown = value)).padStart(3, '0')}%`
+        },
       },
     })
   })
+
+  // The next project's homepage rises into view at the end of the page
+  const nextShot = document.querySelector('[data-next-shot]')
+  if (nextShot) {
+    gsap.fromTo(nextShot, { yPercent: 16 }, {
+      yPercent: 0,
+      ease: 'none',
+      scrollTrigger: { trigger: '.cs-next', start: 'top bottom', end: 'bottom bottom', scrub: 0.4 },
+    })
+  }
 
   const cover = document.querySelector('.cs-cover [data-shot]')
   if (cover) {
@@ -801,7 +821,10 @@ window.addEventListener('pageswap', (e) => {
   }
   let el = null
   if (/^\/work\/[a-z0-9-]+\/?$/.test(to.pathname)) {
-    el = lastLink?.closest('[data-card]')?.querySelector('.shot') || (lastLink?.matches('.screen') ? lastLink : null)
+    el =
+      lastLink?.closest('[data-card]')?.querySelector('.shot') ||
+      (lastLink?.matches('.screen') ? lastLink : null) ||
+      lastLink?.querySelector?.('[data-next-shot]')
   } else if (to.pathname === '/') {
     el = document.querySelector('[data-cover-shot]')
   }

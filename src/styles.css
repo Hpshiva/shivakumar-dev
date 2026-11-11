@@ -2110,12 +2110,41 @@ a.stack__card:hover {
 .cs-hero {
   padding: calc(var(--nav-h) + 56px) var(--gutter) clamp(40px, 5vw, 64px);
 }
+.cs-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
 .cs-back {
   display: inline-flex;
   gap: 8px;
-  margin-bottom: 40px;
   font-size: 14px;
   color: var(--muted);
+}
+/* Flip between case studies without going back to the list */
+.cs-pager {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cs-pager .hud b {
+  color: var(--accent);
+}
+.cs-pager a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.cs-pager a:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #0b0b0c;
 }
 .cs-back:hover {
   color: var(--text);
@@ -2228,6 +2257,46 @@ a.stack__card:hover {
   text-transform: uppercase;
   color: var(--accent);
 }
+/* Each feature card carries its number, top right */
+.cs-features {
+  counter-reset: feature;
+}
+.cs-features li {
+  position: relative;
+  counter-increment: feature;
+  transition: border-color 0.4s ease, transform 0.6s var(--ease);
+}
+.cs-features li::before {
+  content: counter(feature, decimal-leading-zero);
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  font-family: var(--dot);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: color 0.4s ease;
+}
+.cs-features i {
+  padding-right: 34px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cs-features li:hover {
+    border-color: var(--line-2);
+    transform: translateY(-4px);
+  }
+  .cs-features li:hover::before {
+    color: var(--accent);
+  }
+}
+/* The chapter title stays beside its text while you read down it */
+@media (min-width: 861px) {
+  .cs-section h2 {
+    position: sticky;
+    top: calc(var(--nav-h) + 28px);
+    align-self: start;
+  }
+}
 @media (max-width: 860px) {
   .cs-section { grid-template-columns: 1fr; }
   .cs-features { grid-template-columns: 1fr; }
@@ -2257,8 +2326,47 @@ a.stack__card:hover {
   box-shadow: 0 60px 120px -50px rgba(255, 90, 31, 0.3);
 }
 .cs-browser__view {
+  position: relative;
   height: min(70vh, 760px);
   overflow: hidden;
+}
+/* Live position: a percentage in the bar and a scrollbar on the right edge.
+   Both only appear once the scroll-through is running. */
+.cs-browser__pct,
+.cs-browser__track {
+  display: none;
+}
+.cs-browser.is-live .cs-browser__pct {
+  display: block;
+  width: 4ch;
+  font-family: var(--dot);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--accent);
+}
+/* Keeps the address centred now that the bar has something on its right */
+.cs-browser.is-live .shot__bar > span {
+  translate: -3px 0;
+}
+.cs-browser.is-live .cs-browser__track {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  right: 6px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 4px;
+  background: rgba(10, 10, 11, 0.28);
+}
+.cs-browser__track i {
+  display: block;
+  height: 16%;
+  border-radius: inherit;
+  background: var(--accent);
+  /* travel = the rest of the track, measured in thumb heights */
+  transform: translateY(calc(var(--p, 0) * 525%));
 }
 .cs-browser__view img {
   width: 100%;
@@ -2353,15 +2461,40 @@ a.stack__card:hover {
 }
 .cs-next {
   display: block;
-  padding-block: clamp(80px, 11vw, 160px);
+  overflow: hidden;
+  padding-top: clamp(72px, 9vw, 130px);
   border-top: 1px solid var(--line);
   text-align: center;
   background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(255, 90, 31, 0.18), transparent 70%);
 }
+/* The next project's homepage peeks up from the bottom edge */
+.cs-next__peek {
+  display: block;
+  height: clamp(150px, 25vw, 360px);
+  margin-top: clamp(48px, 6vw, 84px);
+}
+.cs-next__shot {
+  width: min(1040px, 88vw);
+  margin-inline: auto;
+  border-color: var(--line-2);
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -30px 90px -30px rgba(255, 90, 31, 0.4);
+  translate: 0 0;
+  transition: translate 0.7s var(--ease), border-color 0.4s ease;
+}
+.cs-next__shot img {
+  display: block;
+}
+.cs-next:hover .cs-next__shot {
+  translate: 0 -20px;
+  border-color: rgba(255, 90, 31, 0.6);
+}
 .cs-next__title {
   display: block;
   margin-top: 14px;
-  font-size: clamp(2.8rem, 9vw, 8.4rem);
+  padding-inline: var(--gutter);
+  font-size: clamp(2.3rem, 9vw, 8.4rem);
   font-stretch: 125%;
   font-weight: 650;
   line-height: 0.92;
@@ -2983,5 +3116,5 @@ a.stack__card:hover {
   transition: translate 0.3s var(--ease);
 }
 .now__cta:hover span {
-  translate: 6px 0;
+  translate: -3px 0;
 }
