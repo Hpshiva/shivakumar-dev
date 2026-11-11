@@ -61,7 +61,7 @@ const indexHtml = fs.readFileSync(indexPath, 'utf8')
 const cards = projects.map(card).join('\n')
 let updated = indexHtml.replace(
   /(<!-- work:start -->)[\s\S]*?(\s*<!-- work:end -->)/,
-  (_, start, end) => `${start}\n${cards}\n${end}`,
+  (_, start) => `${start}\n${cards}\n            <!-- work:end -->`,
 )
 // Structured data + AI/search files, generated from the same sources
 // Replacer function, not a string: JSON text like "$25" must never be read as $2

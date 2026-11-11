@@ -25,7 +25,8 @@ function whenIdle(fn, timeout) {
    Smooth scroll
    --------------------------------------------------------- */
 let lenis = null
-if (!reduceMotion) {
+function setupSmoothScroll() {
+  if (reduceMotion) return
   lenis = new Lenis({ lerp: 0.1 })
   lenis.on('scroll', ScrollTrigger.update)
   gsap.ticker.add((time) => lenis.raf(time * 1000))
@@ -448,20 +449,58 @@ function setupReveals() {
 /* ---------------------------------------------------------
    Boot
    --------------------------------------------------------- */
-// Set up top-to-bottom so pinned sections are measured in page order
-setupChapters()
-setupToolkit()
-if (reduceMotion) {
-  document.querySelectorAll('.module, .problem__turn').forEach((el) => el.classList.add('is-drawn'))
-  setupWork()
-} else {
-  setupParallax()
-  setupProblem()
-  setupProcess()
-  setupWork()
-  setupCaseStudy()
-  whenIdle(setupReveals, 800)
+// Startup is spread over several short tasks instead of one long one, so the page
+// stays responsive on slow phones. It begins after the first paint: by then the
+// browser has already laid the page out, so the first measurements are cheap.
+// The order still runs top-to-bottom so pinned sections are measured in page order.
+const nextTask = () =>
+  new Promise((resolve) => (globalThis.scheduler?.yield ? globalThis.scheduler.yield().then(resolve) : setTimeout(resolve, 0)))
+
+let booted = false
+async function boot() {
+  if (booted) return
+  booted = true
+  const steps = reduceMotion
+    ? [
+        setupChapters,
+        setupToolkit,
+        () => document.querySelectorAll('.module, .problem__turn').forEach((el) => el.classList.add('is-drawn')),
+        setupWork,
+      ]
+    : [setupSmoothScroll, setupChapters, setupToolkit, setupParallax, setupProblem, setupProcess, setupWork, setupCaseStudy]
+  for (const step of steps) {
+    step()
+    await nextTask()
+  }
+  alignToHash()
+  if (!reduceMotion)
+    whenIdle(() => {
+      setupReveals()
+      alignToHash()
+    }, 800)
 }
+
+// Pinned sections change the page height after the browser's own jump to a
+// #section link, so line the linked section up again once they exist. Skipped
+// as soon as the visitor scrolls on their own.
+let userScrolled = false
+;['wheel', 'touchstart', 'keydown'].forEach((type) =>
+  window.addEventListener(type, () => (userScrolled = true), { once: true, passive: true }),
+)
+function alignToHash() {
+  const linked = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)))
+  if (!linked || userScrolled) return
+  ScrollTrigger.refresh()
+  if (lenis) {
+    lenis.resize()
+    lenis.scrollTo(linked, { immediate: true, force: true })
+  } else {
+    linked.scrollIntoView()
+  }
+}
+requestAnimationFrame(() => setTimeout(boot, 0))
+// Background tabs don't run animation frames: make sure the page still sets up
+setTimeout(boot, 1200)
 
 const clock = document.querySelector('[data-clock]')
 if (clock) {
