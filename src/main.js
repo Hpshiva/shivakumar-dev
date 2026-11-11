@@ -192,14 +192,6 @@ function setupParallax() {
     })
   })
 
-  // Hero: the showcase deck drifts forward and fades as you scroll past
-  const stage = document.querySelector('[data-stage]')
-  if (stage && window.matchMedia('(hover: hover)').matches) {
-    gsap
-      .timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
-      .to(stage, { scale: 1.1, yPercent: 8, opacity: 0, ease: 'power1.in' }, 0)
-  }
-
   // Stats count up once
   gsap.from('[data-count]', {
     textContent: 0,

@@ -545,7 +545,7 @@ ul, ol {
   margin-top: clamp(28px, 5vh, 56px);
 }
 .hero__title {
-  font-size: clamp(2.6rem, 7.4vw, 7.8rem);
+  font-size: clamp(2.6rem, 7.4vw, 7.1rem); /* capped so the headline never reaches the right column on very wide screens */
   font-stretch: 125%;
   font-weight: 600;
   line-height: 0.92;
@@ -781,6 +781,7 @@ ul, ol {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
+  margin-top: clamp(20px, 3vh, 36px);
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
