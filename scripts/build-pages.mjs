@@ -134,7 +134,7 @@ const footer = `  <footer class="footer">
   </footer>`
 
 function section(num, kicker, title, body) {
-  return `      <section class="cs-section" data-reveal>
+  return `      <section class="cs-section" data-reveal data-chapter="${pad(num)}" data-chapter-title="${kicker}">
         <h2><small>${pad(num)} — ${kicker}</small>${title}</h2>
         ${body}
       </section>`
@@ -290,8 +290,15 @@ ${phones
 
 ${nav}
 
+  <div class="read-progress" aria-hidden="true"></div>
+  <aside class="chapter-nav" aria-hidden="true" data-chapter-nav>
+    <span class="chapter-nav__num">CH <span data-chapter-num>00</span></span>
+    <span class="chapter-nav__bar"><span data-chapter-progress></span></span>
+    <span class="chapter-nav__title" data-chapter-title>Hello</span>
+  </aside>
+
   <main id="main">
-    <section class="cs-hero container" aria-labelledby="cs-title">
+    <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
       <a class="cs-back" href="/#work">← All work</a>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study ${pad(i + 1)} / ${pad(projects.length)} <span class="hud__bracket">]</span> ${esc(p.industry)}</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">${esc(p.name)}</span></span></h1>

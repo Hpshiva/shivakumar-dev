@@ -87,8 +87,15 @@
     </div>
   </header>
 
+  <div class="read-progress" aria-hidden="true"></div>
+  <aside class="chapter-nav" aria-hidden="true" data-chapter-nav>
+    <span class="chapter-nav__num">CH <span data-chapter-num>00</span></span>
+    <span class="chapter-nav__bar"><span data-chapter-progress></span></span>
+    <span class="chapter-nav__title" data-chapter-title>Hello</span>
+  </aside>
+
   <main id="main">
-    <section class="cs-hero container" aria-labelledby="cs-title">
+    <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
       <a class="cs-back" href="/#work">← All work</a>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study 04 / 07 <span class="hud__bracket">]</span> Fintech · MSME lending</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">Kinara Capital</span></span></h1>
@@ -116,11 +123,11 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="01" data-chapter-title="Context">
         <h2><small>01 — Context</small>The client</h2>
         <div class="cs-body"><p>Kinara offers loans for working capital, supply-chain finance, machinery and a dedicated programme for women entrepreneurs, with cumulative disbursements of over $1 billion.</p></div>
       </section>
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="02" data-chapter-title="Challenge">
         <h2><small>02 — Challenge</small>The problem to solve</h2>
         <div class="cs-body"><p>Lending is built on trust. A campaign page has seconds to explain an offer, prove credibility and get a business owner to start an application.</p><p>The pages had to load fast on mid-range phones, explain products clearly and make the numbers easy to understand.</p></div>
       </section>
@@ -145,7 +152,7 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="03" data-chapter-title="What I built">
         <h2><small>03 — What I built</small>Key features</h2>
         <ul class="cs-features">
           <li><i>one offer, one page</i><b>Campaign landing pages</b><span>Focused, story-led pages for each loan product and campaign, with dynamic media.</span></li>
@@ -181,12 +188,12 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="04" data-chapter-title="Approach">
         <h2><small>04 — Approach</small>How I built it</h2>
         <div class="cs-body"><p>Each campaign followed the same structure: the problem, the offer, proof, then one clear call to action.</p><p>Calculators ran entirely in the browser for instant feedback, and animations were kept on the GPU so they stayed smooth on low-end devices.</p></div>
       </section>
 
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="05" data-chapter-title="Delivered">
         <h2><small>05 — Delivered</small>What shipped</h2>
         <div class="cs-body">
           <ul class="cs-delivered"><li>Campaign landing pages</li><li>Loan &amp; EMI calculators</li><li>Lead-generation forms</li><li>Motion system</li></ul>

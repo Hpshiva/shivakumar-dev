@@ -87,8 +87,15 @@
     </div>
   </header>
 
+  <div class="read-progress" aria-hidden="true"></div>
+  <aside class="chapter-nav" aria-hidden="true" data-chapter-nav>
+    <span class="chapter-nav__num">CH <span data-chapter-num>00</span></span>
+    <span class="chapter-nav__bar"><span data-chapter-progress></span></span>
+    <span class="chapter-nav__title" data-chapter-title>Hello</span>
+  </aside>
+
   <main id="main">
-    <section class="cs-hero container" aria-labelledby="cs-title">
+    <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
       <a class="cs-back" href="/#work">← All work</a>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study 02 / 07 <span class="hud__bracket">]</span> Mental healthcare</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">Agan Health</span></span></h1>
@@ -116,11 +123,11 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="01" data-chapter-title="Context">
         <h2><small>01 — Context</small>The client</h2>
         <div class="cs-body"><p>Agan Health’s psychologists and psychiatrists support people of all ages through anxiety, depression, stress and trauma, using approaches such as CBT, DBT and family counselling, online and in person. They also run mental-health programmes for companies.</p></div>
       </section>
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="02" data-chapter-title="Challenge">
         <h2><small>02 — Challenge</small>The problem to solve</h2>
         <div class="cs-body"><p>Asking for help is hard. Every extra click, slow page or confusing menu is a reason to close the tab.</p><p>The site had to explain a wide range of services in plain language, help people find the right kind of support, and make booking a first consultation feel effortless on any phone and any connection.</p></div>
       </section>
@@ -145,7 +152,7 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="03" data-chapter-title="What I built">
         <h2><small>03 — What I built</small>Key features</h2>
         <ul class="cs-features">
           <li><i>fewer dead ends</i><b>Therapist matching</b><span>A guided flow that helps visitors find a specialist who fits their needs instead of scrolling a long list of names.</span></li>
@@ -181,12 +188,12 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="04" data-chapter-title="Approach">
         <h2><small>04 — Approach</small>How I built it</h2>
         <div class="cs-body"><p>I treated trust as the main feature: readable typography, honest copy and nothing that feels pushy.</p><p>The booking and matching flows were built as typed React components with predictable state in Redux Toolkit, so they behave the same way every time.</p><p>Pages were kept light and mobile-first, because many visitors arrive on a phone, late at night, on a slow connection.</p></div>
       </section>
 
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="05" data-chapter-title="Delivered">
         <h2><small>05 — Delivered</small>What shipped</h2>
         <div class="cs-body">
           <ul class="cs-delivered"><li>Responsive website</li><li>Therapist matching flow</li><li>Video consultation integration</li><li>Booking engine</li><li>Reusable component library</li></ul>

@@ -620,3 +620,59 @@ if (mcta) {
     io.observe(el)
   })
 }
+
+/* ---------------------------------------------------------
+   Pointer polish (mouse only): a glow that follows the cursor across
+   cards and panels, buttons that lean toward it, and a light that
+   sweeps the giant footer name.
+   --------------------------------------------------------- */
+if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const GLOW = '.module, .plan, .note-stat, .direct, .form, .problem__stat, .cs-features li, .cs-results li, [data-card]'
+  document.querySelectorAll(GLOW).forEach((el) => {
+    if (getComputedStyle(el).position === 'static') el.style.position = 'relative'
+    el.classList.add('has-glow')
+    const glow = document.createElement('span')
+    glow.className = 'glow'
+    glow.setAttribute('aria-hidden', 'true')
+    el.append(glow)
+  })
+
+  const word = document.querySelector('.footer__word')
+  let frame = 0
+  let last = null
+  document.addEventListener(
+    'pointermove',
+    (e) => {
+      last = e
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        const host = last.target.closest?.('.has-glow')
+        if (host) {
+          const r = host.getBoundingClientRect()
+          host.style.setProperty('--gx', `${last.clientX - r.left}px`)
+          host.style.setProperty('--gy', `${last.clientY - r.top}px`)
+        }
+        if (word) {
+          const r = word.getBoundingClientRect()
+          if (r.top < innerHeight && r.bottom > 0) {
+            word.style.setProperty('--fx', `${last.clientX - r.left}px`)
+            word.style.setProperty('--fy', `${last.clientY - r.top}px`)
+          }
+        }
+      })
+    },
+    { passive: true },
+  )
+
+  // Magnetic buttons: the pill leans a few pixels toward the cursor
+  document.querySelectorAll('.btn:not(.btn--block)').forEach((btn) => {
+    btn.addEventListener('pointermove', (e) => {
+      const r = btn.getBoundingClientRect()
+      const dx = (e.clientX - (r.left + r.width / 2)) / r.width
+      const dy = (e.clientY - (r.top + r.height / 2)) / r.height
+      btn.style.translate = `${(dx * 14).toFixed(1)}px ${(dy * 10).toFixed(1)}px`
+    })
+    btn.addEventListener('pointerleave', () => (btn.style.translate = ''))
+  })
+}

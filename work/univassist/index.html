@@ -87,8 +87,15 @@
     </div>
   </header>
 
+  <div class="read-progress" aria-hidden="true"></div>
+  <aside class="chapter-nav" aria-hidden="true" data-chapter-nav>
+    <span class="chapter-nav__num">CH <span data-chapter-num>00</span></span>
+    <span class="chapter-nav__bar"><span data-chapter-progress></span></span>
+    <span class="chapter-nav__title" data-chapter-title>Hello</span>
+  </aside>
+
   <main id="main">
-    <section class="cs-hero container" aria-labelledby="cs-title">
+    <section class="cs-hero container" data-chapter="00" data-chapter-title="Intro" aria-labelledby="cs-title">
       <a class="cs-back" href="/#work">← All work</a>
       <p class="chapter__label hud hero-in"><span class="hud__bracket">[</span> Case study 01 / 07 <span class="hud__bracket">]</span> EdTech · Virtual events</p>
       <h1 class="cs-title" id="cs-title"><span class="line"><span class="line__inner">UnivAssist</span></span></h1>
@@ -116,11 +123,11 @@
     </section>
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="01" data-chapter-title="Context">
         <h2><small>01 — Context</small>The client</h2>
         <div class="cs-body"><p>Each fair is its own event. Rede Inspira Virtual College Fairs serves students in Brazil. Five GEMS Education Virtual University Fairs (Changemakers, Explorers, Innovators, Lumina and Visionaries) serve students in the UAE. Every fair hosts dozens of universities, from Canada and the UK to Hong Kong and Australia.</p><p>The fairs run on Hubilo, a closed SaaS platform built with React and Material UI. Organisers get exactly two hooks: one custom CSS field and one custom JavaScript field. There are no templates, no components and no access to the source.</p></div>
       </section>
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="02" data-chapter-title="Challenge">
         <h2><small>02 — Challenge</small>The problem to solve</h2>
         <div class="cs-body"><p>Out of the box, every fair looked identical: generic, dense and hard to scan. That is expensive when a 17-year-old has 60 universities to compare and about eight seconds of patience.</p><p>The platform pushed back, too. React re-renders silently wiped changes. Auto-generated class names shifted between releases. Native modals swallowed clicks. The CDN serving the custom code kept handing visitors stale versions.</p><p>So the real job was this: build a design system for six different brands on top of someone else’s application, without breaking a single registration, login or live room.</p></div>
       </section>
@@ -219,7 +226,7 @@
 
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="03" data-chapter-title="What I built">
         <h2><small>03 — What I built</small>Key features</h2>
         <ul class="cs-features">
           <li><i>the page sells the event</i><b>Event pass &amp; live countdown</b><span>A sticky student pass with a real-time countdown, local date and timezone, and one-tap Register and Add-to-Calendar.</span></li>
@@ -235,15 +242,15 @@
 
 
     <div class="container">
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="04" data-chapter-title="Approach">
         <h2><small>04 — Approach</small>How I built it</h2>
         <div class="cs-body"><p>Treat the platform like an API, not an enemy. I mapped Hubilo’s DOM like a contract: which elements stay stable, which re-render, and which carry native handlers that must never be intercepted (room buttons, meeting slots, one-time-code forms).</p><p>Use theme tokens, not hard-coded colours. Each brand lives in one block of CSS custom properties, so a new fair is a copied folder, a palette and a config object, not a redesign.</p><p>Write six self-contained JavaScript modules (login, register, lobby, embeds, booths and people). Each one is guarded, so a fix on one page can never leak into another.</p><p>Verify, don’t hope. Headless Chrome audits across five viewports, from 1440px down to 360px, with a zero-horizontal-overflow check. A preview harness tests unreleased code against the live event without touching it.</p></div>
       </section>
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="05" data-chapter-title="Results">
         <h2><small>05 — Results</small>The outcome</h2>
         <ul class="cs-results"><li><b>6</b><span>Branded virtual fairs from one codebase</span></li><li><b>15k+</b><span>Lines of CSS &amp; JS layered over a closed platform</span></li><li><b>13 days</b><span>From first commit to six launch-ready fairs</span></li><li><b>0</b><span>Horizontal overflow across 5 audited viewports</span></li></ul>
       </section>
-      <section class="cs-section" data-reveal>
+      <section class="cs-section" data-reveal data-chapter="06" data-chapter-title="Delivered">
         <h2><small>06 — Delivered</small>What shipped</h2>
         <div class="cs-body">
           <ul class="cs-delivered"><li>Design system for 6 brands</li><li>Login &amp; register takeover</li><li>Virtual Lobby redesign</li><li>University profile drawer</li><li>People directory polish</li><li>CDN loader &amp; deploy pipeline</li><li>Responsive QA across 5 viewports</li></ul>
