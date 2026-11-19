@@ -74,7 +74,7 @@ const personNode = () => {
     jobTitle: PERSON.jobTitle,
     description: PERSON.summary,
     url: `${SITE}/`,
-    image: `${SITE}/images/og-image.jpg`,
+    image: `${SITE}/images/share-home.jpg`,
     email: `mailto:${PERSON.email}`,
     telephone: PERSON.phone,
     address: {
@@ -137,7 +137,7 @@ export function homeJsonLd(indexHtml) {
       name: 'Shiva Kumar — Frontend Engineer in Bengaluru',
       isPartOf: { '@id': `${SITE}/#website` },
       mainEntity: { '@id': `${SITE}/#person` },
-      primaryImageOfPage: `${SITE}/images/og-image.jpg`,
+      primaryImageOfPage: `${SITE}/images/share-home.jpg`,
       inLanguage: 'en',
     },
     personNode(),
@@ -148,7 +148,7 @@ export function homeJsonLd(indexHtml) {
       url: `${SITE}/`,
       description:
         'Fast, story-driven websites, landing pages and web apps, engineered for Core Web Vitals, technical SEO and conversion.',
-      image: `${SITE}/images/og-image.jpg`,
+      image: `${SITE}/images/share-home.jpg`,
       email: PERSON.email,
       telephone: PERSON.phone,
       founder: { '@id': `${SITE}/#person` },

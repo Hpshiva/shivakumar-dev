@@ -13,7 +13,8 @@
     "pages": "node scripts/build-pages.mjs",
     "predev": "node scripts/build-pages.mjs",
     "prebuild": "node scripts/build-pages.mjs",
-    "icons": "node scripts/icons.mjs"
+    "icons": "node scripts/icons.mjs",
+    "share": "node scripts/share-cards.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

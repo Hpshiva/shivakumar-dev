@@ -167,7 +167,7 @@ function caseStudy(p, i) {
   const next = projects[(i + 1) % projects.length]
   const prev = projects[(i - 1 + projects.length) % projects.length]
   const url = `${SITE}/work/${p.slug}/`
-  const og = has(`images/cases/${p.slug}-og.jpg`) ? `${SITE}/images/cases/${p.slug}-og.jpg` : `${SITE}/images/og-image.jpg`
+  const og = has(`images/cases/${p.slug}-share.jpg`) ? `${SITE}/images/cases/${p.slug}-share.jpg` : `${SITE}/images/share-home.jpg`
   const full = has(`images/cases/${p.slug}-full-1200.avif`)
   const phones = [0, 1, 2].filter((n) => has(`images/cases/${p.slug}-phone${n}-600.avif`))
   let n = 0
@@ -427,7 +427,7 @@ fs.writeFileSync(
   <meta property="og:site_name" content="Shiva Kumar" />
   <meta property="og:title" content="${privacyTitle}" />
   <meta property="og:description" content="${privacyDesc}" />
-  <meta property="og:image" content="https://shivakumar-dev.vercel.app/images/og-image.jpg" />
+  <meta property="og:image" content="https://shivakumar-dev.vercel.app/images/share-home.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
