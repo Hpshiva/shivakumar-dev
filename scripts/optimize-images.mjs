@@ -18,8 +18,6 @@ const jobs = [
     out: slug,
     widths: SHOT_WIDTHS,
   })),
-  // Studio headshot
-  { input: [path.join(SRC, 'biopic.png')], out: 'headshot', widths: [480, 800] },
 ]
 
 await fs.mkdir(OUT, { recursive: true })

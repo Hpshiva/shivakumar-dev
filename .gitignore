@@ -31,3 +31,8 @@ source-images/cases/
 
 # Raw UnivAssist screenshots (optimised copies live in public/images)
 source-images/univassist/
+
+# Personal photos: kept on this computer only, never published
+source-images/myPic.png
+source-images/biopic.png
+source-images/mobile-pic.png
